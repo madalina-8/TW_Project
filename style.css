@@ -8,6 +8,18 @@ body {
     padding: 0;
 }
 
+#filtersDiv {
+    display: flex;
+    flex-wrap: wrap; /*helps me for responsivness display style*/
+    width: 48%;
+}
+
+#graphDiv {
+    display: flex;
+    flex-wrap: wrap; /*helps me for responsivness display style*/
+    width: 48%;
+}
+
 .navbar {
  display: flex;
  justify-content: space-around;
@@ -20,6 +32,10 @@ body {
 
 .logo {
     margin: 0px;
+}
+
+.choiceBox {
+    margin: 20px;
 }
 
 .navbar-links ul {
@@ -118,6 +134,12 @@ ul {
 .footer-column {
     width: 30%;
     padding: 0 15px;
+}
+
+.body-column {
+    width: 50%;
+    padding: 0 15px;
+
 }
 
 .footer-column h4 {
