@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="homeChart.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <title>Obesity visualizer</title>
 </head>
@@ -34,9 +36,11 @@
 </nav>
 
 <div class="container">
-    <canvas id="mainChart"></canvas>
+    <canvas id="firstChart"></canvas>
+    <canvas id="secondChart"></canvas>
     <script>
-        generateGraph("mainChart");
+        generateChart("firstChart");
+        generateChart("secondChart")
     </script>
 </div>
 <footer class="footer">
@@ -71,6 +75,5 @@
     </div>
 </footer>
 <script src="about/script.js"></script>
-<script src="homeChart.js"></script>
 </body>
 </html>
