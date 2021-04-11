@@ -45,7 +45,7 @@ if (checkGETAndRedirect()) {
 
 <div class="container">
 
-    <label for="firstRow"><h1>First chart</h1></label>
+    <label for="firstRow"><h1 class="filterTitle">First chart</h1></label>
     <form method="post" action="submitFormCompare.php">
         <div class="row" id="firstRow">
             <div class="body-column">
@@ -81,7 +81,7 @@ if (checkGETAndRedirect()) {
             </div>
         </div>
 
-        <label for="secondRow"><h1>Second chart</h1></label>
+        <label for="secondRow"><h1 class="filterTitle">Second chart</h1></label>
         <div class="row" id="secondRow">
             <div class="body-column">
                 <div>

@@ -122,8 +122,40 @@ body {
     margin: auto;
 }
 
+select {
+    background-color: #f3f4ed;
+    margin: 10px;
+    height: 23px;
+    width: 100px;
+    border-radius: 5px;
+    font-family: 'Julius Sans One', sans-serif;
+    font-weight: bold;
+    padding: 1px 9px;
+    cursor: pointer;
+    line-height: 1.1;
+    outline: none;
+    align-items: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;       /* Remove default arrow */
+    background-image: url("arrow.png");
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: 20px;  /* Add custom arrow */
+}
+
+label {
+    font-size: 18px;
+    font-family: 'Julius Sans One', sans-serif;
+    font-weight: 700;
+}
+
 ul {
     list-style: none;
+}
+
+.filterTitle {
+    margin: 20px;
 }
 
 .row {
