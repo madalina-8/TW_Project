@@ -1,9 +1,9 @@
 <?php
-    include 'homeUtils.php';
-    if (checkGETAndRedirect()) {
-        header('Location: ./home.php');
-        exit(0);
-    }
+include 'compareUtils.php';
+if (checkGETAndRedirect()) {
+    header('Location: ./compare.php');
+    exit(0);
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,11 +22,11 @@
     <title>Obesity visualizer</title>
 </head>
 <body>
-    
+
 <nav class="navbar">
     <div class="logo">
-       <a href="#"> 
-           <img src="logo.png" width="200"> 
+        <a href="#">
+            <img src="about/logo.png" width="200">
         </a>
     </div>
     <a href="#" class="toggle-button">
@@ -44,9 +44,11 @@
 </nav>
 
 <div class="container">
-    <div class="row">
-        <div class="body-column">
-            <form method="post" action="submitFormHome.php">
+
+    <label for="firstRow"><h1>First chart</h1></label>
+    <form method="post" action="submitFormCompare.php">
+        <div class="row" id="firstRow">
+            <div class="body-column">
                 <div>
                     <label for="age">Select age:</label>
                     <select name="age" id="age" class=choiceBox>
@@ -72,35 +74,62 @@
                         <option value="de">Germany</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="body-column">
+                <canvas id="firstChart"></canvas>
+            </div>
+        </div>
+
+        <label for="secondRow"><h1>Second chart</h1></label>
+        <div class="row" id="secondRow">
+            <div class="body-column">
+                <div>
+                    <label for="age2">Select age:</label>
+                    <select name="age2" id="age2" class=choiceBox>
+                        <option value="0-9">0-9</option>
+                        <option value="10-19">10-19</option>
+                        <option value="20-29">20-29</option>
+                        <option value="30-39">30-39</option>
+                        <option value="40-49">40-49</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="sex2">Select sex:</label>
+                    <select name="sex2" id="sex2" class="choiceBox">
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="country2">Select country</label>
+                    <select name="country2" id="country2" class="choiceBox">
+                        <option value="ro">Romania</option>
+                        <option value="usa">USA</option>
+                        <option value="de">Germany</option>
+                    </select>
+                </div>
                 <div>
                     <input type="submit" value="Filter" class="choiceBox">
                 </div>
-            </form>
-        </div>
+            </div>
 
-        <div class="body-column">
-            <canvas id="mainChart">
-                <script>generateChart("mainChart")</script>
-            </canvas>
-            <label for="imageFormat">Select format:</label>
-            <select name="imageFormat" id="imageFormat" class="choiceBox" onchange="updateType(this)">
-                <option value="PNG">PNG</option>
-                <option value="CSV">CSV</option>
-                <option value="SVG">SVG</option>
-            </select>
-            <button id="saveButton" onclick="saveChart()">Save chart image</button>
+            <div class="body-column">
+                <canvas id="secondChart"></canvas>
+            </div>
         </div>
-
-    </div>
+    </form>
+    <script>
+        generateChart("firstChart");
+        generateChart("secondChart")
+    </script>
 </div>
-
-<div></div>
 
 <div>
     <label for="shareLink" class="linkShare">Share with others</label>
     <textarea disabled="disabled" id="shareLink"><?php
         $link = getShareLink();
-        $prefix = 'http://localhost:63342/TW_Project/home.php?';
+        $prefix = 'http://localhost:63342/TW_Project/compare.php?';
         echo $prefix . $link; ?></textarea>
 </div>
 
@@ -133,8 +162,8 @@
                 </div>
             </div>
         </div>
-    </div>       
+    </div>
 </footer>
-<script src="script.js"></script>
+<script src="scriptCompare.js"></script>
 </body>
 </html>

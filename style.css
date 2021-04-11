@@ -137,9 +137,11 @@ ul {
 }
 
 .body-column {
-    width: 50%;
     padding: 0 15px;
+}
 
+.linkShare {
+    margin: 20px;
 }
 
 .footer-column h4 {
