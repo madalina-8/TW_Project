@@ -224,6 +224,8 @@ ul {
     display: block;
     color: #bbbbbb;
     transition: all 0.3s ease;
+    position: relative;
+    right: 40px;
 }
 
 .footer-column ul li a:hover {
