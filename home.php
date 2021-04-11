@@ -1,3 +1,11 @@
+<?php
+    include 'homeUtils.php';
+    if (checkGETAndRedirect()) {
+        header('Location: ./home.php');
+        exit(0);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +36,7 @@
     </a>
     <div class="navbar-links">
         <ul>
-            <li><a href="home.html">Home</a></li>
+            <li><a href="home.php">Home</a></li>
             <li><a href="compare.html">Compare</a></li>
             <li><a href="about/about.html">About</a></li>
         </ul>
@@ -37,31 +45,36 @@
 
 <div class="row">
     <div class="body-column">
-        <div>
-            <label for="age">Select age:</label>
-            <select name="age" id="age" class=choiceBox>
-                <option value="0-9">0-10</option>
-                <option value="10-19">10-19</option>
-                <option value="20-29">20-29</option>
-                <option value="30-39">30-39</option>
-                <option value="40-49">40-49</option>
-            </select>
-        </div>
-        <div>
-            <label for="sex">Select sex:</label>
-            <select name="sex" id="sex" class="choiceBox">
-                <option value="M">M</option>
-                <option value="F">F</option>
-            </select>
-        </div>
-        <div>
-            <label for="country">Select country</label>
-            <select name="sex" id="country" class="choiceBox">
-                <option value="ro">Romania</option>
-                <option value="usa">USA</option>
-                <option value="de">Germany</option>
-            </select>
-        </div>
+        <form method="post" action="./submitForm.php">
+            <div>
+                <label for="age">Select age:</label>
+                <select name="age" id="age" class=choiceBox>
+                    <option value="0-9">0-9</option>
+                    <option value="10-19">10-19</option>
+                    <option value="20-29">20-29</option>
+                    <option value="30-39">30-39</option>
+                    <option value="40-49">40-49</option>
+                </select>
+            </div>
+            <div>
+                <label for="sex">Select sex:</label>
+                <select name="sex" id="sex" class="choiceBox">
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                </select>
+            </div>
+            <div>
+                <label for="country">Select country</label>
+                <select name="country" id="country" class="choiceBox">
+                    <option value="ro">Romania</option>
+                    <option value="usa">USA</option>
+                    <option value="de">Germany</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Filter" class="choiceBox">
+            </div>
+        </form>
     </div>
 </div>
 
@@ -77,15 +90,24 @@
     </select>
     <button id="saveButton" onclick="saveChart()">Save chart image</button>
 </div>
+
+<div></div>
+
 <div>
+    <label for="shareLink">Share with others</label>
+    <textarea disabled="disabled" id="shareLink"><?php
+        $link = getShareLink();
+        $prefix = 'http://localhost:63342/TW_Project/home.php?';
+        echo $prefix . $link; ?></textarea>
 </div>
+
 <footer class="footer">
     <div class="container">
         <div class="row">
             <div class="footer-column">
                 <h4>Navigate</h4>
                 <ul>
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="home.php">Home</a></li>
                     <li><a href="compare.html">Compare</a></li>
                     <li><a href="about/about.html">About</a></li>
                 </ul>
