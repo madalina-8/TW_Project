@@ -73,12 +73,12 @@
                     </select>
                 </div>
                 <div>
-                    <input type="submit" value="Filter" class="choiceBox">
+                    <input type="submit" value="Filter">
                 </div>
             </form>
         </div>
 
-        <div class="body-column">
+        <div class="body-column graph">
             <canvas id="mainChart">
                 <script>generateChart("mainChart")</script>
             </canvas>

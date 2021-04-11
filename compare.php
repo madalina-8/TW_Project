@@ -48,7 +48,7 @@ if (checkGETAndRedirect()) {
     <label for="firstRow"><h1 class="filterTitle">First chart</h1></label>
     <form method="post" action="submitFormCompare.php">
         <div class="row" id="firstRow">
-            <div class="body-column">
+            <div class="body-column compareFilter">
                 <div>
                     <label for="age">Select age:</label>
                     <select name="age" id="age" class=choiceBox>
@@ -76,7 +76,7 @@ if (checkGETAndRedirect()) {
                 </div>
             </div>
 
-            <div class="body-column">
+            <div class="body-column compareGraph">
                 <canvas id="firstChart"></canvas>
             </div>
         </div>
@@ -110,11 +110,11 @@ if (checkGETAndRedirect()) {
                     </select>
                 </div>
                 <div>
-                    <input type="submit" value="Filter" class="choiceBox">
+                    <input type="submit" value="Filter">
                 </div>
             </div>
 
-            <div class="body-column">
+            <div class="body-column compareGraph">
                 <canvas id="secondChart"></canvas>
             </div>
         </div>
