@@ -58,10 +58,10 @@
                 <div>
                     <label for="sex">Select sex:</label>
                     <select name="sex" id="sex" class="choiceBox" onchange="updateSex()">
+                        <option value="defaultValue">-</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Both sexes">Both sexes</option>
-                        <option value="">-</option>
                     </select>
                 </div>
                 <div>
@@ -73,7 +73,12 @@
                     </select>
                 </div>
                 <div>
-                    <input type="submit" value="Filter">
+                    <label for="region">Select region</label>
+                    <select name="region" id="region" class="choiceBox" onchange="updateRegion()">
+                        <script>
+                            addRegionOptions()
+                        </script>
+                    </select>
                 </div>
             </form>
         </div>

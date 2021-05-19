@@ -60,10 +60,10 @@ const testFileName = "text.csv"
 const dataFileName = "data.csv"
 
 let defaultValue = "-"
-let selectedLocation = ""
-let selectedCountry = "Afghanistan" //default value in the UI
-let selectedYear = "2016" //default value in the UI
-let selectedSex = "Male" //default value in the UI
+let selectedRegion = defaultValue
+let selectedCountry = defaultValue //default value in the UI
+let selectedYear = defaultValue //default value in the UI
+let selectedSex = defaultValue //default value in the UI
 let mainChartNameId = "mainChart"
 
 async function getData() {
@@ -86,22 +86,14 @@ async function getData() {
     // Location___Country___Year___Sex___Value
     // 0          1         2      3     4
 function isSelectableData(cols) {
-    return (selectedLocation === "" || selectedLocation === cols[0]) &&
-        (selectedCountry === "" || selectedCountry === cols[1]) &&
-        (selectedYear === "" || selectedYear === cols[2]) &&
-        (selectedSex === "" || selectedSex === cols[3]);
+    return (selectedRegion === defaultValue || selectedRegion === cols[0]) &&
+        (selectedCountry === defaultValue || selectedCountry === cols[1]) &&
+        (selectedYear === defaultValue || selectedYear === cols[2]) &&
+        (selectedSex === defaultValue || selectedSex === cols[3]);
 }
 
 function getFields(cols) {
     return cols[1] + " " + cols[2] + " " + cols[3]
-}
-
-function addYearOptions() {
-    let yearChoiceBox = document.querySelector('#year')
-    for (let i = 2016; i >= 1975; i--) {
-        let newOption = new Option(i, i)
-        yearChoiceBox.appendChild(newOption)
-    }
 }
 
 function updateYear() {
@@ -122,6 +114,12 @@ function updateCountry() {
     refreshUI()
 }
 
+function updateRegion() {
+    let regionChoiceBox = document.querySelector('#region')
+    selectedRegion = regionChoiceBox.valueOf().value
+    refreshUI()
+}
+
 function refreshUI() {
     console.log("Updating UI")
     if(window.myChart != null) {
@@ -131,8 +129,6 @@ function refreshUI() {
 }
 
 async function addCountryOptions() {
-    let countryChoiceBox = document.querySelector('#country')
-
     const response = await fetch(dataFileName);
     const data = await response.text();
     let countries = []
@@ -142,10 +138,44 @@ async function addCountryOptions() {
         countries.push(cols[1])
     });
     countries = RemoveDuplicates(countries)
+
+    let countryChoiceBox = document.querySelector('#country')
+    let newOption = new Option("-", defaultValue)
+    countryChoiceBox.appendChild(newOption)
     countries.forEach(country => {
         let newOption = new Option(country, country)
         countryChoiceBox.appendChild(newOption)
     });
+}
+
+async function addRegionOptions() {
+    const response = await fetch(dataFileName);
+    const data = await response.text();
+    let regions = []
+    const rows = data.split('\n').slice(1)
+    rows.forEach(row =>{
+        const cols = row.split(',');
+        regions.push(cols[0])
+    });
+    regions = RemoveDuplicates(regions)
+
+    let regionChoiceBox = document.querySelector('#region')
+    let newOption = new Option("-", defaultValue)
+    regionChoiceBox.appendChild(newOption)
+    regions.forEach(region => {
+        let newOption = new Option(region, region)
+        regionChoiceBox.appendChild(newOption)
+    });
+}
+
+function addYearOptions() {
+    let yearChoiceBox = document.querySelector('#year')
+    let newOption = new Option("-", defaultValue)
+    yearChoiceBox.appendChild(newOption)
+    for (let i = 2016; i >= 1975; i--) {
+        let newOption = new Option(i, i)
+        yearChoiceBox.appendChild(newOption)
+    }
 }
 
 function RemoveDuplicates(arr) {
