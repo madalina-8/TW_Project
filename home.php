@@ -49,15 +49,15 @@
             <form method="post" action="submitFormHome.php">
                 <div>
                     <label for="year">Select year:</label>
-                    <select name="year" id="year" class=choiceBox onchange="updateYear()">
+                    <select name="year" id="year" class=choiceBox onchange="updateField(columnYear, 'year')">
                         <script>
-                            window.addEventListener('load', addYearOptions())
+                            addOptionsForParameter(columnYear, "year")
                         </script>
                     </select>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
-                    <select name="sex" id="sex" class="choiceBox" onchange="updateSex()">
+                    <select name="sex" id="sex" class="choiceBox" onchange="updateField(columnSex, 'sex')">
                         <option value="defaultValue">-</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -66,17 +66,17 @@
                 </div>
                 <div>
                     <label for="country">Select country</label>
-                    <select name="country" id="country" class="choiceBox" onchange="updateCountry()">
+                    <select name="country" id="country" class="choiceBox" onchange="updateField(columnCountry, 'country')">
                         <script>
-                            addCountryOptions()
+                            addOptionsForParameter(columnCountry, "country")
                         </script>
                     </select>
                 </div>
                 <div>
                     <label for="region">Select region</label>
-                    <select name="region" id="region" class="choiceBox" onchange="updateRegion()">
+                    <select name="region" id="region" class="choiceBox" onchange="updateField(columnRegion, 'region')">
                         <script>
-                            addRegionOptions()
+                            addOptionsForParameter(columnRegion, "region")
                         </script>
                     </select>
                 </div>

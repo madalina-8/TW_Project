@@ -18,8 +18,6 @@ function updateType(imageFormatBox) {
     alert(MIME_TYPE)
 }
 
-let myChart
-
 function saveChart() {
     const canvas = document.getElementById("mainChart");
     const MIME_TYPE = "image/png";
@@ -37,14 +35,20 @@ function saveChart() {
 
 async function generateChart(chartID) {
     const ctx = document.getElementById(chartID).getContext('2d');
-    const data = await getData();
+    const data = await getData(
+        defaultValue,
+        selectedRegion,
+        selectedCountry,
+        selectedYear,
+        selectedSex
+    );
     window.myChart = new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: data.enName,
         datasets: [
           {
-            label: 'Average obesity percentage in ' + selectedYear,
+            label: 'Average obesity percentage in ' + selectedYear + " for males",
             data: data.enValue,
             fill: false,
             borderColor: 'rgba(255, 99, 132, 1)',
@@ -58,15 +62,30 @@ async function generateChart(chartID) {
 }
 const testFileName = "text.csv"
 const dataFileName = "data.csv"
-
-let defaultValue = "-"
-let selectedRegion = defaultValue
-let selectedCountry = defaultValue //default value in the UI
-let selectedYear = defaultValue //default value in the UI
-let selectedSex = defaultValue //default value in the UI
 let mainChartNameId = "mainChart"
 
-async function getData() {
+let defaultValue = "-" //default value in the UI
+let selectedRegion = defaultValue
+let selectedCountry = defaultValue
+let selectedYear = defaultValue
+let selectedSex = defaultValue
+
+let columnRegion = 0
+let columnCountry = 1
+let columnYear = 2
+let columnSex = 3
+let columnValue = 4
+
+// The order in the csv files is as stands:
+    // Location___Country___Year___Sex___Value
+    // 0          1         2      3     4
+
+async function getData(dValue,
+                       sRegion,
+                       sCountry,
+                       sYear,
+                       sSex
+) {
     const response = await fetch(dataFileName);
     const data = await response.text();
     const entryName = [];
@@ -74,7 +93,7 @@ async function getData() {
     const rows = data.split('\n').slice(1);
     rows.forEach(row => {
         const cols = row.split(',');
-        if(isSelectableData(cols)) {
+        if(isSelectableData(cols, dValue, sRegion, sCountry, sYear, sSex)) {
             entryName.push(getFields(cols));
             entryValue.push(parseFloat(cols[4]));
         }
@@ -82,41 +101,49 @@ async function getData() {
     return { enName: entryName, enValue: entryValue };
 }
 
-// The order in the csv files is as stands:
-    // Location___Country___Year___Sex___Value
-    // 0          1         2      3     4
-function isSelectableData(cols) {
-    return (selectedRegion === defaultValue || selectedRegion === cols[0]) &&
-        (selectedCountry === defaultValue || selectedCountry === cols[1]) &&
-        (selectedYear === defaultValue || selectedYear === cols[2]) &&
-        (selectedSex === defaultValue || selectedSex === cols[3]);
+function isSelectableData(cols,
+                          dValue,
+                          sRegion,
+                          sCountry,
+                          sYear,
+                          sSex
+) {
+    return (sRegion === dValue || sRegion === cols[0]) &&
+        (sCountry === dValue || sCountry === cols[1]) &&
+        (sYear === dValue || sYear === cols[2]) &&
+        (sSex === dValue || sSex === cols[3]);
 }
 
 function getFields(cols) {
-    return cols[1] + " " + cols[2] + " " + cols[3]
+    let fieldsToGet = [columnCountry, columnYear, columnSex]
+    let concatenatedValue = ""
+    fieldsToGet.forEach(field => {
+        concatenatedValue = concatenatedValue + cols[field] + " "
+    })
+    return concatenatedValue
 }
 
-function updateYear() {
-    let yearChoiceBox = document.querySelector('#year')
-    selectedYear = yearChoiceBox.valueOf().value
-    refreshUI()
-}
-
-function updateSex() {
-    let sexChoiceBox = document.querySelector('#sex')
-    selectedSex = sexChoiceBox.valueOf().value
-    refreshUI()
-}
-
-function updateCountry() {
-    let countryChoiceBox = document.querySelector('#country')
-    selectedCountry = countryChoiceBox.valueOf().value
-    refreshUI()
-}
-
-function updateRegion() {
-    let regionChoiceBox = document.querySelector('#region')
-    selectedRegion = regionChoiceBox.valueOf().value
+function updateField(
+    fieldColumn,
+    choiceBoxId
+) {
+    let choiceBox = document.querySelector('#' + choiceBoxId)
+    switch(fieldColumn) {
+        case columnRegion:
+            selectedRegion = choiceBox.valueOf().value
+            break;
+        case columnCountry:
+            selectedCountry = choiceBox.valueOf().value
+            break;
+        case columnYear:
+            selectedYear = choiceBox.valueOf().value
+            break;
+        case columnSex:
+            selectedSex = choiceBox.valueOf().value
+            break;
+        default:
+            console.log("???")
+    }
     refreshUI()
 }
 
@@ -128,54 +155,26 @@ function refreshUI() {
     generateChart(mainChartNameId)
 }
 
-async function addCountryOptions() {
-    const response = await fetch(dataFileName);
-    const data = await response.text();
-    let countries = []
+async function addOptionsForParameter(
+    fieldColumn,
+    choiceBoxId
+) {
+    const response = await fetch(dataFileName)
+    const data = await response.text()
+    let fields = []
     const rows = data.split('\n').slice(1)
     rows.forEach(row =>{
         const cols = row.split(',');
-        countries.push(cols[1])
-    });
-    countries = RemoveDuplicates(countries)
-
-    let countryChoiceBox = document.querySelector('#country')
+        fields.push(cols[fieldColumn])
+    })
+    fields = RemoveDuplicates(fields)
+    let choiceBox = document.querySelector('#' + choiceBoxId)
     let newOption = new Option("-", defaultValue)
-    countryChoiceBox.appendChild(newOption)
-    countries.forEach(country => {
-        let newOption = new Option(country, country)
-        countryChoiceBox.appendChild(newOption)
-    });
-}
-
-async function addRegionOptions() {
-    const response = await fetch(dataFileName);
-    const data = await response.text();
-    let regions = []
-    const rows = data.split('\n').slice(1)
-    rows.forEach(row =>{
-        const cols = row.split(',');
-        regions.push(cols[0])
-    });
-    regions = RemoveDuplicates(regions)
-
-    let regionChoiceBox = document.querySelector('#region')
-    let newOption = new Option("-", defaultValue)
-    regionChoiceBox.appendChild(newOption)
-    regions.forEach(region => {
-        let newOption = new Option(region, region)
-        regionChoiceBox.appendChild(newOption)
-    });
-}
-
-function addYearOptions() {
-    let yearChoiceBox = document.querySelector('#year')
-    let newOption = new Option("-", defaultValue)
-    yearChoiceBox.appendChild(newOption)
-    for (let i = 2016; i >= 1975; i--) {
-        let newOption = new Option(i, i)
-        yearChoiceBox.appendChild(newOption)
-    }
+    choiceBox.appendChild(newOption)
+    fields.forEach(field => {
+        let newOption = new Option(field, field)
+        choiceBox.appendChild(newOption)
+    })
 }
 
 function RemoveDuplicates(arr) {
