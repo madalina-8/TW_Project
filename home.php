@@ -48,28 +48,28 @@
         <div class="body-column">
             <form method="post" action="submitFormHome.php">
                 <div>
-                    <label for="age">Select age:</label>
-                    <select name="age" id="age" class=choiceBox>
-                        <option value="0-9">0-9</option>
-                        <option value="10-19">10-19</option>
-                        <option value="20-29">20-29</option>
-                        <option value="30-39">30-39</option>
-                        <option value="40-49">40-49</option>
+                    <label for="year">Select year:</label>
+                    <select name="year" id="year" class=choiceBox onchange="updateYear()">
+                        <script>
+                            window.addEventListener('load', addYearOptions())
+                        </script>
                     </select>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
-                    <select name="sex" id="sex" class="choiceBox">
-                        <option value="M">M</option>
-                        <option value="F">F</option>
+                    <select name="sex" id="sex" class="choiceBox" onchange="updateSex()">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Both sexes">Both sexes</option>
+                        <option value="">-</option>
                     </select>
                 </div>
                 <div>
                     <label for="country">Select country</label>
-                    <select name="country" id="country" class="choiceBox">
-                        <option value="ro">Romania</option>
-                        <option value="usa">USA</option>
-                        <option value="de">Germany</option>
+                    <select name="country" id="country" class="choiceBox" onchange="updateCountry()">
+                        <script>
+                            addCountryOptions()
+                        </script>
                     </select>
                 </div>
                 <div>
@@ -80,7 +80,9 @@
 
         <div class="body-column graph">
             <canvas id="mainChart">
-                <script>generateChart("mainChart")</script>
+                <script>
+                    window.addEventListener('load', generateChart("mainChart"))
+                </script>
             </canvas>
             <label for="imageFormat">Select format:</label>
             <select name="imageFormat" id="imageFormat" class="choiceBox" onchange="updateType(this)">

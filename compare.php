@@ -120,8 +120,9 @@ if (checkGETAndRedirect()) {
         </div>
     </form>
     <script>
-        generateChart("firstChart");
-        generateChart("secondChart")
+        window.addEventListener('load', generateChart("firstChart"))
+        window.addEventListener('load', generateChart("secondChart"))
+    
     </script>
 </div>
 
