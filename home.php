@@ -49,16 +49,16 @@
             <form method="post" action="submitFormHome.php">
                 <div>
                     <label for="year">Select year:</label>
-                    <select name="year" id="year" class=choiceBox onchange="updateField(columnYear, 'year')">
+                    <select name="year" id="year" class=choiceBox onchange="updateField(columnYear, idYear)">
                         <script>
-                            addOptionsForParameter(columnYear, "year")
+                            addOptionsForParameter(columnYear, idYear)
                         </script>
                     </select>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
-                    <select name="sex" id="sex" class="choiceBox" onchange="updateField(columnSex, 'sex')">
-                        <option value="defaultValue">-</option>
+                    <select name="sex" id="sex" class="choiceBox" onchange="updateField(columnSex, idSex)">
+                        <option value="-">-</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Both sexes">Both sexes</option>
@@ -66,17 +66,17 @@
                 </div>
                 <div>
                     <label for="country">Select country</label>
-                    <select name="country" id="country" class="choiceBox" onchange="updateField(columnCountry, 'country')">
+                    <select name="country" id="country" class="choiceBox" onchange="updateField(columnCountry, idCountry)">
                         <script>
-                            addOptionsForParameter(columnCountry, "country")
+                            addOptionsForParameter(columnCountry, idCountry)
                         </script>
                     </select>
                 </div>
                 <div>
                     <label for="region">Select region</label>
-                    <select name="region" id="region" class="choiceBox" onchange="updateField(columnRegion, 'region')">
+                    <select name="region" id="region" class="choiceBox" onchange="updateField(columnRegion, idRegion)">
                         <script>
-                            addOptionsForParameter(columnRegion, "region")
+                            addOptionsForParameter(columnRegion, idRegion)
                         </script>
                     </select>
                 </div>
@@ -95,7 +95,7 @@
                 <option value="CSV">CSV</option>
                 <option value="SVG">SVG</option>
             </select>
-            <button id="saveButton" onclick="saveChart()">Save chart image</button>
+            <button id="saveButton" onclick="addData()">Save chart image</button>
         </div>
 
     </div>

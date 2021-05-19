@@ -1,5 +1,30 @@
 var MIME_TYPE = "image/png";
 
+const testFileName = "text.csv"
+const dataFileName = "data.csv"
+let mainChartNameId = "mainChart"
+
+// The order in the csv files is as stands:
+    // Location___Country___Year___Sex___Value
+    // 0          1         2      3     4
+let defaultValue = "-" //default value in the UI
+let selectedRegion = defaultValue
+let selectedCountry = defaultValue
+let selectedYear = defaultValue
+let selectedSex = defaultValue
+
+let columnRegion = 0
+let columnCountry = 1
+let columnYear = 2
+let columnSex = 3
+let columnValue = 4
+
+let idRegion = "region"
+let idCountry = "country"
+let idYear = "year"
+let idSex = "sex"
+let idValue = "value"
+
 function updateType(imageFormatBox) {
     alert(imageFormatBox.value)
     switch(imageFormatBox.value) {
@@ -43,11 +68,11 @@ async function generateChart(chartID) {
         selectedSex
     );
     window.myChart = new Chart(ctx, {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: data.enName,
         datasets: [
-          {
+          { //https://jsfiddle.net/flivni/Lcnj1e5x/
             label: 'Average obesity percentage in ' + selectedYear + " for males",
             data: data.enValue,
             fill: false,
@@ -60,25 +85,6 @@ async function generateChart(chartID) {
       options: {}
     });
 }
-const testFileName = "text.csv"
-const dataFileName = "data.csv"
-let mainChartNameId = "mainChart"
-
-let defaultValue = "-" //default value in the UI
-let selectedRegion = defaultValue
-let selectedCountry = defaultValue
-let selectedYear = defaultValue
-let selectedSex = defaultValue
-
-let columnRegion = 0
-let columnCountry = 1
-let columnYear = 2
-let columnSex = 3
-let columnValue = 4
-
-// The order in the csv files is as stands:
-    // Location___Country___Year___Sex___Value
-    // 0          1         2      3     4
 
 async function getData(dValue,
                        sRegion,
@@ -99,6 +105,26 @@ async function getData(dValue,
         }
     });
     return { enName: entryName, enValue: entryValue };
+}
+
+async function addData() {
+    const data = await getData(
+        defaultValue,
+        defaultValue,
+        "Romania",
+        selectedYear,
+        defaultValue
+    );
+
+    window.myChart.datasets.push({
+        label: 'Average obesity percentage in ' + selectedYear + " in Romania",
+        data: data.enValue,
+        fill: false,
+        borderColor: 'rgba(30, 139, 195, 1)',
+        backgroundColor: 'rgba(30, 139, 195, 0.5)',
+        borderWidth: 1
+    });
+    window.myChart.update();
 }
 
 function isSelectableData(cols,
@@ -140,6 +166,7 @@ function updateField(
             break;
         case columnSex:
             selectedSex = choiceBox.valueOf().value
+            console.log(selectedSex)
             break;
         default:
             console.log("???")
@@ -148,7 +175,7 @@ function updateField(
 }
 
 function refreshUI() {
-    console.log("Updating UI")
+    //console.log("Updating UI")
     if(window.myChart != null) {
         window.myChart.destroy()
     }
@@ -169,7 +196,7 @@ async function addOptionsForParameter(
     })
     fields = RemoveDuplicates(fields)
     let choiceBox = document.querySelector('#' + choiceBoxId)
-    let newOption = new Option("-", defaultValue)
+    let newOption = new Option(defaultValue.valueOf(), defaultValue)
     choiceBox.appendChild(newOption)
     fields.forEach(field => {
         let newOption = new Option(field, field)
