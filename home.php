@@ -57,7 +57,8 @@
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
-                    <select name="sex" id="sex" class="choiceBox" onchange="updateField(columnSex, idSex)">
+                    <select name="sex" id="sex" class="choiceBox" multiple onchange="updateField(columnSex, idSex)">
+                        <!--https://github.com/harvesthq/chosen for better choicebox-->
                         <option value="-">-</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -95,7 +96,7 @@
                 <option value="CSV">CSV</option>
                 <option value="SVG">SVG</option>
             </select>
-            <button id="saveButton" onclick="addData()">Save chart image</button>
+            <button id="saveButton" onclick="saveChart(mainChartNameId)">Save chart image</button>
         </div>
 
     </div>
