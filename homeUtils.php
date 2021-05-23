@@ -1,6 +1,6 @@
 <?php
 //when changing 'formNames' change its value in script.js too
-$formNames = array("age", "sex", "country");
+$formNames = array("year", "region", "country", "sex");
 
 function getShareLink() {
     global $formNames;

@@ -157,21 +157,42 @@ function updateField(
     switch(fieldColumn) {
         case columnRegion:
             selectedRegion = choiceBox.valueOf().value
+            setCookie(choiceBoxId, selectedRegion, 7)
             break;
         case columnCountry:
             selectedCountry = choiceBox.valueOf().value
+            setCookie(choiceBoxId, selectedCountry, 7)
             break;
         case columnYear:
             selectedYear = choiceBox.valueOf().value
+            setCookie(choiceBoxId, selectedYear, 7)
             break;
         case columnSex:
             selectedSex = choiceBox.valueOf().value
+            setCookie(choiceBoxId, selectedSex, 7)
             console.log(selectedSex)
             break;
         default:
             console.log("???")
     }
     refreshUI()
+}
+
+function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    return document.cookie
+        .split('; ')
+        .find(row => row.startsWith(name + '='))
+        .split('=')[1]
 }
 
 function refreshUI() {
@@ -202,6 +223,12 @@ async function addOptionsForParameter(
         let newOption = new Option(field, field)
         choiceBox.appendChild(newOption)
     })
+    let value = getCookie(choiceBoxId)
+    if (value === undefined) {
+        value = defaultValue
+    }
+    choiceBox.value = value
+    updateField(fieldColumn, choiceBoxId)
 }
 
 function RemoveDuplicates(arr) {

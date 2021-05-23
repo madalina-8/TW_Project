@@ -1,5 +1,6 @@
 //when changing 'formNames' change its value in homeUtils.php too
-const formNames = ['age', 'sex', 'country']
+const formNames = ['year', 'sex', 'country', 'region']
+
 const toggleButton = document.getElementsByClassName('toggle-button')[0]
 const navbarLinks = document.getElementsByClassName('navbar-links')[0]
 
