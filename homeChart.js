@@ -25,6 +25,14 @@ let idYear = "year"
 let idSex = "sex"
 let idValue = "value"
 
+let colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"]
+            // red        green      blue       yellow     cyan       magenta
+let colorsIterator = 0
+
+let borderColors = ["#00FF00", "#FF0000", "#FFFF00", "#0000FF", "#FF00FF", "#00FFFF"]
+                  //green       red        yellow      blue      magenta     cyan
+let borderColorsIterator = 0
+
 function updateType(imageFormatBox) {
     alert(imageFormatBox.value)
     switch(imageFormatBox.value) {
@@ -43,13 +51,12 @@ function updateType(imageFormatBox) {
     alert(MIME_TYPE)
 }
 
-function saveChart() {
-    const canvas = document.getElementById("mainChart");
-    const MIME_TYPE = "image/png";
+function saveChart(chartId) {
+    const canvas = document.getElementById(chartId);
     const imageURL = canvas.toDataURL(MIME_TYPE);
 
     const dlLink = document.createElement('a');
-    dlLink.download = "testFileName";
+    dlLink.download = "graph";
     dlLink.href = imageURL;
     dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
 
@@ -73,17 +80,37 @@ async function generateChart(chartID) {
         labels: data.enName,
         datasets: [
           { //https://jsfiddle.net/flivni/Lcnj1e5x/
-            label: 'Average obesity percentage in ' + selectedYear + " for males",
+            label: 'Average obesity percentage in ' + selectedYear,
             data: data.enValue,
             fill: false,
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: colors[iterateBorderColorsAndIncrement()],
+            backgroundColor: colors[iterateColorsAndIncrement()],
             borderWidth: 1
           }
         ]
       },
       options: {}
     });
+}
+
+function iterateColorsAndIncrement() {
+    let valueToReturn = colorsIterator
+    if(colorsIterator < colors.length - 1) {
+        colorsIterator++
+    } else {
+        colorsIterator = 0
+    }
+    return valueToReturn
+}
+
+function iterateBorderColorsAndIncrement() {
+    let valueToReturn = borderColorsIterator
+    if(borderColorsIterator < borderColors.length - 1) {
+        borderColorsIterator++
+    } else {
+        borderColorsIterator = 0
+    }
+    return valueToReturn
 }
 
 async function getData(dValue,
@@ -105,26 +132,6 @@ async function getData(dValue,
         }
     });
     return { enName: entryName, enValue: entryValue };
-}
-
-async function addData() {
-    const data = await getData(
-        defaultValue,
-        defaultValue,
-        "Romania",
-        selectedYear,
-        defaultValue
-    );
-
-    window.myChart.datasets.push({
-        label: 'Average obesity percentage in ' + selectedYear + " in Romania",
-        data: data.enValue,
-        fill: false,
-        borderColor: 'rgba(30, 139, 195, 1)',
-        backgroundColor: 'rgba(30, 139, 195, 0.5)',
-        borderWidth: 1
-    });
-    window.myChart.update();
 }
 
 function isSelectableData(cols,
@@ -170,7 +177,6 @@ function updateField(
         case columnSex:
             selectedSex = choiceBox.valueOf().value
             setCookie(choiceBoxId, selectedSex, 7)
-            console.log(selectedSex)
             break;
         default:
             console.log("???")
