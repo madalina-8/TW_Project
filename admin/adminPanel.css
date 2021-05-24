@@ -1,0 +1,18 @@
+* {
+    margin: 0px;
+    min-height: 100%;
+ }
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #272932 ;
+    color: white;
+    font-family: 'Julius Sans One', sans-serif;
+    padding: 10px 60px;
+    height: 20px;
+}
+
+
