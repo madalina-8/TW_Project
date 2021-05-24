@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
         <ul>
             <li><a href="../home.php">Home</a></li>
             <li><a href="../compare.php">Compare</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="about.php">About</a></li>
         </ul>
     </div>
 </nav>
@@ -85,29 +86,40 @@
 
 
         <div class="contact-form">
-            <form action="about.html">
+
+        <?php
+
+        if(isset($_GET['error'])) {
+            echo "<script>alert('Please fill in the blanks!')</script>";
+        }
+
+        if(isset($_GET['succes'])) {
+            echo "<script>alert('Message succesfully sent!!')</script>";
+        }
+        ?>
+            <form action="contactForm.php" method="post">
                 <h3 class="title">Contact us</h3>  
                 <div class="input-container">
-                <input type="text" name="fname" class="input">
-                <label for="">First name</label>
-                <span>First name</span>
-                </div>
-                <div class="input-container">
-                    <input type="text" name="lname" class="input">
-                    <label for="">Last name</label>
-                <span>Last name</span>
+                <input type="text" name="name" class="input">
+                <label for="">Full name</label>
+                <span>Full name</span>
                 </div>
                 <div class="input-container">
                     <input type="email" name="email" class="input">
                     <label for="">Email</label>
-                    <span>Email</span>
+                <span>Email</span>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="subject" class="input">
+                    <label for="">Subject</label>
+                    <span>Subject</span>
                 </div>
                 <div class="input-container textarea">
                     <textarea name="message" class="input"></textarea>
                     <label for="">Message</label>
                     <span>Message</span>
                 </div>
-                <input type="submit" value="Send" class="btn">
+                <input type="submit" value="Send" class="btn" name="send">
          
             </form>
         </div>
@@ -126,7 +138,7 @@
                 <ul>
                     <li><a href="../home.php">Home</a></li>
                     <li><a href="../compare.php">Compare</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="about.php">About</a></li>
                 </ul>
             </div>
             <div class="footer-column">
