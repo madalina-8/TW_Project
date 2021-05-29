@@ -9,10 +9,14 @@ toggleButton.addEventListener('click', () => {
 })
 
 function getCookie(name) {
-    return document.cookie
-        .split('; ')
-        .find(row => row.startsWith(name + '='))
-        .split('=')[1]
+    try {
+        return document.cookie.split('; ')
+            .find(row => row.startsWith(name + '='))
+            .split('=')[1]
+    } catch (error) {
+        console.log("Error getting cookies: " +  error)
+        return ""
+    }
 }
 
 formNames.forEach( element => {
