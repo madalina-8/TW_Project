@@ -147,7 +147,7 @@ class ChartHandler {
                      sYear,
                      sSex
     ) {
-        return (sRegion.includes(cols[chartData.columnRegion]) || sRegion.length === 0)&&
+        return (sRegion.includes(cols[chartData.columnRegion]) || sRegion.length === 0) &&
             (sCountry.includes(cols[chartData.columnCountry]) || sCountry.length === 0) &&
             (sYear.includes(cols[chartData.columnYear]) || sYear.length === 0) &&
             (sSex.includes(cols[chartData.columnSex]) || sSex.length === 0);
@@ -200,7 +200,7 @@ class ChartHandler {
     }
 
     async getSuggestionsForColumn(fieldColumn) {
-        const response = await fetch(this.misc.dataFileName)
+        const response = await fetch(misc.dataFileName)
         const data = await response.text()
         let fields = []
         const rows = data.split('\n').slice(1)
@@ -209,6 +209,7 @@ class ChartHandler {
             fields.push(cols[fieldColumn])
         })
         fields = this.RemoveDuplicates(fields)
+        console.log(fields)
         return fields
     }
 
@@ -296,7 +297,7 @@ class ViewHandler {
         if(cookieValues.length !== 0) {
             options.valueOf().value = this.getValueFromCookie(optionsID)
         }
-        console.log(options.valueOf().value)
+        // console.log(options.valueOf().value)
         // does not update the UI though... ?
     }
 

@@ -58,7 +58,8 @@
                             $('input[name="year"]').amsifySuggestags({
                                 type : 'bootstrap',
                                 //suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["1970", "2015", "2016"]
+                                suggestions: ["1970", "2015", "2016"],
+                                whiteList: true
                             });
                         </script>
                     </div>
@@ -72,7 +73,8 @@
                             $('input[name="sex"]').amsifySuggestags({
                                 type : 'bootstrap',
                                 //suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["Male", "Female", "Both sexes"]
+                                suggestions: ["Male", "Female", "Both sexes"],
+                                whiteList: true
                             });
                         </script>
                     </div>
@@ -85,8 +87,9 @@
                             viewHandler.updateUIValueFromCookie(chartData.idCountry)
                             $('input[name="country"]').amsifySuggestags({
                                 type : 'bootstrap',
-                                //suggestions: getSuggestionsForColumn(columnCountry),
+                                //suggestions: chartHandler.getSuggestionsForColumn(chartData.columnCountry),
                                 suggestions: ["Romania", "Bulgaria", "China", "Germany", "Afghanistan"],
+                                whiteList: true
                             })
                         </script>
                     </div>
@@ -100,7 +103,8 @@
                             $('input[name="region"]').amsifySuggestags({
                                 type : 'bootstrap',
                                 //suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["Europe", "Africa", "Americas"]
+                                suggestions: ["Europe", "Africa", "Americas"],
+                                whiteList: true
                             });
                         </script>
                     </div>
