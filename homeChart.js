@@ -157,10 +157,23 @@ class ChartHandler {
                      sYear,
                      sSex
     ) {
-        return (sRegion.includes(cols[chartData.columnRegion]) || sRegion.length === 0) &&
-            (sCountry.includes(cols[chartData.columnCountry]) || sCountry.length === 0) &&
-            (sYear.includes(cols[chartData.columnYear]) || sYear.length === 0) &&
-            (sSex.includes(cols[chartData.columnSex]) || sSex.length === 0);
+        return (sRegion.includes(cols[chartData.columnRegion]) || this.isArrayEmpty(sRegion)) &&
+            (sCountry.includes(cols[chartData.columnCountry]) || this.isArrayEmpty(sCountry)) &&
+            (sYear.includes(cols[chartData.columnYear]) || this.isArrayEmpty(sYear)) &&
+            (sSex.includes(cols[chartData.columnSex]) || this.isArrayEmpty(sSex));
+    }
+
+    isArrayEmpty(array) {
+        if(array.length === 0) {
+            return true
+        }
+        let empty = true
+        array.forEach(element => {
+            if(element !== "") {
+                empty = false
+            }
+        })
+        return empty;
     }
 
     getFields(cols) {
@@ -308,7 +321,7 @@ class ViewHandler {
         if(cookieValues.length !== 0) {
             options.valueOf().value = this.getValueFromCookie(optionsID)
         } else {
-            options.valueOf().value = ""
+            options.valueOf().value = []
         }
         // console.log(options.valueOf().value)
         // does not update the UI though... ?
