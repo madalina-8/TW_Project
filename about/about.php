@@ -27,7 +27,7 @@
     <div class="navbar-links">
         <ul>
             <li><a href="../home.php">Home</a></li>
-            <li><a href="../compare.php">Compare</a></li>
+            <li><a href="../compare/compare.php">Compare</a></li>
             <li><a href="about.php">About</a></li>
         </ul>
     </div>
@@ -137,7 +137,7 @@
                 <h4>Navigate</h4>
                 <ul>
                     <li><a href="../home.php">Home</a></li>
-                    <li><a href="../compare.php">Compare</a></li>
+                    <li><a href="../compare/compare.php">Compare</a></li>
                     <li><a href="about.php">About</a></li>
                 </ul>
             </div>

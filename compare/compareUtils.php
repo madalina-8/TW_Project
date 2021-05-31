@@ -1,6 +1,6 @@
 <?php
 //when changing 'formNames' change its value in scriptCompare.js too
-$formNames = array("age", "sex", "country", "age2", "sex2", "country2");
+$formNames = array("year", "region", "country", "sex");
 
 function getShareLink() {
     global $formNames;
@@ -23,7 +23,10 @@ function submitForm() {
     foreach ($formNames as $name) {
         if (isset($_POST[$name])) {
             $value = $_POST[$name];
-            addCookie($name, $value);
+            echo($value);
+            $cookie = str_replace(',', '.', $value);
+            echo($cookie);
+            addCookie($name, $cookie);
         }
     }
 

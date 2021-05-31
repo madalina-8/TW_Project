@@ -6,10 +6,10 @@
 
 class Miscellaneous {
     constructor() {
-        this.MIME_TYPE = "image/png"
-        this.testFileName = "text.csv"
-        this.dataFileName = "data.csv"
-        this.mainChartNameId = "mainChart"
+        this.MIME_TYPE = "../image/png"
+        this.testFileName = "../text.csv"
+        this.dataFileName = "../data.csv"
+        this.mainChartNameId = "../mainChart"
     }
 }
 
@@ -182,19 +182,19 @@ class ChartHandler {
                 console.log("data is ")
                 console.log(options.valueOf().value)
                 chartData.selectedRegion = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedRegion, 7)
+                this.setCookie(optionsID, chartData.selectedRegion, 7)
                 break;
             case chartData.columnCountry:
                 chartData.selectedCountry = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedCountry, 7)
+                this.setCookie(optionsID, chartData.selectedCountry, 7)
                 break;
             case chartData.columnYear:
                 chartData.selectedYear = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedYear, 7)
+                this.setCookie(optionsID, chartData.selectedYear, 7)
                 break;
             case chartData.columnSex:
                 chartData.selectedSex = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedSex, 7)
+                this.setCookie(optionsID, chartData.selectedSex, 7)
                 break;
             default:
                 console.log("???")

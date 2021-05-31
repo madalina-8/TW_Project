@@ -1,15 +1,15 @@
 <?php
-    include 'homeUtils.php';
-    if (checkGETAndRedirect()) {
-        header('Location: ./home.php');
-        exit(0);
-    }
+include 'compareUtils.php';
+if (checkGETAndRedirect()) {
+    header('Location: ./compare.php');
+    exit(0);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,18 +17,18 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
-    <script src="homeChart.js"></script>
+    <script src="./compareChart.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-    <script type="text/javascript" src="jquery.amsify.suggestags.js"></script>
-    <link rel="stylesheet" type="text/css" href="jquery.amsify.suggestags.css">
+    <script type="text/javascript" src="../jquery.amsify.suggestags.js"></script>
+    <link rel="stylesheet" type="text/css" href="../jquery.amsify.suggestags.css">
     <title>Obesity visualizer</title>
 </head>
 <body>
-    
+
 <nav class="navbar">
     <div class="logo">
-       <a href="#"> 
-           <img src="logo.png" width="200"> 
+        <a href="#">
+            <img src="../about/logo.png" width="200">
         </a>
     </div>
     <a href="#" class="toggle-button">
@@ -38,17 +38,18 @@
     </a>
     <div class="navbar-links">
         <ul>
-            <li><a href="home.php">Home</a></li>
-            <li><a href="compare/compare.php">Compare</a></li>
+            <li><a href="../home.php">Home</a></li>
+            <li><a href="compare.php">Compare</a></li>
             <li><a href="about/about.html">About</a></li>
         </ul>
     </div>
 </nav>
 
+
 <div class="container">
     <div class="row">
         <div class="body-column">
-            <form method="post" action="submitFormHome.php">
+            <form method="post" action="submitFormCompare.php">
                 <div>
                     <label for="year">Select year:</label>
                     <div class="form-group">
@@ -120,26 +121,21 @@
                     viewHandler.generateChart(misc.mainChartNameId)
                 </script>
             </canvas>
-            <label for="imageFormat">Select format:</label>
-            <select name="imageFormat" id="imageFormat" class="choiceBox" onchange="updateType(this)">
-                <option value="PNG">PNG</option>
-                <option value="CSV">CSV</option>
-                <option value="SVG">SVG</option>
-            </select>
-            <button id="saveButton" onclick="chartHandler.saveChart()">Save chart image</button>
         </div>
     </div>
 </div>
 
-<div></div>
 
 <div>
     <label for="shareLink" class="linkShare">Share with others</label>
     <textarea disabled="disabled" id="shareLink"><?php
         $link = getShareLink();
-        $prefix = 'http://localhost:63342/TW_Project/home.php?';
+        $prefix = 'http://localhost:63342/TW_Project/compare.php?';
         echo $prefix . $link; ?></textarea>
 </div>
+
+
+
 
 <footer class="footer">
     <div class="container">
@@ -147,8 +143,8 @@
             <div class="footer-column">
                 <h4>Navigate</h4>
                 <ul>
-                    <li><a href="home.php">Home</a></li>
-                    <li><a href="compare/compare.php">Compare</a></li>
+                    <li><a href="../home.php">Home</a></li>
+                    <li><a href="compare.php">Compare</a></li>
                     <li><a href="about/about.html">About</a></li>
                 </ul>
             </div>
@@ -170,8 +166,8 @@
                 </div>
             </div>
         </div>
-    </div>       
+    </div>
 </footer>
-<script src="script.js"></script>
+<script src="scriptCompare.js"></script>
 </body>
 </html>
