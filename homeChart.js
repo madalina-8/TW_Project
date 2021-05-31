@@ -24,14 +24,12 @@ class ColorManager {
         this.borderColorsIterator = 0
     }
 
-    // We explicitly use 'ch' instead of 'this' because when we call
-    // 'getXColors', a new function will be created that has no connection to 'this'
     iterateColorsAndIncrement(ch) {
-        let valueToReturn = ch.colors.colorsIterator
-        if(ch.colors.colorsIterator < ch.colors.length - 1) {
-            ch.colors.colorsIterator++
+        let valueToReturn = ch.colorsIterator
+        if(ch.colorsIterator < ch.colors.length - 1) {
+            ch.colorsIterator = ch.colorsIterator + 1
         } else {
-            ch.colors.colorsIterator = 0
+            ch.colorsIterator = 0
         }
         return valueToReturn
     }
@@ -39,7 +37,7 @@ class ColorManager {
     iterateBorderColorsAndIncrement(ch) {
         let valueToReturn = ch.borderColorsIterator
         if(ch.borderColorsIterator < ch.borderColors.length - 1) {
-            ch.borderColorsIterator++
+            ch.borderColorsIterator = ch.borderColorsIterator + 1
         } else {
             ch.borderColorsIterator = 0
         }
@@ -109,7 +107,7 @@ class ChartHandler {
 
     saveChart(chartId) {
         const canvas = document.getElementById(chartId);
-        const imageURL = canvas.toDataURL(this.misc.MIME_TYPE);
+        const imageURL = canvas.toDataURL(misc.MIME_TYPE);
 
         const dlLink = document.createElement('a');
         dlLink.download = "graph";
@@ -126,6 +124,18 @@ class ChartHandler {
                   sYear,
                   sSex
     ) {
+        /*let url = new URL('http://localhost/chartapi/ChartServer.php')
+        let params = {
+            sRegion: sRegion,
+            sCountry: sCountry,
+            sYear: sYear,
+            sSex: sSex
+        }
+        url.search = new URLSearchParams(params).toString()
+        let response = await fetch(url, {
+            method: 'GET',
+        });
+        console.log(response.text())*/
         const response = await fetch("data.csv");
         const data = await response.text();
         const rows = data.split('\n').slice(1);
@@ -288,6 +298,7 @@ class ViewHandler {
     }
 
     getValueFromCookie(name) {
+        console.log(this.getCookie(name).split("%2C"))
         return this.getCookie(name).split("%2C")
     }
 
@@ -296,6 +307,8 @@ class ViewHandler {
         let cookieValues = this.getValueFromCookie(optionsID)
         if(cookieValues.length !== 0) {
             options.valueOf().value = this.getValueFromCookie(optionsID)
+        } else {
+            options.valueOf().value = ""
         }
         // console.log(options.valueOf().value)
         // does not update the UI though... ?
