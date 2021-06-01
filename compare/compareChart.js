@@ -1,3 +1,4 @@
+// import CookiesHelper from "../cookies/CookiesHelper.js";
 
 /**
  * Model
@@ -182,33 +183,23 @@ class ChartHandler {
                 console.log("data is ")
                 console.log(options.valueOf().value)
                 chartData.selectedRegion = options.valueOf().value
-                this.setCookie(optionsID, chartData.selectedRegion, 7)
+                // this.setCookie(optionsID, chartData.selectedRegion, 7)
                 break;
             case chartData.columnCountry:
                 chartData.selectedCountry = options.valueOf().value
-                this.setCookie(optionsID, chartData.selectedCountry, 7)
+                // this.setCookie(optionsID, chartData.selectedCountry, 7)
                 break;
             case chartData.columnYear:
                 chartData.selectedYear = options.valueOf().value
-                this.setCookie(optionsID, chartData.selectedYear, 7)
+                // this.setCookie(optionsID, chartData.selectedYear, 7)
                 break;
             case chartData.columnSex:
                 chartData.selectedSex = options.valueOf().value
-                this.setCookie(optionsID, chartData.selectedSex, 7)
+                // this.setCookie(optionsID, chartData.selectedSex, 7)
                 break;
             default:
                 console.log("???")
         }
-    }
-
-    setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            let date = new Date();
-            date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
 
     async getSuggestionsForColumn(fieldColumn) {
@@ -289,26 +280,20 @@ class ViewHandler {
         this.generateChart(misc.mainChartNameId)
     }
 
-    getCookie(name) {
-        try {
-            return document.cookie.split('; ')
-                .find(row => row.startsWith(name + '='))
-                .split('=')[1]
-        } catch (error) {
-            return ""
-        }
-    }
-
     getValueFromCookie(name) {
-        console.log(this.getCookie(name).split("%2C"))
-        return this.getCookie(name).split("%2C")
+        let filter = CookiesHelper.getCookieFilter(name)
+        console.log(filter)
+        let value = filter?.values?.join(',')
+        console.log(value)
+
+        return value
     }
 
     updateUIValueFromCookie(optionsID) {
         let options = document.getElementById(optionsID)
         let cookieValues = this.getValueFromCookie(optionsID)
-        if(cookieValues.length !== 0) {
-            options.valueOf().value = this.getValueFromCookie(optionsID)
+        if(cookieValues !== undefined && cookieValues.length !== 0) {
+            options.valueOf().value = cookieValues
         } else {
             options.valueOf().value = ""
         }
@@ -316,6 +301,41 @@ class ViewHandler {
         // does not update the UI though... ?
     }
 
+}
+
+class CookiesHelper {
+
+    static setCookieFilter(filter) {
+        let expires = ""
+        if (days) {
+            let date = new Date()
+            date.setTime(date.getTime() + (7*24*60*60*1000))
+            expires = "; expires=" + date.toUTCString()
+        }
+        document.cookie = filter.getCookieName() + "=" + (filter.getEncoded() || "")  + expires + "; path=/"
+    }
+
+    static getCookieFilter(cookieName) {
+        let decoded = decodeURI(document.cookie)
+        let replaced = decoded
+            .replaceAll("%3A", ':')
+            .replaceAll("%2C", ',')
+
+        console.log(replaced)
+
+        let string = replaced
+            .split('; ')
+            .find(row => row.startsWith(cookieName + '='))
+            ?.split(cookieName + '=')[1]
+
+        console.log(string)
+
+        if (string != null) {
+            return JSON.parse(string)
+        } else {
+            return null
+        }
+    }
 }
 
 /**

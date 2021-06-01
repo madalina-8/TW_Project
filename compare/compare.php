@@ -168,6 +168,6 @@ if (checkGETAndRedirect()) {
         </div>
     </div>
 </footer>
-<script src="scriptCompare.js"></script>
+<script type="module" src="scriptCompare.js"></script>
 </body>
 </html>
