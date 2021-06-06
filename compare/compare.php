@@ -116,8 +116,8 @@ if (checkGETAndRedirect()) {
 
         <div class="body-column table">
             <?php
-//                importFiltersFromCookies();
-//                generateCompareTable();
+                importFiltersFromCookies();
+                generateCompareTable();
             ?>
         </div>
     </div>

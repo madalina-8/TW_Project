@@ -38,4 +38,14 @@ class YearFilter extends Filter
     {
         return "year";
     }
+
+    public function shouldCompare(): bool
+    {
+        return $this->compare;
+    }
+
+    public function setValues($new)
+    {
+        $this->values = $new;
+    }
 }

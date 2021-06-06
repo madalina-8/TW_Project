@@ -239,7 +239,7 @@ class ChartHandler {
 
 class ViewHandler {
 
-    async generateChart(chartID) {
+    async generateChart(chartID, filters) {
         const ctx = document.getElementById(chartID).getContext('2d');
         const data = await chartHandler.getData(
             chartData.selectedRegion,

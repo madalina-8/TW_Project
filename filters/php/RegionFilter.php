@@ -39,4 +39,14 @@ class RegionFilter extends Filter
     {
         return "region";
     }
+
+    public function shouldCompare(): bool
+    {
+        return $this->compare;
+    }
+
+    public function setValues($new)
+    {
+        $this->values = $new;
+    }
 }

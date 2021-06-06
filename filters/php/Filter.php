@@ -12,5 +12,7 @@ abstract class Filter implements JsonSerializable
     }
 
     public abstract function getValues(): array;
+    public abstract function setValues($new);
+    public abstract function shouldCompare(): bool;
 }
 

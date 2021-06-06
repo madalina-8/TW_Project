@@ -39,4 +39,15 @@ class SexFilter extends Filter
     {
         return "sex";
     }
+
+
+    public function shouldCompare(): bool
+    {
+        return $this->compare;
+    }
+
+    public function setValues($new)
+    {
+        $this->values = $new;
+    }
 }

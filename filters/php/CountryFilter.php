@@ -39,4 +39,14 @@ class CountryFilter extends Filter
     {
         return "country";
     }
+
+    public function shouldCompare(): bool
+    {
+        return $this->compare;
+    }
+
+    public function setValues($new)
+    {
+        $this->values = $new;
+    }
 }
