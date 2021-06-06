@@ -11,10 +11,19 @@ export default class CookiesHelper {
     }
 
     static getCookieFilter(cookieName) {
-        let string = document.cookie
+        let decoded = decodeURI(document.cookie)
+        let replaced = decoded
+            .replaceAll("%3A", ':')
+            .replaceAll("%2C", ',')
+
+        console.log(replaced)
+
+        let string = replaced
             .split('; ')
             .find(row => row.startsWith(cookieName + '='))
-            .split(cookieName + '=')[1]
+            ?.split(cookieName + '=')[1]
+
+        console.log(string)
 
         if (string != null) {
             return JSON.parse(string)

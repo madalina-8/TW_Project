@@ -3,12 +3,20 @@ include_once "Filter.php";
 
 class YearFilter extends Filter
 {
-    private $values;
-    private $compare;
+    public $values;
+    public $compare;
 
     public function __construct($values = [], $compare = false) {
             $this->values = $values;
             $this->compare = $compare;
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getValues(): array
+    {
+        return $this->values;
     }
 
     public static function from($data): YearFilter {

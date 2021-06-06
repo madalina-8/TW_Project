@@ -7,6 +7,10 @@ include_once "../cookies/CookiesHelper.php";
 
 //when changing 'formNames' change its value in scriptCompare.js too
 $formNames = array("year", "region", "country", "sex");
+$yearFilter = new YearFilter([], false);
+$regionFilter = null;
+$countryFilter = null;
+$sexFilter = null;
 
 function getShareLink() {
     global $formNames;
@@ -77,4 +81,20 @@ function checkGETAndRedirect() {
     }
 
     return $shouldExit;
+}
+
+function importFiltersFromCookies() {
+    global $yearFilter, $sexFilter, $regionFilter, $countryFilter;
+    $yearFilter = CookiesHelper::getCookieFilter(YearFilter::getCookieName(), YearFilter::class);
+    $sexFilter = CookiesHelper::getCookieFilter(SexFilter::getCookieName(), SexFilter::class);
+    $regionFilter = CookiesHelper::getCookieFilter(RegionFilter::getCookieName(), RegionFilter::class);
+    $countryFilter = CookiesHelper::getCookieFilter(CountryFilter::getCookieName(), CountryFilter::class);
+}
+
+function generateCompareTable() {
+    global $yearFilter, $sexFilter, $regionFilter, $countryFilter;
+
+
+
+
 }

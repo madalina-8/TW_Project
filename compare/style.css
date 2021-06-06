@@ -1,0 +1,272 @@
+* {
+   box-sizing: border-box;
+}
+
+body {
+    background-color: #E7ECEF;
+    margin: 0;
+    padding: 0;
+}
+
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#filtersDiv {
+    display: flex;
+    flex-wrap: wrap; /*helps me for responsivness display style*/
+    width: 48%;
+}
+
+#graphDiv {
+    display: flex;
+    flex-wrap: wrap; /*helps me for responsivness display style*/
+    width: 48%;
+}
+
+.navbar {
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+ background-color: #272932 ;
+ color: white;
+ font-family: 'Julius Sans One', sans-serif;
+ text-transform: uppercase;
+}
+
+.logo {
+    margin: 0px;
+}
+
+.choiceBox {
+    margin: 20px;
+}
+
+.navbar-links ul {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.navbar-links li {
+    list-style: none;
+}
+
+.navbar-links li a {
+    color: white;
+    padding: 28px;
+    display: block;
+    text-decoration: none;
+}
+
+.navbar-links li:hover {
+    background-color: #555;;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+     .toggle-button {
+         display: flex;
+     }
+
+     .navbar-links {
+         display: none;
+         width: 100%;
+     }
+
+     .navbar {
+         flex-direction: column;
+         align-items: flex-start;
+     }
+
+     .navbar-links ul {
+         flex-direction: column;
+         width: 100%;
+     }
+
+     .navbar-links li {
+         text-align: center;
+     }
+
+     .navbar-links li a {
+        padding: 10px 16px;
+     }
+
+     .navbar-links.active {
+         display: flex;
+     }
+}
+
+
+.footer {
+        padding: 70px 0;
+        background-color: #272932;
+        font-family: 'Julius Sans One', sans-serif;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+select {
+    background-color: #f3f4ed;
+    margin: 10px;
+    height: 23px;
+    width: 100px;
+    border-radius: 5px;
+    font-family: 'Julius Sans One', sans-serif;
+    font-weight: bold;
+    padding: 1px 9px;
+    cursor: pointer;
+    line-height: 1.1;
+    outline: none;
+    align-items: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;       /* Remove default arrow */
+    background-image: url("arrow.png");
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: 20px;  /* Add custom arrow */
+}
+
+label {
+    font-size: 18px;
+    font-family: 'Julius Sans One', sans-serif;
+    font-weight: 700;
+}
+
+input {
+    font-size: 18px;
+    font-family: 'Julius Sans One', sans-serif;
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+}
+
+.filterTitle {
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap; /*helps me for responsivness display style*/
+}
+
+.footer-column {
+    width: 30%;
+    padding: 0 15px;
+}
+
+.body-column {
+    padding: 10px 15px;
+    width: 20%;
+}
+
+.compareGraph {
+    width: 60%;
+}
+
+.table {
+    width: 80%;
+}
+
+.linkShare {
+    margin: 20px;
+}
+
+.footer-column h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.footer-column h4::before {
+    content: '';
+    position: absolute;
+    left: 5;
+    bottom: -10px;
+    background-color: #F05D5E;
+    box-sizing: border-box;
+    height: 2px;
+    width: 50px;
+
+}
+
+.footer-column ul li:not(:last-child) {
+    margin-bottom: 10px;
+    
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    display: block;
+    color: #bbbbbb;
+    transition: all 0.3s ease;
+    position: relative;
+    right: 40px;
+}
+
+.footer-column ul li a:hover {
+    color: #ffffff;
+    padding-inline-start: 20px;
+}
+
+.footer-column .social-links a{
+    width: 40px;
+    height: 40px;
+    margin: 0 10px 10px 0;
+    display: inline-block;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 50%;
+    transition: all 0.5 ease;
+    background-color: rgba(225, 225, 225, 0.2);
+    color: white;
+}
+
+.footer-column .social-links a:hover {
+    color: #24262b;
+    background-color: white;
+}
+
+/*responsiveness*/
+
+@media(max-width: 700px) {
+    .footer-column {
+        width: 25%;
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width: 530px) {
+    .footer-column {
+        width: 100%;
+    }
+}

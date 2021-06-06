@@ -9,7 +9,7 @@ if (checkGETAndRedirect()) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,7 @@ if (checkGETAndRedirect()) {
     <script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script src="./compareChart.js"></script>
+    <script type="module" src="cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <script type="text/javascript" src="../jquery.amsify.suggestags.js"></script>
     <link rel="stylesheet" type="text/css" href="../jquery.amsify.suggestags.css">
@@ -40,7 +41,7 @@ if (checkGETAndRedirect()) {
         <ul>
             <li><a href="../home.php">Home</a></li>
             <li><a href="compare.php">Compare</a></li>
-            <li><a href="about/about.html">About</a></li>
+            <li><a href="../about/about.php">About</a></li>
         </ul>
     </div>
 </nav>
@@ -51,76 +52,73 @@ if (checkGETAndRedirect()) {
         <div class="body-column">
             <form method="post" action="submitFormCompare.php">
                 <div>
-                    <label for="year">Select year:</label>
+                    <label for="year" id="abc">Select year:</label>
                     <div class="form-group">
                         <input type="text" class="form-control" name="year" id="year"/>
-                        <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idYear)
-                            $('input[name="year"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                //suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["1970", "2015", "2016"],
-                                whiteList: true
-                            });
-                        </script>
+<!--                        <script>-->
+<!--                            $('input[name="year"]').amsifySuggestags({-->
+<!--                                type : 'bootstrap',-->
+<!--                                //suggestions: getSuggestionsForColumn(columnCountry),-->
+<!--                                suggestions: ["1970", "2015", "2016"],-->
+<!--                                whiteList: true-->
+<!--                            });-->
+<!--                        </script>-->
                     </div>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
                     <div class="form-group">
                         <input type="text" class="form-control"  name="sex" id="sex"/>
-                        <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idSex)
-                            $('input[name="sex"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                //suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["Male", "Female", "Both sexes"],
-                                whiteList: true
-                            });
-                        </script>
+<!---->
+<!--                        <script>-->
+<!--                            $('input[name="sex"]').amsifySuggestags({-->
+<!--                                type : 'bootstrap',-->
+<!--                                //suggestions: getSuggestionsForColumn(columnCountry),-->
+<!--                                suggestions: ["Male", "Female", "Both sexes"],-->
+<!--                                whiteList: true-->
+<!--                            });-->
+<!--                        </script>-->
                     </div>
                 </div>
                 <div>
                     <label for="country">Select country</label>
                     <div class="form-group">
                         <input type="text" class="form-control" name="country" id="country"/>
-                        <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idCountry)
-                            $('input[name="country"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                //suggestions: chartHandler.getSuggestionsForColumn(chartData.columnCountry),
-                                suggestions: ["Romania", "Bulgaria", "China", "Germany", "Afghanistan"],
-                                whiteList: true
-                            })
-                        </script>
+
+<!--                        <script>-->
+<!--                            $('input[name="country"]').amsifySuggestags({-->
+<!--                                type : 'bootstrap',-->
+<!--                                //suggestions: chartHandler.getSuggestionsForColumn(chartData.columnCountry),-->
+<!--                                suggestions: ["Romania", "Bulgaria", "China", "Germany", "Afghanistan"],-->
+<!--                                whiteList: true-->
+<!--                            })-->
+<!--                        </script>-->
                     </div>
                 </div>
                 <div>
                     <label for="region">Select region</label>
                     <div class="form-group">
                         <input type="text" class="form-control" name="region" id="region"/>
-                        <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idRegion)
-                            $('input[name="region"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                // suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["Europe", "Africa", "Americas"],
-                                whiteList: true
-                            });
-                        </script>
+
+<!--                        <script>-->
+<!--                            $('input[name="region"]').amsifySuggestags({-->
+<!--                                type : 'bootstrap',-->
+<!--                                // suggestions: getSuggestionsForColumn(columnCountry),-->
+<!--                                suggestions: ["Europe", "Africa", "Americas"],-->
+<!--                                whiteList: true-->
+<!--                            });-->
+<!--                        </script>-->
                     </div>
                 </div>
                 <button id="filterButton" onclick="filter()">Filter</button>
             </form>
         </div>
 
-        <div class="body-column graph">
-            <canvas id="mainChart">
-                <script>
-                    viewHandler.updateDataFromCookies()
-                    viewHandler.generateChart(misc.mainChartNameId)
-                </script>
-            </canvas>
+        <div class="body-column table">
+            <?php
+//                importFiltersFromCookies();
+//                generateCompareTable();
+            ?>
         </div>
     </div>
 </div>
@@ -169,5 +167,12 @@ if (checkGETAndRedirect()) {
     </div>
 </footer>
 <script type="module" src="scriptCompare.js"></script>
+<script type="module">
+    import updateUIValueFromCookie from './cookieUtils.js';
+    updateUIValueFromCookie("year");
+    updateUIValueFromCookie("sex");
+    updateUIValueFromCookie("region");
+    updateUIValueFromCookie("country");
+</script>
 </body>
 </html>

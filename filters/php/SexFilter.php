@@ -11,6 +11,14 @@ class SexFilter extends Filter
             $this->compare = $compare;
     }
 
+    /**
+     * @return array|mixed
+     */
+    public function getValues(): array
+    {
+        return $this->values;
+    }
+
     public static function from($data): SexFilter {
         $class = new SexFilter();
         foreach ($data as $key => $value)

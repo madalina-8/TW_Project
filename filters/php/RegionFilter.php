@@ -11,8 +11,16 @@ class RegionFilter extends Filter
             $this->compare = $compare;
     }
 
-    public static function from($data): CountryFilter {
-        $class = new CountryFilter();
+    /**
+     * @return array|mixed
+     */
+    public function getValues(): array
+    {
+        return $this->values;
+    }
+
+    public static function from($data): RegionFilter {
+        $class = new RegionFilter();
         foreach ($data as $key => $value)
             $class->{$key} = $value;
         return $class;

@@ -11,5 +11,6 @@ abstract class Filter implements JsonSerializable
         return json_encode($this);
     }
 
+    public abstract function getValues(): array;
 }
 

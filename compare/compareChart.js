@@ -239,13 +239,6 @@ class ChartHandler {
 
 class ViewHandler {
 
-    updateDataFromCookies() {
-        chartData.selectedRegion = this.getValueFromCookie(chartData.idRegion)
-        chartData.selectedCountry = this.getValueFromCookie(chartData.idCountry)
-        chartData.selectedSex = this.getValueFromCookie(chartData.idSex)
-        chartData.selectedYear = this.getValueFromCookie(chartData.idYear)
-    }
-
     async generateChart(chartID) {
         const ctx = document.getElementById(chartID).getContext('2d');
         const data = await chartHandler.getData(
@@ -279,64 +272,8 @@ class ViewHandler {
         }
         this.generateChart(misc.mainChartNameId)
     }
-
-    getValueFromCookie(name) {
-        let filter = CookiesHelper.getCookieFilter(name)
-        console.log(filter)
-        let value = filter?.values?.join(',')
-        console.log(value)
-
-        return value
-    }
-
-    updateUIValueFromCookie(optionsID) {
-        let options = document.getElementById(optionsID)
-        let cookieValues = this.getValueFromCookie(optionsID)
-        if(cookieValues !== undefined && cookieValues.length !== 0) {
-            options.valueOf().value = cookieValues
-        } else {
-            options.valueOf().value = ""
-        }
-        // console.log(options.valueOf().value)
-        // does not update the UI though... ?
-    }
-
 }
 
-class CookiesHelper {
-
-    static setCookieFilter(filter) {
-        let expires = ""
-        if (days) {
-            let date = new Date()
-            date.setTime(date.getTime() + (7*24*60*60*1000))
-            expires = "; expires=" + date.toUTCString()
-        }
-        document.cookie = filter.getCookieName() + "=" + (filter.getEncoded() || "")  + expires + "; path=/"
-    }
-
-    static getCookieFilter(cookieName) {
-        let decoded = decodeURI(document.cookie)
-        let replaced = decoded
-            .replaceAll("%3A", ':')
-            .replaceAll("%2C", ',')
-
-        console.log(replaced)
-
-        let string = replaced
-            .split('; ')
-            .find(row => row.startsWith(cookieName + '='))
-            ?.split(cookieName + '=')[1]
-
-        console.log(string)
-
-        if (string != null) {
-            return JSON.parse(string)
-        } else {
-            return null
-        }
-    }
-}
 
 /**
  * Model
