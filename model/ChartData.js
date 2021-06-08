@@ -19,6 +19,10 @@ export default class ChartData {
         this.idCountry = "country"
         this.idYear = "year"
         this.idSex = "sex"
-        this.idValue = "value"
+
+        this.idSelectedRegion = "regionSelected"
+        this.idSelectedCountry = "countrySelected"
+        this.idSelectedYear = "yearSelected"
+        this.idSelectedSex = "sexSelected"
     }
 }

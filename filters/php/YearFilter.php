@@ -36,7 +36,7 @@ class YearFilter extends Filter
 
     public static function getCookieName(): string
     {
-        return "year";
+        return "yearSelections";
     }
 
     public function shouldCompare(): bool

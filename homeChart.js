@@ -20,4 +20,9 @@ export const chartHandler = new ChartHandler(chartData)
  * View
  */
 
-export const viewHandler = new ViewHandler(chartData, chartHandler, colorManager, misc)
+export const viewHandler = new ViewHandler(
+    chartData,
+    chartHandler,
+    colorManager,
+    misc
+)

@@ -17,6 +17,7 @@
     <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --><script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script type="module" src="homeChart.js"></script>
+    <script src="view/UpdateHandler.js"></script>
     <script type="module" src="./cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <title>Obesity visualizer</title>
@@ -49,46 +50,46 @@
             <form method="post" action="submitFormHome.php">
                 <div>
                     <label for="year">Select year:</label>
-                    <select name="year" id="year" class=choiceBox onchange="viewHandler.updateSelection(chartData.idYear, 'yearSelections')">
+                    <select name="year" id="year" class=choiceBox onchange="updateSelection('year', 'yearSelections')">
                         <script type="module">
-                            import { viewHandler, chartData} from './homeChart.js'
+                            import { viewHandler, chartData } from './homeChart.js'
                             viewHandler.addOptionsForParameter(chartData.columnYear, chartData.idYear)
                         </script>
                     </select>
-                    <select id="yearSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('yearSelections')"></select>
+                    <select id="yearSelections" class="choiceBox" onchange="removeCurrentChoice('yearSelections')"></select>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
-                    <select name="sex" id="sex" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idSex, 'sexSelections')">
+                    <select name="sex" id="sex" class="choiceBox" onchange="updateSelection('sex', 'sexSelections')">
                         <!--https://github.com/harvesthq/chosen for better choicebox-->
                         <option value="-">-</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Both sexes">Both sexes</option>
                     </select>
-                    <select id="sexSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('sexSelections')"></select>
+                    <select id="sexSelections" class="choiceBox" onchange="removeCurrentChoice('sexSelections')"></select>
                 </div>
                 <div>
                     <label for="country">Select country</label>
-                    <select name="country" id="country" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idCountry, 'countrySelections')">
+                    <select name="country" id="country" class="choiceBox" onchange="updateSelection('country', 'countrySelections')">
                         <script type="module">
                             import { viewHandler, chartData} from './homeChart.js'
                             viewHandler.addOptionsForParameter(chartData.columnCountry, chartData.idCountry)
                         </script>
                     </select>
-                    <select id="countrySelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('countrySelections')"></select>
+                    <select id="countrySelections" class="choiceBox" onchange="removeCurrentChoice('countrySelections')"></select>
                 </div>
                 <div>
                     <label for="region">Select region</label>
-                    <select name="region" id="region" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idRegion, 'regionSelections')">
+                    <select name="region" id="region" class="choiceBox" onchange="updateSelection('region', 'regionSelections')">
                         <script type="module">
                             import { viewHandler, chartData} from './homeChart.js'
                             viewHandler.addOptionsForParameter(chartData.columnRegion, chartData.idRegion)
                         </script>
                     </select>
-                    <select id="regionSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('regionSelections')"></select>
+                    <select id="regionSelections" class="choiceBox" onchange="removeCurrentChoice('regionSelections')"></select>
                 </div>
-                <button id="filterButton" onclick="filter()">Filter</button>
+                <button id="filterButton" onclick="chartHandler.filter()">Filter</button>
             </form>
         </div>
 
@@ -96,8 +97,13 @@
             <canvas id="mainChart">
                 <script type="module">
                     import { viewHandler, misc } from './homeChart.js';
-                    viewHandler.updateDataFromCookies()
-                    viewHandler.generateChart(misc.mainChartNameId)
+                    viewHandler.generateChart(
+                        misc.mainChartNameId,
+                        viewHandler.chartData.selectedRegion,
+                        viewHandler.chartData.selectedCountry,
+                        viewHandler.chartData.selectedYear,
+                        viewHandler.chartData.selectedSex
+                    )
                 </script>
             </canvas>
             <label for="imageFormat">Select format:</label>
@@ -154,11 +160,11 @@
 </footer>
 <script src="script.js"></script>
 <script type="module">
-    import updateUIValueFromCookie from './cookies/cookieUtils.js';
-    updateUIValueFromCookie("year");
-    updateUIValueFromCookie("sex");
-    updateUIValueFromCookie("region");
-    updateUIValueFromCookie("country");
+    import { updateFiltersFromCookies } from './cookies/cookieUtils.js';
+    updateFiltersFromCookies("year");
+    updateFiltersFromCookies("sex");
+    updateFiltersFromCookies("region");
+    updateFiltersFromCookies("country");
 </script>
 </body>
 </html>

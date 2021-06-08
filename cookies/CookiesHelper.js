@@ -16,7 +16,7 @@ export default class CookiesHelper {
             .replaceAll("%3A", ':')
             .replaceAll("%2C", ',')
 
-        console.log(replaced)
+        //console.log(replaced)
 
         let string = replaced
             .split('; ')

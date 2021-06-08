@@ -10,6 +10,6 @@ export default class SexFilter extends Filter
 
     static getCookieName()
     {
-        return "sex";
+        return "sexSelections";
     }
 }

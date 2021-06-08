@@ -37,7 +37,7 @@ class RegionFilter extends Filter
 
     public static function getCookieName(): string
     {
-        return "region";
+        return "regionSelections";
     }
 
     public function shouldCompare(): bool

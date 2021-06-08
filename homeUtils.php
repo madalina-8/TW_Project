@@ -6,7 +6,7 @@ foreach (glob("filters/php/*.php") as $filename)
 include_once "cookies/CookiesHelper.php";
 
 //when changing 'formNames' change its value in script.js too
-$formNames = array("year", "region", "country", "sex");
+$formNames = array("yearSelections", "regionSelections", "countrySelections", "sexSelections");
 
 function getShareLink() {
     global $formNames;
@@ -49,6 +49,7 @@ function filterFromPost($name): ?Filter {
 }
 
 function submitForm() {
+    echo("================================================================================================");
     global $formNames;
     foreach ($formNames as $name) {
         if (isset($_POST[$name])) {

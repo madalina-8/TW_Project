@@ -109,19 +109,15 @@ export default class ChartHandler {
         switch(fieldColumn) {
             case this.chartData.columnRegion:
                 this.chartData.selectedRegion = options.valueOf().value
-                // this.setCookie(optionsID, this.chartData.selectedRegion, 7)
                 break;
             case this.chartData.columnCountry:
                 this.chartData.selectedCountry = options.valueOf().value
-                // this.setCookie(optionsID, this.chartData.selectedCountry, 7)
                 break;
             case this.chartData.columnYear:
                 this.chartData.selectedYear = options.valueOf().value
-                // this.setCookie(optionsID, this.chartData.selectedYear, 7)
                 break;
             case this.chartData.columnSex:
                 this.chartData.selectedSex = options.valueOf().value
-                // this.setCookie(optionsID, this.chartData.selectedSex, 7)
                 break;
             default:
                 console.log("???")
@@ -135,10 +131,9 @@ export default class ChartHandler {
     }
 
     filter() {
-        this.updateField(this.chartData.columnRegion, this.chartData.idRegion)
-        this.updateField(this.chartData.columnCountry, this.chartData.idCountry)
-        this.updateField(this.chartData.columnYear, this.chartData.idYear)
-        this.updateField(this.chartData.columnSex, this.chartData.idSex)
-        viewHandler.refreshChart()
+        this.updateField(this.chartData.columnRegion, this.chartData.idSelectedRegion)
+        this.updateField(this.chartData.columnCountry, this.chartData.idSelectedCountry)
+        this.updateField(this.chartData.columnYear, this.chartData.idSelectedYear)
+        this.updateField(this.chartData.columnSex, this.chartData.idSelectedSex)
     }
 }

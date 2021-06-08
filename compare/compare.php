@@ -20,8 +20,6 @@ if (checkGETAndRedirect()) {
     <script src="./compareChart.js"></script>
     <script type="module" src="../cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-    <script type="text/javascript" src="../jquery.amsify.suggestags.js"></script>
-    <link rel="stylesheet" type="text/css" href="../jquery.amsify.suggestags.css">
     <title>Obesity visualizer</title>
 </head>
 <body>

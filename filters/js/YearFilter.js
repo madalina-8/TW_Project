@@ -10,6 +10,6 @@ export default class YearFilter extends Filter
 
     static getCookieName()
     {
-        return "year";
+        return "yearSelections";
     }
 }
