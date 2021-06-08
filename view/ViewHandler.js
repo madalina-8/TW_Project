@@ -96,4 +96,33 @@ export default class ViewHandler {
         let selectionChoiceBox = document.querySelector('#' + selectionsChoiceBoxId)
         selectionChoiceBox.children.item(selectionChoiceBox.valueOf().index).remove()
     }
+
+    async addOptionsForParameter(
+        fieldColumn,
+        choiceBoxId
+    ) {
+        const response = await fetch("data.csv")
+        const data = await response.text()
+        let fields = []
+        const rows = data.split('\n').slice(1)
+        rows.forEach(row =>{
+            const cols = row.split(',');
+            fields.push(cols[fieldColumn])
+        })
+        fields = this.chartHandler.RemoveDuplicates(fields)
+        let choiceBox = document.querySelector('#' + choiceBoxId)
+        let newOption = new Option(this.chartData.defaultValue.valueOf(), this.chartData.defaultValue)
+        choiceBox.appendChild(newOption)
+        fields.forEach(field => {
+            let newOption = new Option(field, field)
+            choiceBox.appendChild(newOption)
+        })
+        let value = getCookie(choiceBoxId)
+        if (value === undefined) {
+            value = this.chartData.defaultValue
+        }
+        choiceBox.value = value
+        this.chartHandler.updateField(fieldColumn, choiceBoxId)
+    }
+
 }

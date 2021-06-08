@@ -50,8 +50,8 @@
                     <label for="year">Select year:</label>
                     <select name="year" id="year" class=choiceBox onchange="viewHandler.updateSelection(chartData.idYear, 'yearSelections')">
                         <script type="module">
-                            import { addOptionsForParameter, chartData} from './homeChart.js'
-                            addOptionsForParameter(chartData.columnYear, chartData.idYear)
+                            import { viewHandler, chartData} from './homeChart.js'
+                            viewHandler.addOptionsForParameter(chartData.columnYear, chartData.idYear)
                         </script>
                     </select>
                     <select id="yearSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('yearSelections')"></select>
@@ -71,8 +71,8 @@
                     <label for="country">Select country</label>
                     <select name="country" id="country" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idCountry, 'countrySelections')">
                         <script type="module">
-                            import { addOptionsForParameter, chartData} from './homeChart.js'
-                            addOptionsForParameter(chartData.columnCountry, chartData.idCountry)
+                            import { viewHandler, chartData} from './homeChart.js'
+                            viewHandler.addOptionsForParameter(chartData.columnCountry, chartData.idCountry)
                         </script>
                     </select>
                     <select id="countrySelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('countrySelections')"></select>
@@ -81,8 +81,8 @@
                     <label for="region">Select region</label>
                     <select name="region" id="region" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idRegion, 'regionSelections')">
                         <script type="module">
-                            import { addOptionsForParameter, chartData} from './homeChart.js'
-                            addOptionsForParameter(chartData.columnRegion, chartData.idRegion)
+                            import { viewHandler, chartData} from './homeChart.js'
+                            viewHandler.addOptionsForParameter(chartData.columnRegion, chartData.idRegion)
                         </script>
                     </select>
                     <select id="regionSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('regionSelections')"></select>
