@@ -10,7 +10,7 @@ export default class CookiesHelper {
         document.cookie = filter.getCookieName() + "=" + (filter.getEncoded() || "")  + expires + "; path=/"
     }
 
-    static getCookieFilter(cookieName) {
+    static getCookie(cookieName) {
         let decoded = decodeURI(document.cookie)
         let replaced = decoded
             .replaceAll("%3A", ':')
@@ -25,8 +25,14 @@ export default class CookiesHelper {
 
         console.log(string)
 
-        if (string != null) {
-            return JSON.parse(string)
+        return string
+    }
+
+    static getCookieFilter(cookieName) {
+        const filterString = this.getCookie(cookieName)
+
+        if (filterString != null) {
+            return JSON.parse(filterString)
         } else {
             return null
         }

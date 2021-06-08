@@ -18,7 +18,7 @@ function getCompareFromCookie(name) {
     return compare
 }
 
-export default function updateUIValueFromCookie(optionsID) {
+export function updateUIValueFromCookie(optionsID) {
     let options = document.getElementById(optionsID)
     let compare = document.getElementById(optionsID + "Compare")
     console.log(options)
@@ -39,6 +39,18 @@ export default function updateUIValueFromCookie(optionsID) {
     }
     console.log(options)
     console.log(options.value)
-    // does not update the UI though... ?
+}
+
+export function updateUICheckBoxFromCookie(checkBoxId) {
+    let checkBox = document.getElementById(checkBoxId)
+
+    let checked = CookiesHelper.getCookie(checkBoxId)
+
+    if (checked !== undefined && checked === "off") {
+        checkBox.valueOf().checked = false
+    } else {
+        checkBox.valueOf().checked = true
+    }
+
 }
 // updateUIValueFromCookie("year")

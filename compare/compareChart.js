@@ -120,6 +120,11 @@ class ChartHandler {
         document.body.removeChild(dlLink);
     }
 
+    getAverage(array) {
+        const sum = array.reduce((a, b) => a + b, 0);
+        return (sum / array.length) || 0;
+    }
+
     async getData(sRegion,
                   sCountry,
                   sYear,
@@ -137,6 +142,10 @@ class ChartHandler {
             method: 'GET',
         });
         console.log(response.text())*/
+        console.log(sRegion)
+        console.log(sCountry)
+        console.log(sYear)
+        console.log(sSex)
         const response = await fetch("data.csv");
         const data = await response.text();
         const rows = data.split('\n').slice(1);
@@ -144,12 +153,19 @@ class ChartHandler {
         const entryValue = [];
         rows.forEach(row => {
             const cols = row.split(',');
-            if(this.isSelectableData(cols, sRegion, sCountry, sYear, sSex)) {
+            if (this.isSelectableData(cols, sRegion, sCountry, sYear, sSex)) {
                 entryName.push(this.getFields(cols));
                 entryValue.push(parseFloat(cols[4]));
             }
         });
-        return { enName: entryName, enValue: entryValue };
+
+        const isGrouped = document.getElementById("grouped").checked
+
+        if (isGrouped) {
+            return {enName: ["Average"], enValue: [this.getAverage(entryValue)]}
+        } else {
+            return {enName: entryName, enValue: entryValue};
+        }
     }
 
     isSelectableData(cols,
@@ -239,15 +255,16 @@ class ChartHandler {
 
 class ViewHandler {
 
-    async generateChart(chartID, filters) {
-        const ctx = document.getElementById(chartID).getContext('2d');
+    async generateChart(chartID, regionFilter, countryFilter, yearFilter, sexFilter) {
+        let canvas = document.getElementById(chartID)
+        let ctx = canvas.getContext('2d');
         const data = await chartHandler.getData(
-            chartData.selectedRegion,
-            chartData.selectedCountry,
-            chartData.selectedYear,
-            chartData.selectedSex
+            regionFilter.values,
+            countryFilter.values,
+            yearFilter.values,
+            sexFilter.values
         );
-        window.myChart = new Chart(ctx, {
+        new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: data.enName,
@@ -264,6 +281,7 @@ class ViewHandler {
             },
             options: {}
         });
+
     }
 
     refreshChart() {

@@ -83,7 +83,11 @@ if (checkGETAndRedirect()) {
                         <input type="checkbox" class="form-control" name="regionCompare" id="regionCompare">
                     </div>
                 </div>
-                <button id="filterButton" onclick="filter()">Filter</button>
+                <div>
+                    <label for="grouped">Group data: </label>
+                    <input id="grouped" type="checkbox" name="grouped"/>
+                </div>
+                <input id="filterButton" type="submit" value="Filter" />
             </form>
         </div>
 
@@ -141,11 +145,12 @@ if (checkGETAndRedirect()) {
 </footer>
 <script type="module" src="scriptCompare.js"></script>
 <script type="module">
-    import updateUIValueFromCookie from './cookieUtils.js';
+    import {updateUIValueFromCookie, updateUICheckBoxFromCookie} from './cookieUtils.js';
     updateUIValueFromCookie("year");
     updateUIValueFromCookie("sex");
     updateUIValueFromCookie("region");
     updateUIValueFromCookie("country");
+    updateUICheckBoxFromCookie("grouped");
 </script>
 </body>
 </html>

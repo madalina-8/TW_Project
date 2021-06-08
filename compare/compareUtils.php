@@ -11,6 +11,7 @@ $yearFilter = null;
 $regionFilter = null;
 $countryFilter = null;
 $sexFilter = null;
+$groupedId = "grouped";
 
 function getFilters(): array {
     global $yearFilter, $sexFilter, $regionFilter, $countryFilter;
@@ -34,7 +35,7 @@ function addCookie($name, $value) {
 }
 
 function submitForm() {
-    global $formNames;
+    global $formNames, $groupedId;
     foreach ($formNames as $name) {
         if (isset($_POST[$name])) {
             $filter = filterFromPost($name);
@@ -43,6 +44,12 @@ function submitForm() {
                 CookiesHelper::setCookieFilter($filter);
             }
         }
+    }
+
+    if (isset($_POST[$groupedId])) {
+        CookiesHelper::setCookie($groupedId, $_POST[$groupedId]);
+    } else {
+        CookiesHelper::setCookie($groupedId, "off");
     }
 
     header("Location: ./compare.php");
@@ -140,7 +147,7 @@ function generateCompareTable() {
                     $onlySecond->setValues([$second]);
 
 
-                    showCanvasForFilters(array_merge($normalFilters, [$onlySecond, $onlyFirst]));
+                    printCanvasForFilters(array_merge($normalFilters, [$onlySecond, $onlyFirst]));
 
                     echo "</td>";
                 }
@@ -155,7 +162,7 @@ function generateCompareTable() {
                 $onlyFirst = clone $compareFilters[0];
                 $onlyFirst->setValues([$value]);
 
-                showCanvasForFilters(array_merge($normalFilters, [$onlyFirst]));
+                printCanvasForFilters(array_merge($normalFilters, [$onlyFirst]));
 
                 echo "</td>";
             }
@@ -164,7 +171,7 @@ function generateCompareTable() {
         }
         echo "</table>";
     } else {
-        showCanvasForFilters($normalFilters);
+        printCanvasForFilters($normalFilters);
     }
 }
 
@@ -192,35 +199,57 @@ function getFiltersWithout($without): array
     return $result;
 }
 
-function showCanvasForFilters($filters) {
+function orderFilters($filters): array {
+    $result = [];
+    foreach($filters as $filter) {
+        switch ($filter->getCookieName()) {
+            case "region": $result[0] = $filter;
+                break;
+            case "country": $result[1] = $filter;
+                break;
+            case "year": $result[2] = $filter;
+                break;
+            case "sex": $result[3] = $filter;
+                break;
+            default: echo "Unknown filter: " . $filter->getCookieName();
+        }
+    }
+    ksort($result);
+    return $result;
+}
+
+function printCanvasForFilters($filters) {
+//    var_dump($filters);
+    $ordered = orderFilters($filters);
+//    echo "<br/><br/><br/> ";
+//    var_dump($ordered);
     $id = rand();
     echo "<canvas id=\"" . $id . "\">";
 
-    echo "<script  type=\"module\">";
+//    echo "<script  type=\"module\">\n";
+//
+//    echo "import CookiesHelper from \"../cookies/CookiesHelper.js\";\n";
 
-    echo "import CookiesHelper from \"../cookies/CookiesHelper.js\";";
+    echo "<script type='module'>\n";
 
-    foreach($filters as $filter) {
+    foreach($ordered as $filter) {
         echo "let " . $filter->getCookieName() . " = \"" . str_replace("\"", "\\\"", $filter->getEncoded()) . "\" \n";
     }
 
-    foreach($filters as $filter) {
+    foreach($ordered as $filter) {
         echo "let " .
             $filter->getCookieName() . "Filter = " .
-            "CookiesHelper.getCookieFilter(" .
+            "JSON.parse(" .
             $filter->getCookieName() .")  \n";
     }
 
-    echo "let filters = [" . $filters[0]->getCookieName();
-    foreach(array_splice($filters, 1) as $filter) {
+    echo "viewHandler.generateChart(" . $id;
+
+    foreach($ordered as $filter) {
         echo ", " . $filter->getCookieName() . "Filter";
-    }
-    echo "]\n";
+    };
 
-    echo "viewHandler.generateChart(" . $id . ", filters)\n";
-
-
-
+    echo ")\n";
 
     echo "</script>";
 

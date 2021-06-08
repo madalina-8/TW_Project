@@ -4,7 +4,11 @@ include_once "../filters/php/Filter.php";
 class CookiesHelper
 {
     public static function setCookieFilter($filter) {
-        setcookie($filter->getCookieName(), $filter->getEncoded());
+        setCookie($filter->getCookieName(), $filter->getEncoded());
+    }
+
+    public static function setCookie($name, $value) {
+        setcookie($name, $value);
     }
 
     public static function getCookieFilter($cookieName, $class): ?Filter {
