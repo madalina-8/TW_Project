@@ -14,13 +14,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --><script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script src="homeChart.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-    <script type="text/javascript" src="jquery.amsify.suggestags.js"></script>
-    <link rel="stylesheet" type="text/css" href="jquery.amsify.suggestags.css">
     <title>Obesity visualizer</title>
 </head>
 <body>
@@ -51,63 +48,41 @@
             <form method="post" action="submitFormHome.php">
                 <div>
                     <label for="year">Select year:</label>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="year" id="year"/>
+                    <select name="year" id="year" class=choiceBox onchange="viewHandler.updateSelection(chartData.idYear, 'yearSelections')">
                         <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idYear)
-                            $('input[name="year"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                //suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["1970", "2015", "2016"],
-                                whiteList: true
-                            });
+                            addOptionsForParameter(chartData.columnYear, chartData.idYear)
                         </script>
-                    </div>
+                    </select>
+                    <select id="yearSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('yearSelections')"></select>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
-                    <div class="form-group">
-                        <input type="text" class="form-control"  name="sex" id="sex"/>
-                        <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idSex)
-                            $('input[name="sex"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                //suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["Male", "Female", "Both sexes"],
-                                whiteList: true
-                            });
-                        </script>
-                    </div>
+                    <select name="sex" id="sex" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idSex, 'sexSelections')">
+                        <!--https://github.com/harvesthq/chosen for better choicebox-->
+                        <option value="-">-</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Both sexes">Both sexes</option>
+                    </select>
+                    <select id="sexSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('sexSelections')"></select>
                 </div>
                 <div>
                     <label for="country">Select country</label>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="country" id="country"/>
+                    <select name="country" id="country" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idCountry, 'countrySelections')">
                         <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idCountry)
-                            $('input[name="country"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                //suggestions: chartHandler.getSuggestionsForColumn(chartData.columnCountry),
-                                suggestions: ["Romania", "Bulgaria", "China", "Germany", "Afghanistan"],
-                                whiteList: true
-                            })
+                            addOptionsForParameter(chartData.columnCountry, chartData.idCountry)
                         </script>
-                    </div>
+                    </select>
+                    <select id="countrySelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('countrySelections')"></select>
                 </div>
                 <div>
                     <label for="region">Select region</label>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="region" id="region"/>
+                    <select name="region" id="region" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idRegion, 'regionSelections')">
                         <script>
-                            viewHandler.updateUIValueFromCookie(chartData.idRegion)
-                            $('input[name="region"]').amsifySuggestags({
-                                type : 'bootstrap',
-                                // suggestions: getSuggestionsForColumn(columnCountry),
-                                suggestions: ["Europe", "Africa", "Americas"],
-                                whiteList: true
-                            });
+                            addOptionsForParameter(chartData.columnRegion, chartData.idRegion)
                         </script>
-                    </div>
+                    </select>
+                    <select id="regionSelections" class="choiceBox" onchange="viewHandler.removeCurrentChoice('regionSelections')"></select>
                 </div>
                 <button id="filterButton" onclick="filter()">Filter</button>
             </form>
