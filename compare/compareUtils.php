@@ -45,22 +45,23 @@ function submitForm() {
 
 function filterFromPost($name): ?Filter {
     $values = $_POST[$name];
+    $compare = $_POST[$name . "Compare"] == "on";
     $array = explode(',', $values);
     echo("Array: ");
-    var_dump($array);
+    var_dump($compare);
     echo("<br/>");
     switch ($name) {
         case YearFilter::getCookieName():
-            return new YearFilter($array);
+            return new YearFilter($array, $compare);
             break;
         case SexFilter::getCookieName():
-            return new SexFilter($array);
+            return new SexFilter($array, $compare);
             break;
         case CountryFilter::getCookieName():
-            return new CountryFilter($array);
+            return new CountryFilter($array, $compare);
             break;
         case RegionFilter::getCookieName():
-            return new RegionFilter($array);
+            return new RegionFilter($array, $compare);
             break;
         default:
             return null;

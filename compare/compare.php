@@ -55,59 +55,32 @@ if (checkGETAndRedirect()) {
                     <label for="year" id="abc">Select year:</label>
                     <div class="form-group">
                         <input type="text" class="form-control" name="year" id="year"/>
-<!--                        <script>-->
-<!--                            $('input[name="year"]').amsifySuggestags({-->
-<!--                                type : 'bootstrap',-->
-<!--                                //suggestions: getSuggestionsForColumn(columnCountry),-->
-<!--                                suggestions: ["1970", "2015", "2016"],-->
-<!--                                whiteList: true-->
-<!--                            });-->
-<!--                        </script>-->
+                        <label for="yearCompare">Should compare:</label>
+                        <input type="checkbox" class="form-control" name="yearCompare" id="regionCompare">
                     </div>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
                     <div class="form-group">
                         <input type="text" class="form-control"  name="sex" id="sex"/>
-<!---->
-<!--                        <script>-->
-<!--                            $('input[name="sex"]').amsifySuggestags({-->
-<!--                                type : 'bootstrap',-->
-<!--                                //suggestions: getSuggestionsForColumn(columnCountry),-->
-<!--                                suggestions: ["Male", "Female", "Both sexes"],-->
-<!--                                whiteList: true-->
-<!--                            });-->
-<!--                        </script>-->
+                        <label for="sexCompare">Should compare:</label>
+                        <input type="checkbox" class="form-control" name="sexCompare" id="regionCompare">
                     </div>
                 </div>
                 <div>
                     <label for="country">Select country</label>
                     <div class="form-group">
                         <input type="text" class="form-control" name="country" id="country"/>
-
-<!--                        <script>-->
-<!--                            $('input[name="country"]').amsifySuggestags({-->
-<!--                                type : 'bootstrap',-->
-<!--                                //suggestions: chartHandler.getSuggestionsForColumn(chartData.columnCountry),-->
-<!--                                suggestions: ["Romania", "Bulgaria", "China", "Germany", "Afghanistan"],-->
-<!--                                whiteList: true-->
-<!--                            })-->
-<!--                        </script>-->
+                        <label for="countryCompare">Should compare:</label>
+                        <input type="checkbox" class="form-control" name="countryCompare" id="regionCompare">
                     </div>
                 </div>
                 <div>
                     <label for="region">Select region</label>
                     <div class="form-group">
                         <input type="text" class="form-control" name="region" id="region"/>
-
-<!--                        <script>-->
-<!--                            $('input[name="region"]').amsifySuggestags({-->
-<!--                                type : 'bootstrap',-->
-<!--                                // suggestions: getSuggestionsForColumn(columnCountry),-->
-<!--                                suggestions: ["Europe", "Africa", "Americas"],-->
-<!--                                whiteList: true-->
-<!--                            });-->
-<!--                        </script>-->
+                        <label for="regionCompare">Should compare:</label>
+                        <input type="checkbox" class="form-control" name="regionCompare" id="regionCompare">
                     </div>
                 </div>
                 <button id="filterButton" onclick="filter()">Filter</button>
