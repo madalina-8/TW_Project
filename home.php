@@ -17,6 +17,7 @@
     <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --><script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script type="module" src="homeChart.js"></script>
+    <script type="module" src="./cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <title>Obesity visualizer</title>
 </head>
@@ -152,5 +153,12 @@
     </div>       
 </footer>
 <script src="script.js"></script>
+<script type="module">
+    import updateUIValueFromCookie from './cookies/cookieUtils.js';
+    updateUIValueFromCookie("year");
+    updateUIValueFromCookie("sex");
+    updateUIValueFromCookie("region");
+    updateUIValueFromCookie("country");
+</script>
 </body>
 </html>

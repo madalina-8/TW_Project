@@ -1,5 +1,5 @@
 <?php
-include_once "../filters/php/Filter.php";
+include_once __DIR__ . '/../filters/php/Filter.php';
 
 class CookiesHelper
 {

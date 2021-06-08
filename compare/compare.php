@@ -18,7 +18,7 @@ if (checkGETAndRedirect()) {
     <script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script src="./compareChart.js"></script>
-    <script type="module" src="cookieUtils.js"></script>
+    <script type="module" src="../cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <script type="text/javascript" src="../jquery.amsify.suggestags.js"></script>
     <link rel="stylesheet" type="text/css" href="../jquery.amsify.suggestags.css">
@@ -168,7 +168,7 @@ if (checkGETAndRedirect()) {
 </footer>
 <script type="module" src="scriptCompare.js"></script>
 <script type="module">
-    import updateUIValueFromCookie from './cookieUtils.js';
+    import updateUIValueFromCookie from '../cookies/cookieUtils.js';
     updateUIValueFromCookie("year");
     updateUIValueFromCookie("sex");
     updateUIValueFromCookie("region");

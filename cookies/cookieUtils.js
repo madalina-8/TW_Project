@@ -1,4 +1,4 @@
-import CookiesHelper from "../cookies/CookiesHelper.js";
+import CookiesHelper from "./CookiesHelper.js";
 
 function getValueFromCookie(name) {
     let filter = CookiesHelper.getCookieFilter(name)
