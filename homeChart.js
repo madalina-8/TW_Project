@@ -106,7 +106,7 @@ class ViewHandler {
 /**
  * Model
  */
-const chartData = new ChartData()
+export const chartData = new ChartData()
 const colorManager = new ColorManager()
 const misc = new Miscellaneous()
 
@@ -122,7 +122,7 @@ const chartHandler = new ChartHandler()
 const viewHandler = new ViewHandler()
 
 
-async function addOptionsForParameter(
+export async function addOptionsForParameter(
     fieldColumn,
     choiceBoxId
 ) {

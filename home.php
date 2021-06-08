@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --><script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
-    <script src="homeChart.js"></script>
+    <script type="module" src="homeChart.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <title>Obesity visualizer</title>
 </head>
@@ -49,7 +49,8 @@
                 <div>
                     <label for="year">Select year:</label>
                     <select name="year" id="year" class=choiceBox onchange="viewHandler.updateSelection(chartData.idYear, 'yearSelections')">
-                        <script>
+                        <script type="module">
+                            import { addOptionsForParameter, chartData} from './homeChart.js'
                             addOptionsForParameter(chartData.columnYear, chartData.idYear)
                         </script>
                     </select>
@@ -69,7 +70,8 @@
                 <div>
                     <label for="country">Select country</label>
                     <select name="country" id="country" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idCountry, 'countrySelections')">
-                        <script>
+                        <script type="module">
+                            import { addOptionsForParameter, chartData} from './homeChart.js'
                             addOptionsForParameter(chartData.columnCountry, chartData.idCountry)
                         </script>
                     </select>
@@ -78,7 +80,8 @@
                 <div>
                     <label for="region">Select region</label>
                     <select name="region" id="region" class="choiceBox" onchange="viewHandler.updateSelection(chartData.idRegion, 'regionSelections')">
-                        <script>
+                        <script type="module">
+                            import { addOptionsForParameter, chartData} from './homeChart.js'
                             addOptionsForParameter(chartData.columnRegion, chartData.idRegion)
                         </script>
                     </select>
