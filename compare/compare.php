@@ -56,7 +56,7 @@ if (checkGETAndRedirect()) {
                     <div class="form-group">
                         <input type="text" class="form-control" name="year" id="year"/>
                         <label for="yearCompare">Should compare:</label>
-                        <input type="checkbox" class="form-control" name="yearCompare" id="regionCompare">
+                        <input type="checkbox" class="form-control" name="yearCompare" id="yearCompare">
                     </div>
                 </div>
                 <div>
@@ -64,7 +64,7 @@ if (checkGETAndRedirect()) {
                     <div class="form-group">
                         <input type="text" class="form-control"  name="sex" id="sex"/>
                         <label for="sexCompare">Should compare:</label>
-                        <input type="checkbox" class="form-control" name="sexCompare" id="regionCompare">
+                        <input type="checkbox" class="form-control" name="sexCompare" id="sexCompare">
                     </div>
                 </div>
                 <div>
@@ -72,7 +72,7 @@ if (checkGETAndRedirect()) {
                     <div class="form-group">
                         <input type="text" class="form-control" name="country" id="country"/>
                         <label for="countryCompare">Should compare:</label>
-                        <input type="checkbox" class="form-control" name="countryCompare" id="regionCompare">
+                        <input type="checkbox" class="form-control" name="countryCompare" id="countryCompare">
                     </div>
                 </div>
                 <div>

@@ -12,6 +12,11 @@ $regionFilter = null;
 $countryFilter = null;
 $sexFilter = null;
 
+function getFilters(): array {
+    global $yearFilter, $sexFilter, $regionFilter, $countryFilter;
+    return [$yearFilter, $sexFilter, $countryFilter, $regionFilter];
+}
+
 function getShareLink() {
     global $formNames;
     $data = array();
@@ -103,8 +108,7 @@ function shouldNotCompare($filter): bool
 
 function generateCompareTable() {
     $compareFilters = getCompareFilters();
-    $normalFilters = getNormalFilters();
-//    var_dump($compareFilters);
+    $normalFilters = getFiltersWithout($compareFilters);
     if (count($compareFilters) > 0) {
         echo "<table>";
 
@@ -143,34 +147,46 @@ function generateCompareTable() {
                 echo "</tr>";
             }
         } else {
+            echo "<tr>";
+            echo "<td></td>";
+            foreach($compareFilters[0]->getValues() as $value) {
+                echo "<td>";
+
+                $onlyFirst = clone $compareFilters[0];
+                $onlyFirst->setValues([$value]);
+
+                showCanvasForFilters(array_merge($normalFilters, [$onlyFirst]));
+
+                echo "</td>";
+            }
+            echo "</tr>";
+
         }
-
-
         echo "</table>";
     } else {
-
+        showCanvasForFilters($normalFilters);
     }
 }
 
 function getCompareFilters(): array
 {
-    global $yearFilter, $sexFilter, $regionFilter, $countryFilter;
-    $filters = [$sexFilter,$yearFilter, $regionFilter, $countryFilter];
+    $filters = getFilters();
     $result = [];
     foreach($filters as $filter) {
         if (shouldCompare($filter))
             $result[] = $filter;
+        if (count($result) > 1)
+            break;
     }
     return $result;
 }
 
-function getNormalFilters(): array
+function getFiltersWithout($without): array
 {
-    global $yearFilter, $sexFilter, $regionFilter, $countryFilter;
-    $filters = [$sexFilter,$yearFilter, $regionFilter, $countryFilter];
+    $filters = getFilters();
     $result = [];
     foreach($filters as $filter) {
-        if (shouldNotCompare($filter))
+        if (!in_array($filter, $without))
             $result[] = $filter;
     }
     return $result;
