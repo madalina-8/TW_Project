@@ -11,8 +11,17 @@
     background-color: #272932 ;
     color: white;
     font-family: 'Julius Sans One', sans-serif;
-    padding: 10px 60px;
-    height: 20px;
+    font-size: 10px;
+    padding: 40px 50px;
+    height: 25px;
 }
 
 
+.row {
+    font-family: 'Julius Sans One', sans-serif;
+    font-weight: 600;
+}
+
+table, thead, td, th {
+    border: 1px solid black;
+  }
