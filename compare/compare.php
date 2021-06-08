@@ -105,7 +105,7 @@ if (checkGETAndRedirect()) {
     <label for="shareLink" class="linkShare">Share with others</label>
     <textarea disabled="disabled" id="shareLink"><?php
         $link = getShareLink();
-        $prefix = 'http://localhost:63342/TW_Project/compare.php?';
+        $prefix = "http://localhost:63342/TW_Project/compare/compare.php?";
         echo $prefix . $link; ?></textarea>
 </div>
 

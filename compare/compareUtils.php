@@ -12,6 +12,7 @@ $regionFilter = null;
 $countryFilter = null;
 $sexFilter = null;
 $groupedId = "grouped";
+$cookies = array_merge($formNames, [$groupedId]);
 
 function getFilters(): array {
     global $yearFilter, $sexFilter, $regionFilter, $countryFilter;
@@ -19,15 +20,15 @@ function getFilters(): array {
 }
 
 function getShareLink() {
-    global $formNames;
+    global $cookies;
     $data = array();
-    foreach ($formNames as $name) {
+    foreach ($cookies as $name) {
         if (isset($_COOKIE[$name])) {
             $value = $_COOKIE[$name];
             $data[$name] = $value;
         }
     }
-    return http_build_query($data);
+    return urlencode(http_build_query($data));
 }
 
 function addCookie($name, $value) {
@@ -58,9 +59,13 @@ function submitForm() {
 function filterFromPost($name): ?Filter {
     $values = $_POST[$name];
     $compare = $_POST[$name . "Compare"] == "on";
+    return filterFromData($name, $values, $compare);
+}
+
+function filterFromData($name, $values, $compare) {
     $array = explode(',', $values);
     echo("Array: ");
-    var_dump($compare);
+//    var_dump($compare);
     echo("<br/>");
     switch ($name) {
         case YearFilter::getCookieName():
@@ -80,12 +85,13 @@ function filterFromPost($name): ?Filter {
     }
 }
 
-function checkGETAndRedirect() {
-    global $formNames;
+function checkGETAndRedirect(): bool{
+    global $cookies;
+//    var_dump($cookies);
 
     $shouldExit = false;
 
-    foreach ($formNames as $name) {
+    foreach ($cookies as $name) {
         if (isset($_GET[$name])) {
             $value = $_GET[$name];
             addCookie($name, $value);
