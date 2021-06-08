@@ -1,5 +1,7 @@
 export default class ChartHandler {
-    constructor() {}
+    constructor(chartData) {
+        this.chartData = chartData
+    }
 
     updateType(imageFormatBox) {
         alert(imageFormatBox.value)
@@ -71,10 +73,10 @@ export default class ChartHandler {
                      sYear,
                      sSex
     ) {
-        return (sRegion.includes(cols[chartData.columnRegion]) || this.isArrayEmpty(sRegion)) &&
-            (sCountry.includes(cols[chartData.columnCountry]) || this.isArrayEmpty(sCountry)) &&
-            (sYear.includes(cols[chartData.columnYear]) || this.isArrayEmpty(sYear)) &&
-            (sSex.includes(cols[chartData.columnSex]) || this.isArrayEmpty(sSex));
+        return (sRegion.includes(cols[this.chartData.columnRegion]) || this.isArrayEmpty(sRegion)) &&
+            (sCountry.includes(cols[this.chartData.columnCountry]) || this.isArrayEmpty(sCountry)) &&
+            (sYear.includes(cols[this.chartData.columnYear]) || this.isArrayEmpty(sYear)) &&
+            (sSex.includes(cols[this.chartData.columnSex]) || this.isArrayEmpty(sSex));
     }
 
     isArrayEmpty(array) {
@@ -83,7 +85,7 @@ export default class ChartHandler {
         }
         let empty = true
         array.forEach(element => {
-            if(element !== "" && element !== chartData.defaultValue) {
+            if(element !== "" && element !== this.chartData.defaultValue) {
                 empty = false
             }
         })
@@ -91,7 +93,7 @@ export default class ChartHandler {
     }
 
     getFields(cols) {
-        let fieldsToGet = [chartData.columnCountry, chartData.columnYear, chartData.columnSex]
+        let fieldsToGet = [this.chartData.columnCountry, this.chartData.columnYear, this.chartData.columnSex]
         let concatenatedValue = ""
         fieldsToGet.forEach(field => {
             concatenatedValue = concatenatedValue + cols[field] + " "
@@ -105,21 +107,21 @@ export default class ChartHandler {
     ) {
         let options = document.querySelector('#' + optionsID)
         switch(fieldColumn) {
-            case chartData.columnRegion:
-                chartData.selectedRegion = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedRegion, 7)
+            case this.chartData.columnRegion:
+                this.chartData.selectedRegion = options.valueOf().value
+                // this.setCookie(optionsID, this.chartData.selectedRegion, 7)
                 break;
-            case chartData.columnCountry:
-                chartData.selectedCountry = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedCountry, 7)
+            case this.chartData.columnCountry:
+                this.chartData.selectedCountry = options.valueOf().value
+                // this.setCookie(optionsID, this.chartData.selectedCountry, 7)
                 break;
-            case chartData.columnYear:
-                chartData.selectedYear = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedYear, 7)
+            case this.chartData.columnYear:
+                this.chartData.selectedYear = options.valueOf().value
+                // this.setCookie(optionsID, this.chartData.selectedYear, 7)
                 break;
-            case chartData.columnSex:
-                chartData.selectedSex = options.valueOf().value
-                // this.setCookie(optionsID, chartData.selectedSex, 7)
+            case this.chartData.columnSex:
+                this.chartData.selectedSex = options.valueOf().value
+                // this.setCookie(optionsID, this.chartData.selectedSex, 7)
                 break;
             default:
                 console.log("???")
@@ -133,10 +135,10 @@ export default class ChartHandler {
     }
 
     filter() {
-        this.updateField(chartData.columnRegion, chartData.idRegion)
-        this.updateField(chartData.columnCountry, chartData.idCountry)
-        this.updateField(chartData.columnYear, chartData.idYear)
-        this.updateField(chartData.columnSex, chartData.idSex)
+        this.updateField(this.chartData.columnRegion, this.chartData.idRegion)
+        this.updateField(this.chartData.columnCountry, this.chartData.idCountry)
+        this.updateField(this.chartData.columnYear, this.chartData.idYear)
+        this.updateField(this.chartData.columnSex, this.chartData.idSex)
         viewHandler.refreshChart()
     }
 }

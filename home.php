@@ -93,7 +93,8 @@
 
         <div class="body-column graph">
             <canvas id="mainChart">
-                <script>
+                <script type="module">
+                    import { viewHandler, misc } from './homeChart.js';
                     viewHandler.updateDataFromCookies()
                     viewHandler.generateChart(misc.mainChartNameId)
                 </script>
