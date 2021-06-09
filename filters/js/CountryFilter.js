@@ -14,6 +14,6 @@ export default class CountryFilter extends Filter
 
     static getCookieName()
     {
-        return "countrySelections";
+        return "country";
     }
 }

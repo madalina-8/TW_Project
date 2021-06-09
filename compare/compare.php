@@ -37,7 +37,7 @@ if (checkGETAndRedirect()) {
     </a>
     <div class="navbar-links">
         <ul>
-            <li><a href="../home.php">Home</a></li>
+            <li><a href="../home/home.php">Home</a></li>
             <li><a href="compare.php">Compare</a></li>
             <li><a href="../about/about.php">About</a></li>
         </ul>
@@ -139,7 +139,7 @@ if (checkGETAndRedirect()) {
             <div class="footer-column">
                 <h4>Navigate</h4>
                 <ul>
-                    <li><a href="../home.php">Home</a></li>
+                    <li><a href="../home/home.php">Home</a></li>
                     <li><a href="compare.php">Compare</a></li>
                     <li><a href="about/about.html">About</a></li>
                 </ul>

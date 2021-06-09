@@ -1,13 +1,13 @@
 <?php
-foreach (glob("filters/php/*.php") as $filename)
+foreach (glob("../filters/php/*.php") as $filename)
 {
     include_once $filename;
 }
-include_once "cookies/CookiesHelper.php";
+include_once "../cookies/CookiesHelper.php";
 
 //when changing 'formNames' change its value in script.js too
-$formNames = array("year");
-//$formNames = array("year", "region", "country", "sex");
+
+$formNames = array("year", "region", "country", "sex");
 
 function getShareLink() {
     global $formNames;
@@ -28,43 +28,41 @@ function addCookie($name, $value) {
 function filterFromPost($name): ?Filter {
     $values = $_POST[$name];
     $array = explode(',', $values);
-    echo("Array: ");
-    var_dump($array);
+    //var_dump($array);
     echo("<br/>");
     switch ($name) {
         case YearFilter::getCookieName():
             return new YearFilter($array);
-            break;
+
         case SexFilter::getCookieName():
             return new SexFilter($array);
-            break;
+
         case CountryFilter::getCookieName():
             return new CountryFilter($array);
-            break;
+
         case RegionFilter::getCookieName():
             return new RegionFilter($array);
-            break;
+
         default:
             return null;
     }
 }
 
 function submitForm() {
-    echo("================================================================================================");
-//    var_dump($_POST);
     global $formNames;
+    //var_dump($_POST);
     foreach ($formNames as $name) {
         if (isset($_POST[$name])) {
-            var_dump($_POST[$name]);
-//            $filter = filterFromPost($name);
-//            if ($filter != null) {
-//                echo("Filter to put in cookie:" . $filter->getEncoded() . "<br/>");
-//                CookiesHelper::setCookieFilter($filter);
-//            }
+            $filter = filterFromPost($name);
+            var_dump($filter);
+            if ($filter != null) {
+                echo("Filter to put in cookie:" . $filter->getEncoded() . "<br/>");
+                CookiesHelper::setCookieFilter($filter);
+            }
         }
     }
 
-//    header("Location: ./home.php");
+    header("Location: ./home.php");
 }
 
 function checkGETAndRedirect() {

@@ -7,7 +7,7 @@ export default class ChartData {
         this.selectedCountry = ["Romania", "Bulgaria", "Germany"] // getCookie for list
         this.selectedYear = ["2016"] // getCookie for list
         this.selectedSex = ["Male"] // getCookie for list
-        this.defaultValue = "-"
+        this.defaultValue = ["-"]
 
         this.columnRegion = 0
         this.columnCountry = 1
@@ -15,14 +15,14 @@ export default class ChartData {
         this.columnSex = 3
         this.columnValue = 4
 
-        this.idRegion = "region"
-        this.idCountry = "country"
-        this.idYear = "year"
-        this.idSex = "sex"
+        this.idRegion = "region1"
+        this.idCountry = "country1"
+        this.idYear = "year1"
+        this.idSex = "sex1"
 
-        this.idSelectedRegion = "regionSelected"
-        this.idSelectedCountry = "countrySelected"
-        this.idSelectedYear = "yearSelected"
-        this.idSelectedSex = "sexSelected"
+        this.idSelectedRegion = "region"
+        this.idSelectedCountry = "country"
+        this.idSelectedYear = "year"
+        this.idSelectedSex = "sex"
     }
 }

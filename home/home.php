@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +17,8 @@
     <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --><script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script type="module" src="homeChart.js"></script>
-    <script src="view/UpdateHandler.js"></script>
-    <script type="module" src="./cookies/cookieUtils.js"></script>
+    <script src="../view/UpdateHandler.js"></script>
+    <script type="module" src="../cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <title>Obesity visualizer</title>
 </head>
@@ -27,7 +27,7 @@
 <nav class="navbar">
     <div class="logo">
        <a href="#"> 
-           <img src="logo.png" width="200"> 
+           <img src="../logo.png" width="200">
         </a>
     </div>
     <a href="#" class="toggle-button">
@@ -38,7 +38,7 @@
     <div class="navbar-links">
         <ul>
             <li><a href="home.php">Home</a></li>
-            <li><a href="compare/compare.php">Compare</a></li>
+            <li><a href="../compare/compare.php">Compare</a></li>
             <li><a href="about/about.html">About</a></li>
         </ul>
     </div>
@@ -49,63 +49,52 @@
         <div class="body-column">
             <form method="post" action="submitFormHome.php" id="form">
                 <div>
-                    <label for="year">Select year:</label>
-                    <select name="year1" id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
+                    <label for="year1">Select year:</label>
+                    <select id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
                         <script type="module">
                             import { viewHandler, chartData } from './homeChart.js'
                             viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
                         </script>
                     </select>
-                    <select id="year" class="choiceBox" name="year" onchange="removeCurrentChoice('year')" form="form"></select>
+                    <select name="year" id="year" class="choiceBox" onchange="removeCurrentChoice('year')"></select>
                 </div>
                 <div>
-                    <label for="sex">Select sex:</label>
-                    <select name="sex" id="sex" class="choiceBox" onchange="updateSelection('sex', 'sexSelections')">
+                    <label for="sex1">Select sex:</label>
+                    <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
                         <!--https://github.com/harvesthq/chosen for better choicebox-->
                         <option value="-">-</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Both sexes">Both sexes</option>
                     </select>
-                    <select id="sexSelections" class="choiceBox" onchange="removeCurrentChoice('sexSelections')"></select>
+                    <select name="sex" id="sex" class="choiceBox" onchange="removeCurrentChoice('sex')"></select>
                 </div>
                 <div>
-                    <label for="country">Select country</label>
-                    <select name="country" id="country" class="choiceBox" onchange="updateSelection('country', 'countrySelections')">
+                    <label for="country1">Select country</label>
+                    <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
                         <script type="module">
                             import { viewHandler, chartData} from './homeChart.js'
-                            viewHandler.addOptionsForParameter(chartData.columnCountry, chartData.idCountry)
+                            viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
                         </script>
                     </select>
-                    <select id="countrySelections" class="choiceBox" onchange="removeCurrentChoice('countrySelections')"></select>
+                    <select name="country" id="country" class="choiceBox" onchange="removeCurrentChoice('country')"></select>
                 </div>
                 <div>
-                    <label for="region">Select region</label>
-                    <select name="region" id="region" class="choiceBox" onchange="updateSelection('region', 'regionSelections')">
+                    <label for="region1">Select region</label>
+                    <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
                         <script type="module">
                             import { viewHandler, chartData} from './homeChart.js'
-                            viewHandler.addOptionsForParameter(chartData.columnRegion, chartData.idRegion)
+                            viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
                         </script>
                     </select>
-                    <select id="regionSelections" class="choiceBox" onchange="removeCurrentChoice('regionSelections')"></select>
+                    <select name="region" id="region" class="choiceBox" onchange="removeCurrentChoice('region')"></select>
                 </div>
                 <button id="filterButton" onclick="chartHandler.filter()">Filter</button>
             </form>
         </div>
 
         <div class="body-column graph">
-            <canvas id="mainChart">
-                <script type="module">
-                    import { viewHandler, misc } from './homeChart.js';
-                    viewHandler.generateChart(
-                        misc.mainChartNameId,
-                        viewHandler.chartData.selectedRegion,
-                        viewHandler.chartData.selectedCountry,
-                        viewHandler.chartData.selectedYear,
-                        viewHandler.chartData.selectedSex
-                    )
-                </script>
-            </canvas>
+            <canvas id="mainChart"></canvas>
             <label for="imageFormat">Select format:</label>
             <select name="imageFormat" id="imageFormat" class="choiceBox" onchange="updateType(this)">
                 <option value="PNG">PNG</option>
@@ -134,7 +123,7 @@
                 <h4>Navigate</h4>
                 <ul>
                     <li><a href="home.php">Home</a></li>
-                    <li><a href="compare/compare.php">Compare</a></li>
+                    <li><a href="../compare/compare.php">Compare</a></li>
                     <li><a href="about/about.html">About</a></li>
                 </ul>
             </div>
@@ -158,13 +147,22 @@
         </div>
     </div>       
 </footer>
-<script src="script.js"></script>
+<script src="../script.js"></script>
 <script type="module">
-    import { updateFiltersFromCookies } from './cookies/cookieUtils.js';
+    import { updateFiltersFromCookies } from '../cookies/cookieUtils.js';
     updateFiltersFromCookies("year");
-    // updateFiltersFromCookies("sex");
-    // updateFiltersFromCookies("region");
-    // updateFiltersFromCookies("country");
+    updateFiltersFromCookies("sex");
+    updateFiltersFromCookies("region");
+    updateFiltersFromCookies("country");
+    import { chartHandler, viewHandler, misc } from "./homeChart.js";
+    chartHandler.filter()
+    viewHandler.generateChart(
+        misc.mainChartNameId,
+        viewHandler.chartData.selectedRegion,
+        viewHandler.chartData.selectedCountry,
+        viewHandler.chartData.selectedYear,
+        viewHandler.chartData.selectedSex
+    )
 </script>
 </body>
 </html>

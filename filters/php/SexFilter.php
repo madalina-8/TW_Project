@@ -37,7 +37,7 @@ class SexFilter extends Filter
 
     public static function getCookieName(): string
     {
-        return "sexSelections";
+        return "sex";
     }
 
 

@@ -23,7 +23,7 @@ export default class CookiesHelper {
             .find(row => row.startsWith(cookieName + '='))
             ?.split(cookieName + '=')[1]
 
-        console.log(string)
+        //console.log(string)
 
         if (string != null) {
             return JSON.parse(string)

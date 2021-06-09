@@ -40,7 +40,7 @@ export default class ChartHandler {
                   sYear,
                   sSex
     ) {
-        let url = new URL('http://localhost/chartapi/ChartServer.php')
+        /*let url = new URL('http://localhost/chartapi/ChartServer.php')
         let params = {
             sRegion: sRegion,
             sCountry: sCountry,
@@ -51,7 +51,7 @@ export default class ChartHandler {
         let response2 = await fetch(url, {
             method: 'GET',
         });
-        console.log(response2.text().valueOf())
+        console.log(response2.text().valueOf())*/
         const response = await fetch("data.csv");
         const data = await response.text();
         const rows = data.split('\n').slice(1);
@@ -108,16 +108,16 @@ export default class ChartHandler {
         let options = document.querySelector('#' + optionsID)
         switch(fieldColumn) {
             case this.chartData.columnRegion:
-                this.chartData.selectedRegion = options.valueOf().value
+                this.chartData.selectedRegion = [options.valueOf().value]
                 break;
             case this.chartData.columnCountry:
-                this.chartData.selectedCountry = options.valueOf().value
+                this.chartData.selectedCountry = [options.valueOf().value]
                 break;
             case this.chartData.columnYear:
-                this.chartData.selectedYear = options.valueOf().value
+                this.chartData.selectedYear = [options.valueOf().value]
                 break;
             case this.chartData.columnSex:
-                this.chartData.selectedSex = options.valueOf().value
+                this.chartData.selectedSex = [options.valueOf().value]
                 break;
             default:
                 console.log("???")

@@ -1,8 +1,8 @@
-import ChartData from './model/ChartData.js'
-import ColorManager from './model/ColorManager.js'
-import Miscellaneous from './model/Miscellaneous.js'
-import ChartHandler from './controller/ChartHandler.js'
-import ViewHandler from './view/ViewHandler.js';
+import ChartData from '../model/ChartData.js'
+import ColorManager from '../model/ColorManager.js'
+import Miscellaneous from '../model/Miscellaneous.js'
+import ChartHandler from '../controller/ChartHandler.js'
+import ViewHandler from '../view/ViewHandler.js';
 
 /**
  * Model
