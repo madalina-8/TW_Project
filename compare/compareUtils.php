@@ -64,6 +64,8 @@ function filterFromPost($name): ?Filter {
 
 function filterFromData($name, $values, $compare) {
     $array = explode(',', $values);
+    if (strlen(trim($values)) == 0)
+        $array = [];
     echo("Array: ");
 //    var_dump($compare);
     echo("<br/>");
