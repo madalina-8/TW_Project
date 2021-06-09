@@ -3,10 +3,8 @@ import CookiesHelper from "./CookiesHelper.js";
 function getValueFromCookie(name) {
     let filter = CookiesHelper.getCookieFilter(name)
     //console.log(filter)
-    let value = filter?.values?.join(',')
+    return filter?.values
     //console.log(value)
-
-    return value
 }
 
 export default function updateUIValueFromCookie(optionsID) {

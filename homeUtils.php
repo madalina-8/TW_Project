@@ -6,7 +6,8 @@ foreach (glob("filters/php/*.php") as $filename)
 include_once "cookies/CookiesHelper.php";
 
 //when changing 'formNames' change its value in script.js too
-$formNames = array("yearSelections", "regionSelections", "countrySelections", "sexSelections");
+$formNames = array("year");
+//$formNames = array("year", "region", "country", "sex");
 
 function getShareLink() {
     global $formNames;
@@ -50,18 +51,20 @@ function filterFromPost($name): ?Filter {
 
 function submitForm() {
     echo("================================================================================================");
+//    var_dump($_POST);
     global $formNames;
     foreach ($formNames as $name) {
         if (isset($_POST[$name])) {
-            $filter = filterFromPost($name);
-            if ($filter != null) {
-                echo("Filter to put in cookie:" . $filter->getEncoded() . "<br/>");
-                CookiesHelper::setCookieFilter($filter);
-            }
+            var_dump($_POST[$name]);
+//            $filter = filterFromPost($name);
+//            if ($filter != null) {
+//                echo("Filter to put in cookie:" . $filter->getEncoded() . "<br/>");
+//                CookiesHelper::setCookieFilter($filter);
+//            }
         }
     }
 
-    header("Location: ./home.php");
+//    header("Location: ./home.php");
 }
 
 function checkGETAndRedirect() {

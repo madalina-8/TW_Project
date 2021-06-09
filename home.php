@@ -47,16 +47,16 @@
 <div class="container">
     <div class="row">
         <div class="body-column">
-            <form method="post" action="submitFormHome.php">
+            <form method="post" action="submitFormHome.php" id="form">
                 <div>
                     <label for="year">Select year:</label>
-                    <select name="year" id="year" class=choiceBox onchange="updateSelection('year', 'yearSelections')">
+                    <select name="year1" id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
                         <script type="module">
                             import { viewHandler, chartData } from './homeChart.js'
-                            viewHandler.addOptionsForParameter(chartData.columnYear, chartData.idYear)
+                            viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
                         </script>
                     </select>
-                    <select id="yearSelections" class="choiceBox" onchange="removeCurrentChoice('yearSelections')"></select>
+                    <select id="year" class="choiceBox" name="year" onchange="removeCurrentChoice('year')" form="form"></select>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
@@ -162,9 +162,9 @@
 <script type="module">
     import { updateFiltersFromCookies } from './cookies/cookieUtils.js';
     updateFiltersFromCookies("year");
-    updateFiltersFromCookies("sex");
-    updateFiltersFromCookies("region");
-    updateFiltersFromCookies("country");
+    // updateFiltersFromCookies("sex");
+    // updateFiltersFromCookies("region");
+    // updateFiltersFromCookies("country");
 </script>
 </body>
 </html>
