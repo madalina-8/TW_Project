@@ -73,6 +73,13 @@ export default class ChartHandler {
                      sYear,
                      sSex
     ) {
+       /* console.log(cols + '\n' + sRegion + '\n' + sCountry + '\n' + sYear + sYear[0]+sYear[1] + '\n' + sSex+sSex[0]+sSex[1] + '\n')
+        console.log(sRegion.includes(cols[this.chartData.columnRegion]))
+        console.log(sCountry.includes(cols[this.chartData.columnCountry]))
+        console.log(sYear.includes(cols[this.chartData.columnYear]))
+        console.log(sSex.includes(cols[this.chartData.columnSex]))
+
+        console.log('\n')*/
         return (sRegion.includes(cols[this.chartData.columnRegion]) || this.isArrayEmpty(sRegion)) &&
             (sCountry.includes(cols[this.chartData.columnCountry]) || this.isArrayEmpty(sCountry)) &&
             (sYear.includes(cols[this.chartData.columnYear]) || this.isArrayEmpty(sYear)) &&
@@ -80,7 +87,7 @@ export default class ChartHandler {
     }
 
     isArrayEmpty(array) {
-        if(array.length === 0) {
+        /*if(array.length === 0) {
             return true
         }
         let empty = true
@@ -89,7 +96,8 @@ export default class ChartHandler {
                 empty = false
             }
         })
-        return empty;
+        return empty;*/
+        return array === "" || array === this.chartData.defaultValue
     }
 
     getFields(cols) {
@@ -108,16 +116,16 @@ export default class ChartHandler {
         let options = document.querySelector('#' + optionsID)
         switch(fieldColumn) {
             case this.chartData.columnRegion:
-                this.chartData.selectedRegion = [options.valueOf().value]
+                this.chartData.selectedRegion = options.valueOf().value
                 break;
             case this.chartData.columnCountry:
-                this.chartData.selectedCountry = [options.valueOf().value]
+                this.chartData.selectedCountry = options.valueOf().value
                 break;
             case this.chartData.columnYear:
-                this.chartData.selectedYear = [options.valueOf().value]
+                this.chartData.selectedYear = options.valueOf().value
                 break;
             case this.chartData.columnSex:
-                this.chartData.selectedSex = [options.valueOf().value]
+                this.chartData.selectedSex = options.valueOf().value
                 break;
             default:
                 console.log("???")

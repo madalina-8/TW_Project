@@ -44,89 +44,58 @@
     </div>
 </nav>
 
-<?php include '../admin/process.php';
-
-$mysqli = new mysqli("localhost","root","","project") or die(mysqli_error($mysqli));
-$result = $mysqli->query("SELECT * FROM modify_status1") or die($mysqli->error);
-
-
-$status_year = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Year'") or die($mysqli->error);
-$status_sex = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Sex'") or die($mysqli->error);
-$status_country = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Country'") or die($mysqli->error);
-$status_region = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Region'") or die($mysqli->error);
-
-$st_year = $status_year->fetch_assoc();
-$st_sex = $status_sex->fetch_assoc();
-$st_country = $status_country->fetch_assoc();
-$st_region = $status_region->fetch_assoc();
-
-
-?>
-
 <div class="container">
     <div class="row">
         <div class="body-column">
             <form method="post" action="submitFormHome.php" id="form">
                 <div>
                     <label for="year1">Select year:</label>
-                    <?php if($st_year['Status'] == 0): ?>
-                        <input type="text" class="form-control" name="year" id="year" disabled/>
-                    <?php endif; ?>
-                    <?php if($st_year['Status'] == 1): ?>
-                    <select id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
-                        <script type="module">
-                            import { viewHandler, chartData } from './homeChart.js'
-                            viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
-                        </script>
-                    </select>
-                    <select name="year" id="year" class="choiceBox" onchange="removeCurrentChoice('year')"></select>
-                    <?php endif; ?>
+                    <div>
+                        <select id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
+                            <script type="module">
+                                import { viewHandler, chartData } from './homeChart.js'
+                                viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
+                            </script>
+                        </select>
+                        <input type="text" id="year" name="year" class="form-control">
+                    </div>
                 </div>
                 <div>
                     <label for="sex1">Select sex:</label>
-                    <?php if($st_sex['Status'] == 0): ?>
-                        <input type="text" class="form-control"  name="sex" id="sex" disabled/>
-                    <?php endif; ?>
-                    <?php if($st_sex['Status'] == 1): ?>
-                    <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
-                        <!--https://github.com/harvesthq/chosen for better choicebox-->
-                        <option value="-">-</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Both sexes">Both sexes</option>
-                    </select>
-                    <select name="sex" id="sex" class="choiceBox" onchange="removeCurrentChoice('sex')"></select>
-                    <?php endif; ?>
+                    <div class="form-group">
+                        <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
+                            <!--https://github.com/harvesthq/chosen for better choicebox-->
+                            <option value="-">-</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Both sexes">Both sexes</option>
+                        </select>
+                        <input type="text" id="sex" name="sex" class="form-control">
+                    </div>
                 </div>
                 <div>
                     <label for="country1">Select country</label>
-                    <?php if($st_country['Status'] == 0): ?>
-                        <input type="text" class="form-control" name="country" id="country" disabled/>
-                    <?php endif; ?>
-                    <?php if($st_country['Status'] == 1): ?>
-                    <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
-                        <script type="module">
-                            import { viewHandler, chartData} from './homeChart.js'
-                            viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
-                        </script>
-                    </select>
-                    <select name="country" id="country" class="choiceBox" onchange="removeCurrentChoice('country')"></select>
-                    <?php endif; ?>
+                    <div class="form-control">
+                        <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
+                            <script type="module">
+                                import { viewHandler, chartData} from './homeChart.js'
+                                viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
+                            </script>
+                        </select>
+                        <input type="text" id="country" name="country" class="form-control">
+                    </div>
                 </div>
                 <div>
                     <label for="region1">Select region</label>
-                    <?php if($st_region['Status'] == 1): ?>
-                    <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
-                        <script type="module">
-                            import { viewHandler, chartData} from './homeChart.js'
-                            viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
-                        </script>
-                    </select>
-                    <select name="region" id="region" class="choiceBox" onchange="removeCurrentChoice('region')"></select>
-                    <?php endif; ?>
-                    <?php if($st_region['Status'] == 0): ?>
-                        <input type="text" class="form-control" name="region" id="region" disabled/>
-                    <?php endif; ?>
+                    <div class="form-group">
+                        <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
+                            <script type="module">
+                                import { viewHandler, chartData} from './homeChart.js'
+                                viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
+                            </script>
+                        </select>
+                        <input type="text" id="region" name="region" class="form-control">
+                    </div>
                 </div>
                 <button id="filterButton" onclick="chartHandler.filter()">Filter</button>
             </form>
@@ -188,11 +157,11 @@ $st_region = $status_region->fetch_assoc();
 </footer>
 <script src="../script.js"></script>
 <script type="module">
-    import { updateFiltersFromCookies } from '../cookies/cookieUtils.js';
-    updateFiltersFromCookies("year");
-    updateFiltersFromCookies("sex");
-    updateFiltersFromCookies("region");
-    updateFiltersFromCookies("country");
+    import updateUIValueFromCookie from '../cookies/cookieUtils.js';
+    updateUIValueFromCookie("year");
+    updateUIValueFromCookie("sex");
+    updateUIValueFromCookie("region");
+    updateUIValueFromCookie("country");
     import { chartHandler, viewHandler, misc } from "./homeChart.js";
     chartHandler.filter()
     viewHandler.generateChart(
