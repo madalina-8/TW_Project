@@ -8,11 +8,6 @@ body {
     padding: 0;
 }
 
-table, td, th {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
 #filtersDiv {
     display: flex;
     flex-wrap: wrap; /*helps me for responsivness display style*/
@@ -143,7 +138,7 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;       /* Remove default arrow */
-    background-image: url("../arrow.png");
+    background-image: url("arrow.png");
     background-position: center right;
     background-repeat: no-repeat;
     background-size: 20px;  /* Add custom arrow */
@@ -188,7 +183,7 @@ ul {
     width: 60%;
 }
 
-.table {
+.graph {
     width: 80%;
 }
 

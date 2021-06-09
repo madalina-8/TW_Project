@@ -14,10 +14,9 @@ if (checkGETAndRedirect()) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
-    <script src="./compareChart.js"></script>
+    <script src="../view/UpdateHandler.js"></script>
+    <script type="module" src="compareChart.js"></script>
     <script type="module" src="../cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <title>Obesity visualizer</title>
@@ -27,7 +26,7 @@ if (checkGETAndRedirect()) {
 <nav class="navbar">
     <div class="logo">
         <a href="#">
-            <img src="../about/logo.png" width="200">
+            <img src="../about/logo.png" width="200" alt="Logo">
         </a>
     </div>
     <a href="#" class="toggle-button">
@@ -44,39 +43,63 @@ if (checkGETAndRedirect()) {
     </div>
 </nav>
 
-
 <div class="container">
     <div class="row">
         <div class="body-column">
             <form method="post" action="submitFormCompare.php">
                 <div>
-                    <label for="year" id="abc">Select year:</label>
+                    <label for="year1" id="abc">Select year:</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="year" id="year"/>
+                        <select id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
+                            <script type="module">
+                                import { viewHandler, chartData } from './compareChart.js'
+                                viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
+                            </script>
+                        </select>
+                        <input type="text" id="year" name="year" class="form-control" disabled="disabled">
                         <label for="yearCompare">Should compare:</label>
                         <input type="checkbox" class="form-control" name="yearCompare" id="yearCompare">
                     </div>
                 </div>
                 <div>
-                    <label for="sex">Select sex:</label>
+                    <label for="sex1">Select sex:</label>
                     <div class="form-group">
-                        <input type="text" class="form-control"  name="sex" id="sex"/>
+                        <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
+                            <!--https://github.com/harvesthq/chosen for better choicebox-->
+                            <option value="-">-</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Both sexes">Both sexes</option>
+                        </select>
+                        <input type="text" id="sex" name="sex" class="form-control" disabled="disabled">
                         <label for="sexCompare">Should compare:</label>
                         <input type="checkbox" class="form-control" name="sexCompare" id="sexCompare">
                     </div>
                 </div>
                 <div>
-                    <label for="country">Select country</label>
+                    <label for="country1">Select country</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="country" id="country"/>
+                        <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
+                            <script type="module">
+                                import { viewHandler, chartData} from './compareChart.js'
+                                viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
+                            </script>
+                        </select>
+                        <input type="text" id="country" name="country" class="form-control" disabled="disabled">
                         <label for="countryCompare">Should compare:</label>
                         <input type="checkbox" class="form-control" name="countryCompare" id="countryCompare">
                     </div>
                 </div>
                 <div>
-                    <label for="region">Select region</label>
+                    <label for="region1">Select region</label>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="region" id="region"/>
+                        <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
+                            <script type="module">
+                                import { viewHandler, chartData} from './compareChart.js'
+                                viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
+                            </script>
+                        </select>
+                        <input type="text" id="region" name="region" class="form-control" disabled="disabled">
                         <label for="regionCompare">Should compare:</label>
                         <input type="checkbox" class="form-control" name="regionCompare" id="regionCompare">
                     </div>
@@ -98,7 +121,6 @@ if (checkGETAndRedirect()) {
     </div>
 </div>
 
-
 <div>
     <label for="shareLink" class="linkShare">Share with others</label>
     <textarea disabled="disabled" id="shareLink"><?php
@@ -106,8 +128,6 @@ if (checkGETAndRedirect()) {
         $prefix = "http://localhost:63342/TW_Project/compare/compare.php?";
         echo $prefix . $link; ?></textarea>
 </div>
-
-
 
 
 <footer class="footer">
@@ -141,9 +161,18 @@ if (checkGETAndRedirect()) {
         </div>
     </div>
 </footer>
-<script type="module" src="scriptCompare.js"></script>
+
+<script>
+    const toggleButton = document.getElementsByClassName('toggle-button')[0]
+    const navbarLinks = document.getElementsByClassName('navbar-links')[0]
+
+    toggleButton.addEventListener('click', () => {
+        navbarLinks.classList.toggle('active')
+    })
+</script>
+
 <script type="module">
-    import {updateUIValueFromCookie, updateUICheckBoxFromCookie} from '../compare/cookieUtils.js';
+    import {updateUIValueFromCookie, updateUICheckBoxFromCookie} from '../cookies/cookieUtils.js';
     updateUIValueFromCookie("year");
     updateUIValueFromCookie("sex");
     updateUIValueFromCookie("region");

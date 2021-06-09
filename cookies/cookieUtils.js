@@ -7,7 +7,7 @@ function getValueFromCookie(name) {
     //console.log(value)
 }
 
-export default function updateUIValueFromCookie(optionsID) {
+export function updateUIValueFromCookie(optionsID) {
     let options = document.getElementById(optionsID)
     //console.log(options)
     let cookieValues = getValueFromCookie(optionsID)
@@ -16,5 +16,17 @@ export default function updateUIValueFromCookie(optionsID) {
         options.valueOf().value = cookieValues
     } else {
         options.value = ""
+    }
+}
+
+export function updateUICheckBoxFromCookie(checkBoxId) {
+    let checkBox = document.getElementById(checkBoxId)
+
+    let checked = CookiesHelper.getCookie(checkBoxId)
+
+    if (checked !== undefined && checked === "off") {
+        checkBox.valueOf().checked = false
+    } else {
+        checkBox.valueOf().checked = true
     }
 }

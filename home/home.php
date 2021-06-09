@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,7 +57,7 @@
                                 viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
                             </script>
                         </select>
-                        <input type="text" id="year" name="year" class="form-control">
+                        <input type="text" id="year" name="year" class="form-control" disabled="disabled">
                     </div>
                 </div>
                 <div>
@@ -70,7 +70,7 @@
                             <option value="Female">Female</option>
                             <option value="Both sexes">Both sexes</option>
                         </select>
-                        <input type="text" id="sex" name="sex" class="form-control">
+                        <input type="text" id="sex" name="sex" class="form-control" disabled="disabled">
                     </div>
                 </div>
                 <div>
@@ -82,7 +82,7 @@
                                 viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
                             </script>
                         </select>
-                        <input type="text" id="country" name="country" class="form-control">
+                        <input type="text" id="country" name="country" class="form-control" disabled="disabled">
                     </div>
                 </div>
                 <div>
@@ -94,7 +94,7 @@
                                 viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
                             </script>
                         </select>
-                        <input type="text" id="region" name="region" class="form-control">
+                        <input type="text" id="region" name="region" class="form-control" disabled="disabled">
                     </div>
                 </div>
                 <button id="filterButton" onclick="chartHandler.filter()">Filter</button>
@@ -157,7 +157,7 @@
 </footer>
 <script src="../script.js"></script>
 <script type="module">
-    import updateUIValueFromCookie from '../cookies/cookieUtils.js';
+    import {updateUIValueFromCookie} from '../cookies/cookieUtils.js';
     updateUIValueFromCookie("year");
     updateUIValueFromCookie("sex");
     updateUIValueFromCookie("region");

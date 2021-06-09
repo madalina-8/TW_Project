@@ -239,7 +239,7 @@ function printCanvasForFilters($filters) {
 //    echo "import CookiesHelper from \"../cookies/CookiesHelper.js\";\n";
 
     echo "<script type='module'>\n";
-
+    echo "import { viewHandler } from './compareChart.js'\n";
     foreach($ordered as $filter) {
         echo "let " . $filter->getCookieName() . " = \"" . str_replace("\"", "\\\"", $filter->getEncoded()) . "\" \n";
     }
@@ -254,7 +254,7 @@ function printCanvasForFilters($filters) {
     echo "viewHandler.generateChart(" . $id;
 
     foreach($ordered as $filter) {
-        echo ", " . $filter->getCookieName() . "Filter";
+        echo ", " . $filter->getCookieName() . "Filter.values";
     };
 
     echo ")\n";
