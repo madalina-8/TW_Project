@@ -45,6 +45,25 @@
     </div>
 </nav>
 
+<?php include './admin/process.php'; 
+
+    $mysqli = new mysqli("localhost","root","","project") or die(mysqli_error($mysqli));
+    $result = $mysqli->query("SELECT * FROM modify_status1") or die($mysqli->error);
+  
+    
+    $status_year = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Year'") or die($mysqli->error);
+    $status_sex = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Sex'") or die($mysqli->error);
+    $status_country = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Country'") or die($mysqli->error);
+    $status_region = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Region'") or die($mysqli->error);
+
+    $st_year = $status_year->fetch_assoc();
+    $st_sex = $status_sex->fetch_assoc();
+    $st_country = $status_country->fetch_assoc();
+    $st_region = $status_region->fetch_assoc();
+
+
+?>
+
 <div class="container">
     <div class="row">
         <div class="body-column">
@@ -52,6 +71,10 @@
                 <div>
                     <label for="year">Select year:</label>
                     <div class="form-group">
+                        <?php if($st_year['Status'] == 0): ?>
+                            <input type="text" class="form-control" name="year" id="year" disabled/>
+                            <?php endif; ?>
+                            <?php if($st_year['Status'] == 1): ?>
                         <input type="text" class="form-control" name="year" id="year"/>
                         <script>
                             viewHandler.updateUIValueFromCookie(chartData.idYear)
@@ -62,11 +85,16 @@
                                 whiteList: true
                             });
                         </script>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div>
                     <label for="sex">Select sex:</label>
                     <div class="form-group">
+                    <?php if($st_sex['Status'] == 0): ?>
+                        <input type="text" class="form-control"  name="sex" id="sex" disabled/>
+                        <?php endif; ?>
+                        <?php if($st_sex['Status'] == 1): ?>
                         <input type="text" class="form-control"  name="sex" id="sex"/>
                         <script>
                             viewHandler.updateUIValueFromCookie(chartData.idSex)
@@ -77,11 +105,16 @@
                                 whiteList: true
                             });
                         </script>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div>
                     <label for="country">Select country</label>
                     <div class="form-group">
+                    <?php if($st_country['Status'] == 0): ?>
+                        <input type="text" class="form-control" name="country" id="country" disabled/>
+                        <?php endif; ?>
+                        <?php if($st_country['Status'] == 1): ?>
                         <input type="text" class="form-control" name="country" id="country"/>
                         <script>
                             viewHandler.updateUIValueFromCookie(chartData.idCountry)
@@ -92,11 +125,13 @@
                                 whiteList: true
                             })
                         </script>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div>
                     <label for="region">Select region</label>
                     <div class="form-group">
+                    <?php if($st_region['Status'] == 1): ?>
                         <input type="text" class="form-control" name="region" id="region"/>
                         <script>
                             viewHandler.updateUIValueFromCookie(chartData.idRegion)
@@ -107,6 +142,10 @@
                                 whiteList: true
                             });
                         </script>
+                        <?php endif; ?>
+                        <?php if($st_region['Status'] == 0): ?>
+                            <input type="text" class="form-control" name="region" id="region" disabled/>
+                            <?php endif; ?>
                     </div>
                 </div>
                 <button id="filterButton" onclick="filter()">Filter</button>
