@@ -1,0 +1,207 @@
+<?php
+    include 'homeUtils.php';
+    if (checkGETAndRedirect()) {
+        header('Location: ./home.php');
+        exit(0);
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --><script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
+    <script type="module" src="homeChart.js"></script>
+    <script src="../view/UpdateHandler.js"></script>
+    <script type="module" src="../cookies/cookieUtils.js"></script>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <title>Obesity visualizer</title>
+</head>
+<body>
+    
+<nav class="navbar">
+    <div class="logo">
+       <a href="#"> 
+           <img src="../logo.png" width="200">
+        </a>
+    </div>
+    <a href="#" class="toggle-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+        <ul>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="../compare/compare.php">Compare</a></li>
+            <li><a href="about/about.html">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<?php include '../admin/process.php';
+
+$mysqli = new mysqli("localhost","root","","project") or die(mysqli_error($mysqli));
+$result = $mysqli->query("SELECT * FROM modify_status1") or die($mysqli->error);
+
+
+$status_year = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Year'") or die($mysqli->error);
+$status_sex = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Sex'") or die($mysqli->error);
+$status_country = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Country'") or die($mysqli->error);
+$status_region = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Region'") or die($mysqli->error);
+
+$st_year = $status_year->fetch_assoc();
+$st_sex = $status_sex->fetch_assoc();
+$st_country = $status_country->fetch_assoc();
+$st_region = $status_region->fetch_assoc();
+
+
+?>
+
+<div class="container">
+    <div class="row">
+        <div class="body-column">
+            <form method="post" action="submitFormHome.php" id="form">
+                <div>
+                    <label for="year1">Select year:</label>
+                    <?php if($st_year['Status'] == 0): ?>
+                        <input type="text" class="form-control" name="year" id="year" disabled/>
+                    <?php endif; ?>
+                    <?php if($st_year['Status'] == 1): ?>
+                    <select id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
+                        <script type="module">
+                            import { viewHandler, chartData } from './homeChart.js'
+                            viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
+                        </script>
+                    </select>
+                    <select name="year" id="year" class="choiceBox" onchange="removeCurrentChoice('year')"></select>
+                    <?php endif; ?>
+                </div>
+                <div>
+                    <label for="sex1">Select sex:</label>
+                    <?php if($st_sex['Status'] == 0): ?>
+                        <input type="text" class="form-control"  name="sex" id="sex" disabled/>
+                    <?php endif; ?>
+                    <?php if($st_sex['Status'] == 1): ?>
+                    <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
+                        <!--https://github.com/harvesthq/chosen for better choicebox-->
+                        <option value="-">-</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Both sexes">Both sexes</option>
+                    </select>
+                    <select name="sex" id="sex" class="choiceBox" onchange="removeCurrentChoice('sex')"></select>
+                    <?php endif; ?>
+                </div>
+                <div>
+                    <label for="country1">Select country</label>
+                    <?php if($st_country['Status'] == 0): ?>
+                        <input type="text" class="form-control" name="country" id="country" disabled/>
+                    <?php endif; ?>
+                    <?php if($st_country['Status'] == 1): ?>
+                    <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
+                        <script type="module">
+                            import { viewHandler, chartData} from './homeChart.js'
+                            viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
+                        </script>
+                    </select>
+                    <select name="country" id="country" class="choiceBox" onchange="removeCurrentChoice('country')"></select>
+                    <?php endif; ?>
+                </div>
+                <div>
+                    <label for="region1">Select region</label>
+                    <?php if($st_region['Status'] == 1): ?>
+                    <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
+                        <script type="module">
+                            import { viewHandler, chartData} from './homeChart.js'
+                            viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
+                        </script>
+                    </select>
+                    <select name="region" id="region" class="choiceBox" onchange="removeCurrentChoice('region')"></select>
+                    <?php endif; ?>
+                    <?php if($st_region['Status'] == 0): ?>
+                        <input type="text" class="form-control" name="region" id="region" disabled/>
+                    <?php endif; ?>
+                </div>
+                <button id="filterButton" onclick="chartHandler.filter()">Filter</button>
+            </form>
+        </div>
+
+        <div class="body-column graph">
+            <canvas id="mainChart"></canvas>
+            <label for="imageFormat">Select format:</label>
+            <select name="imageFormat" id="imageFormat" class="choiceBox" onchange="updateType(this)">
+                <option value="PNG">PNG</option>
+                <option value="CSV">CSV</option>
+                <option value="SVG">SVG</option>
+            </select>
+            <button id="saveButton" onclick="chartHandler.saveChart()">Save chart image</button>
+        </div>
+    </div>
+</div>
+
+<div></div>
+
+<div>
+    <label for="shareLink" class="linkShare">Share with others</label>
+    <textarea disabled="disabled" id="shareLink"><?php
+        $link = getShareLink();
+        $prefix = 'http://localhost:63342/TW_Project/home.php?';
+        echo $prefix . $link; ?></textarea>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-column">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="home.php">Home</a></li>
+                    <li><a href="../compare/compare.php">Compare</a></li>
+                    <li><a href="about/about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Associated websites</h4>
+                <ul>
+                    <li><a href="https://www.worldobesity.org/">World Obesity</a></li>
+                    <li><a href="https://www.cdc.gov/obesity/">CDC's Obesity</a></li>
+                    <li><a href="https://vizhub.healthdata.org/obesity/">Healthdata</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Follow us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="https://github.com/madalina-8/TW_Project"><i class="fab fa-github fa-lg"></i></a>
+                    <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>       
+</footer>
+<script src="../script.js"></script>
+<script type="module">
+    import { updateFiltersFromCookies } from '../cookies/cookieUtils.js';
+    updateFiltersFromCookies("year");
+    updateFiltersFromCookies("sex");
+    updateFiltersFromCookies("region");
+    updateFiltersFromCookies("country");
+    import { chartHandler, viewHandler, misc } from "./homeChart.js";
+    chartHandler.filter()
+    viewHandler.generateChart(
+        misc.mainChartNameId,
+        viewHandler.chartData.selectedRegion,
+        viewHandler.chartData.selectedCountry,
+        viewHandler.chartData.selectedYear,
+        viewHandler.chartData.selectedSex
+    )
+</script>
+</body>
+</html>

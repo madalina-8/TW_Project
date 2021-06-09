@@ -16,14 +16,14 @@ export default class CookiesHelper {
             .replaceAll("%3A", ':')
             .replaceAll("%2C", ',')
 
-        console.log(replaced)
+        //console.log(replaced)
 
         let string = replaced
             .split('; ')
             .find(row => row.startsWith(cookieName + '='))
             ?.split(cookieName + '=')[1]
 
-        console.log(string)
+        //console.log(string)
 
         return string
     }

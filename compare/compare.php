@@ -18,10 +18,8 @@ if (checkGETAndRedirect()) {
     <script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script src="./compareChart.js"></script>
-    <script type="module" src="cookieUtils.js"></script>
+    <script type="module" src="../cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
-    <script type="text/javascript" src="../jquery.amsify.suggestags.js"></script>
-    <link rel="stylesheet" type="text/css" href="../jquery.amsify.suggestags.css">
     <title>Obesity visualizer</title>
 </head>
 <body>
@@ -39,7 +37,7 @@ if (checkGETAndRedirect()) {
     </a>
     <div class="navbar-links">
         <ul>
-            <li><a href="../home.php">Home</a></li>
+            <li><a href="../home/home.php">Home</a></li>
             <li><a href="compare.php">Compare</a></li>
             <li><a href="../about/about.php">About</a></li>
         </ul>
@@ -118,7 +116,7 @@ if (checkGETAndRedirect()) {
             <div class="footer-column">
                 <h4>Navigate</h4>
                 <ul>
-                    <li><a href="../home.php">Home</a></li>
+                    <li><a href="../home/home.php">Home</a></li>
                     <li><a href="compare.php">Compare</a></li>
                     <li><a href="about/about.html">About</a></li>
                 </ul>
@@ -145,7 +143,7 @@ if (checkGETAndRedirect()) {
 </footer>
 <script type="module" src="scriptCompare.js"></script>
 <script type="module">
-    import {updateUIValueFromCookie, updateUICheckBoxFromCookie} from './cookieUtils.js';
+    import {updateUIValueFromCookie, updateUICheckBoxFromCookie} from '../compare/cookieUtils.js';
     updateUIValueFromCookie("year");
     updateUIValueFromCookie("sex");
     updateUIValueFromCookie("region");
