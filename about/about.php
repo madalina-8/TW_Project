@@ -16,7 +16,7 @@
 <nav class="navbar">
     <div class="logo">
        <a href="#"> 
-           <img src="logo.png" width="200"> 
+           <img src="logo.png" alt="logo" width="200"> 
         </a>
     </div>
     <a href="#" class="toggle-button">
@@ -30,6 +30,7 @@
             <li><a href="../compare/compare.php">Compare</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="../admin/admin.php">Admin</a></li>
+
         </ul>
     </div>
 </nav>
@@ -52,9 +53,9 @@
             <h3>Who are we?</h3>
             <p>We're a creative team of three students who started their journey into the web-technology field.
             </p>
-            <div class="imgBox"><img src="lorin.jpg"></div>
-            <div class="imgBox"><img src="mada.jpg"></div>
-            <div class="imgBox"><img src="tudor.jpg"></div>
+            <div class="imgBox"><img src="lorin.jpg" alt="lorin"></div>
+            <div class="imgBox"><img src="mada.jpg" alt="mada"></div>
+            <div class="imgBox"><img src="tudor.jpg" alt="tudor"></div>
             <div class="names">
                 <p>Lorin Budacă Mădălina Dulhac Tudor Crăciun</p>
             </div>
@@ -102,22 +103,22 @@
                 <h3 class="title">Contact us</h3>  
                 <div class="input-container">
                 <input type="text" name="name" class="input">
-                <label for="">Full name</label>
+                <label>Full name</label>
                 <span>Full name</span>
                 </div>
                 <div class="input-container">
                     <input type="email" name="email" class="input">
-                    <label for="">Email</label>
-                <span>Email</span>
+                    <label>Email</label>
+                    <span>Email</span>
                 </div>
                 <div class="input-container">
                     <input type="text" name="subject" class="input">
-                    <label for="">Subject</label>
+                    <label>Subject</label>
                     <span>Subject</span>
                 </div>
                 <div class="input-container textarea">
                     <textarea name="message" class="input"></textarea>
-                    <label for="">Message</label>
+                    <label>Message</label>
                     <span>Message</span>
                 </div>
                 <input type="submit" value="Send" class="btn" name="send">
