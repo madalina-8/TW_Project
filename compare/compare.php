@@ -48,22 +48,24 @@ if (checkGETAndRedirect()) {
     <div class="row">
         <div class="body-column">
             <form method="post" action="submitFormCompare.php">
-                <div>
-                    <label for="year1" id="abc">Select year:</label>
-                    <div class="form-group">
-                        <select id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
-                            <script type="module">
-                                import { viewHandler, chartData } from './compareChart.js'
-                                viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
-                            </script>
-                        </select>
-                        <input type="text" id="year" name="year" class="form-control" disabled="disabled">
-                        <label for="yearCompare">Should compare:</label>
-                        <input type="checkbox" class="form-control" name="yearCompare" id="yearCompare">
-                    </div>
+                <div class="filterContainer">
+                    <label for="year1" class="filterTitle">Select year:</label>
+                    <br/>
+                    <select id="year1" class="choiceBox" onchange="updateSelection('year1', 'year')">
+                        <script type="module">
+                            import { viewHandler, chartData } from './compareChart.js'
+                            viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
+                        </script>
+                    </select>
+                    <br/>
+                    <input type="text" id="year" name="year" class="textInput">
+                    <br/>
+                    <label for="yearCompare">Should compare year:</label>
+                    <input type="checkbox" name="yearCompare" id="yearCompare">
                 </div>
-                <div>
-                    <label for="sex1">Select sex:</label>
+                <div class="filterContainer">
+                    <label for="sex1" class="filterTitle">Select sex:</label>
+                    <br/>
                     <div class="form-group">
                         <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
                             <!--https://github.com/harvesthq/chosen for better choicebox-->
@@ -72,13 +74,15 @@ if (checkGETAndRedirect()) {
                             <option value="Female">Female</option>
                             <option value="Both sexes">Both sexes</option>
                         </select>
-                        <input type="text" id="sex" name="sex" class="form-control" disabled="disabled">
-                        <label for="sexCompare">Should compare:</label>
-                        <input type="checkbox" class="form-control" name="sexCompare" id="sexCompare">
+                        <input type="text" id="sex" name="sex" class="textInput" >
+                        <br/>
+                        <label for="sexCompare">Should compare sex:</label>
+                        <input type="checkbox" name="sexCompare" id="sexCompare">
                     </div>
                 </div>
-                <div>
-                    <label for="country1">Select country</label>
+                <div class="filterContainer">
+                    <label for="country1" class="filterTitle">Select country</label>
+                    <br/>
                     <div class="form-group">
                         <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
                             <script type="module">
@@ -86,13 +90,15 @@ if (checkGETAndRedirect()) {
                                 viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
                             </script>
                         </select>
-                        <input type="text" id="country" name="country" class="form-control" disabled="disabled">
-                        <label for="countryCompare">Should compare:</label>
-                        <input type="checkbox" class="form-control" name="countryCompare" id="countryCompare">
+                        <input type="text" id="country" name="country" class="textInput">
+                        <br/>
+                        <label for="countryCompare">Should compare country:</label>
+                        <input type="checkbox" name="countryCompare" id="countryCompare">
                     </div>
                 </div>
-                <div>
-                    <label for="region1">Select region</label>
+                <div class="filterContainer">
+                    <label for="region1" class="filterTitle">Select region</label>
+                    <br/>
                     <div class="form-group">
                         <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
                             <script type="module">
@@ -100,35 +106,41 @@ if (checkGETAndRedirect()) {
                                 viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
                             </script>
                         </select>
-                        <input type="text" id="region" name="region" class="form-control" disabled="disabled">
-                        <label for="regionCompare">Should compare:</label>
-                        <input type="checkbox" class="form-control" name="regionCompare" id="regionCompare">
+                        <input type="text" id="region" name="region" class="textInput">
+                        <br/>
+                        <label for="regionCompare">Should compare region:</label>
+                        <input type="checkbox" name="regionCompare" id="regionCompare">
                     </div>
                 </div>
-                <div>
-                    <label for="grouped">Group data: </label>
+                <div class="filterContainer">
+                    <label for="grouped" class="filterTitle">Group data: </label>
                     <input id="grouped" type="checkbox" name="grouped"/>
+                    <br/>
+                    <p>Should graph data be averaged?</p>
                 </div>
-                <input id="filterButton" type="submit" value="Filter" />
+                <div class="filterContainer">
+                    <input id="filterButton" style="font-size: 30px;" type="submit" value="Filter" />
+                </div>
             </form>
         </div>
 
-        <div class="body-column table">
+        <div class="compareTable">
             <?php
                 importFiltersFromCookies();
                 generateCompareTable();
             ?>
         </div>
     </div>
+
+    <div class="row">
+        <label for="shareLink" class="linkShare">Share with others</label>
+        <textarea disabled="disabled" id="shareLink"><?php
+            $link = getShareLink();
+            $prefix = "http://localhost:63342/TW_Project/compare/compare.php?";
+            echo $prefix . $link; ?></textarea>
+    </div>
 </div>
 
-<div>
-    <label for="shareLink" class="linkShare">Share with others</label>
-    <textarea disabled="disabled" id="shareLink"><?php
-        $link = getShareLink();
-        $prefix = "http://localhost:63342/TW_Project/compare/compare.php?";
-        echo $prefix . $link; ?></textarea>
-</div>
 
 
 <footer class="footer">

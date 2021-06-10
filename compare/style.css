@@ -166,7 +166,7 @@ ul {
 }
 
 .filterTitle {
-    margin: 20px;
+    font-size: 30px;
 }
 
 .row {
@@ -181,19 +181,25 @@ ul {
 
 .body-column {
     padding: 10px 15px;
-    width: 20%;
+    width: 30%;
 }
 
-.compareGraph {
-    width: 60%;
+.compareTable {
+    overflow: auto;
+    padding: 10px 15px;
+    width: 70%;
 }
 
-.table {
-    width: 80%;
+.filterContainer {
+    margin-bottom: 30px;
 }
 
 .linkShare {
-    margin: 20px;
+    margin: 30px;
+}
+
+.textInput {
+    width: 100%;
 }
 
 .footer-column h4 {

@@ -38,7 +38,6 @@ CREATE TABLE `data` (
 --
 -- Eliminarea datelor din tabel `data`
 --
-
 INSERT INTO `data` (`Location`, `Country`, `Year`, `Sex`, `Value`) VALUES
 ('Eastern Mediterranean', 'Afghanistan', '2016', 'Male', 2.7),
 ('Eastern Mediterranean', 'Afghanistan', '2016', 'Both sexes', 4.5),

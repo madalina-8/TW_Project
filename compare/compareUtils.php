@@ -36,6 +36,7 @@ function addCookie($name, $value) {
 }
 
 function submitForm() {
+    var_dump($_POST);
     global $formNames, $groupedId;
     foreach ($formNames as $name) {
         if (isset($_POST[$name])) {
@@ -125,7 +126,7 @@ function generateCompareTable() {
     $compareFilters = getCompareFilters();
     $normalFilters = getFiltersWithout($compareFilters);
     if (count($compareFilters) > 0) {
-        echo "<table>";
+        echo "<table class=\"table\">";
 
         echo "<tr>";
 
@@ -153,7 +154,6 @@ function generateCompareTable() {
 
                     $onlySecond = clone $compareFilters[1];
                     $onlySecond->setValues([$second]);
-
 
                     printCanvasForFilters(array_merge($normalFilters, [$onlySecond, $onlyFirst]));
 

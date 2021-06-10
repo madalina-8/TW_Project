@@ -7,8 +7,16 @@ function getValueFromCookie(name) {
     //console.log(value)
 }
 
+function getCompareFromCookie(name) {
+    let filter = CookiesHelper.getCookieFilter(name)
+    //console.log(filter)
+    return filter?.compare
+    //console.log(value)
+}
+
 export function updateUIValueFromCookie(optionsID) {
     let options = document.getElementById(optionsID)
+    let shouldCompare = document.getElementById(optionsID + "Compare")
     //console.log(options)
     let cookieValues = getValueFromCookie(optionsID)
     //console.log("cookie value: " + cookieValues)
@@ -16,6 +24,9 @@ export function updateUIValueFromCookie(optionsID) {
         options.valueOf().value = cookieValues
     } else {
         options.value = ""
+    }
+    if(shouldCompare !== undefined) {
+        shouldCompare.valueOf().checked = (getCompareFromCookie(optionsID) === true)
     }
 }
 
