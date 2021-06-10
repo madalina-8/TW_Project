@@ -143,7 +143,7 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;       /* Remove default arrow */
-    background-image: url("../arrow.png");
+    background-image: url("../images/arrow.png");
     background-position: center right;
     background-repeat: no-repeat;
     background-size: 20px;  /* Add custom arrow */

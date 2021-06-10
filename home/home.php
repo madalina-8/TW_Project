@@ -28,7 +28,7 @@
 <nav class="navbar">
     <div class="logo">
        <a href="#"> 
-           <img src="../logo.png" width="200">
+           <img src="../images/logo.png" width="200">
         </a>
     </div>
     <a href="#" class="toggle-button">

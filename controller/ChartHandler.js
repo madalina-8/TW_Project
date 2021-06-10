@@ -16,49 +16,20 @@ export default class ChartHandler {
             sSex: sSex
         }
         url.search = new URLSearchParams(params).toString()
-        let response2 = await fetch(url, {
+        let response = await fetch(url, {
             method: 'GET',
         });
-        console.log(response2.text().valueOf())
-        const response = await fetch("data.csv");
-        const data = await response.text();
-        const rows = data.split('\n').slice(1);
+        const data = await response.text()
+        const entries = data.split('|')
+        entries.splice(entries.length-1)
         const entryName = [];
         const entryValue = [];
-        rows.forEach(row => {
-            const cols = row.split(',');
-            if(this.isSelectableData(cols, sRegion, sCountry, sYear, sSex)) {
-                entryName.push(this.getFields(cols));
-                entryValue.push(parseFloat(cols[4]));
-            }
-        });
-        return { enName: entryName, enValue: entryValue };
-    }
-
-    isSelectableData(cols,
-                     sRegion,
-                     sCountry,
-                     sYear,
-                     sSex
-    ) {
-        return (sRegion.includes(cols[this.chartData.columnRegion]) || this.isArrayEmpty(sRegion)) &&
-            (sCountry.includes(cols[this.chartData.columnCountry]) || this.isArrayEmpty(sCountry)) &&
-            (sYear.includes(cols[this.chartData.columnYear]) || this.isArrayEmpty(sYear)) &&
-            (sSex.includes(cols[this.chartData.columnSex]) || this.isArrayEmpty(sSex));
-    }
-
-    isArrayEmpty(array) {
-        /*if(array.length === 0) {
-            return true
-        }
-        let empty = true
-        array.forEach(element => {
-            if(element !== "" && element !== this.chartData.defaultValue) {
-                empty = false
-            }
+        entries.forEach(entry => {
+            const en = entry.replaceAll("\"", "").split(',')
+            entryName.push(this.getFields(en));
+            entryValue.push(parseFloat(en[4]));
         })
-        return empty;*/
-        return array === "" || array === this.chartData.defaultValue
+        return { enName: entryName, enValue: entryValue };
     }
 
     getFields(cols) {

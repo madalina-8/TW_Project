@@ -18,8 +18,8 @@ $regions = "'$region'";
 
 $search_c = $mysqli->query("SELECT * FROM data WHERE Country IN ($countries) AND Year IN ($years) AND Sex IN ($sexes) AND Location IN ($regions)") or die($mysqli->error);
 while($row = $search_c->fetch_array()):
-    $data = array($row['Location'], $row['Country'], $row['Year'], $row['Sex'], $row['Value']);
-
-    echo json_encode($data);;
+    $data = $row['Location'].','.$row['Country'].','.$row['Year'].','.$row['Sex'].','.$row['Value'];
+    echo json_encode($data);
+    echo "|";
 endwhile;
 ?>

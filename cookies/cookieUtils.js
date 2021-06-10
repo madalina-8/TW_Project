@@ -11,7 +11,7 @@ export function updateUIValueFromCookie(optionsID) {
     let options = document.getElementById(optionsID)
     //console.log(options)
     let cookieValues = getValueFromCookie(optionsID)
-    console.log("cookie value: " + cookieValues)
+    //console.log("cookie value: " + cookieValues)
     if(cookieValues !== undefined && cookieValues.length !== 0) {
         options.valueOf().value = cookieValues
     } else {
