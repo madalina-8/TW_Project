@@ -46,6 +46,25 @@
     </div>
 </nav>
 
+<?php include '../admin/process.php';
+
+    $mysqli = new mysqli("localhost","root","","project") or die(mysqli_error($mysqli));
+    $result = $mysqli->query("SELECT * FROM modify_status1") or die($mysqli->error);
+
+
+    $status_year = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Year'") or die($mysqli->error);
+    $status_sex = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Sex'") or die($mysqli->error);
+    $status_country = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Country'") or die($mysqli->error);
+    $status_region = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Region'") or die($mysqli->error);
+
+    $st_year = $status_year->fetch_assoc();
+    $st_sex = $status_sex->fetch_assoc();
+    $st_country = $status_country->fetch_assoc();
+    $st_region = $status_region->fetch_assoc();
+
+?>
+
+
 <div class="container">
     <div class="row">
         <div class="body-column">
@@ -53,6 +72,9 @@
                 <div>
                     <label for="year1">Select year:</label>
                     <div>
+                        <?php if($st_year['Status'] == 0): ?>
+                        <select class=choiceBox disabled></select>
+                        <?php else: ?>
                         <select id="year1" class=choiceBox onchange="updateSelection('year1', 'year')">
                             <script type="module">
                                 import { viewHandler, chartData } from './homeChart.js'
@@ -60,11 +82,15 @@
                             </script>
                         </select>
                         <input type="text" id="year" name="year" class="form-control" >
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div>
                     <label for="sex1">Select sex:</label>
                     <div class="form-group">
+                        <?php if($st_sex['Status'] == 0): ?>
+                        <select disabled></select>
+                        <?php else: ?>
                         <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
                             <!--https://github.com/harvesthq/chosen for better choicebox-->
                             <option value="-">-</option>
@@ -73,11 +99,15 @@
                             <option value="Both sexes">Both sexes</option>
                         </select>
                         <input type="text" id="sex" name="sex" class="form-control" >
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div>
                     <label for="country1">Select country</label>
                     <div class="form-control">
+                        <?php if($st_country['Status'] == 0): ?>
+                            <select disabled></select>
+                        <?php else: ?>
                         <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
                             <script type="module">
                                 import { viewHandler, chartData} from './homeChart.js'
@@ -85,11 +115,15 @@
                             </script>
                         </select>
                         <input type="text" id="country" name="country" class="form-control">
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div>
                     <label for="region1">Select region</label>
                     <div class="form-group">
+                        <?php if($st_region['Status'] == 0): ?>
+                            <select disabled></select>
+                        <?php else: ?>
                         <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
                             <script type="module">
                                 import { viewHandler, chartData} from './homeChart.js'
@@ -97,6 +131,7 @@
                             </script>
                         </select>
                         <input type="text" id="region" name="region" class="form-control">
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div>
