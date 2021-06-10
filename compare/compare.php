@@ -36,9 +36,10 @@ if (checkGETAndRedirect()) {
     </a>
     <div class="navbar-links">
         <ul>
-            <li><a href="../home/home.php">Home</a></li>
-            <li><a href="compare.php">Compare</a></li>
-            <li><a href="../about/about.php">About</a></li>
+             <li><a href="../home/home.php">Home</a></li>
+             <li><a href="compare.php">Compare</a></li>
+             <li><a href="../about/about.php">About</a></li>
+             <li><a href="../admin/admin.php">Admin</a></li>
         </ul>
     </div>
 </nav>
