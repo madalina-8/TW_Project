@@ -18,7 +18,7 @@
 <nav class="navbar">
     <div class="logo">
        <a href="#"> 
-           <img src="logo.png" width="200"> 
+           <img src="logo.png" alt="logo" width="200"> 
         </a>
     </div>
     <a href="#" class="toggle-button">
@@ -28,7 +28,7 @@
     </a>
     <div class="navbar-links">
         <ul>
-           <li><a href="../home/home.php">Home</a></li>
+            <li><a href="../home/home.php">Home</a></li>
             <li><a href="../compare/compare.php">Compare</a></li>
             <li><a href="../about/about.php">About</a></li>
             <li><a href="admin.php">Admin</a></li>
