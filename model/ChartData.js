@@ -3,10 +3,10 @@ export default class ChartData {
         // The order in the csv files is as stands:
         // Location___Country___Year___Sex___Value
         // 0          1         2      3     4
-        this.selectedRegion = ["Europe"] // getCookie for list
-        this.selectedCountry = ["Romania", "Bulgaria", "Germany"] // getCookie for list
-        this.selectedYear = ["2016"] // getCookie for list
-        this.selectedSex = ["Male"] // getCookie for list
+        this.selectedRegion = [""] // getCookie for list
+        this.selectedCountry = [""] // getCookie for list
+        this.selectedYear = [""] // getCookie for list
+        this.selectedSex = [""] // getCookie for list
         this.defaultValue = ["-"]
 
         this.columnRegion = 0

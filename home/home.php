@@ -206,13 +206,25 @@
 <script src="../script.js"></script>
 <script type="module">
     import {updateUIValueFromCookie} from '../cookies/cookieUtils.js';
-    updateUIValueFromCookie("year");
-    updateUIValueFromCookie("sex");
-    updateUIValueFromCookie("region");
-    updateUIValueFromCookie("country");
-    updateUIValueFromCookie("chartType");
     import { chartHandler, viewHandler, misc } from "./homeChart.js";
-    chartHandler.filter()
+    <?php if($st_year['Status'] == 1): ?>
+        updateUIValueFromCookie("year");
+        chartHandler.updateField(chartHandler.chartData.columnYear, chartHandler.chartData.idSelectedYear)
+    <?php endif; ?>
+    <?php if($st_sex['Status'] == 1): ?>
+        updateUIValueFromCookie("sex");
+        chartHandler.updateField(chartHandler.chartData.columnSex, chartHandler.chartData.idSelectedSex)
+    <?php endif; ?>
+    <?php if($st_region['Status'] == 1): ?>
+        updateUIValueFromCookie("region");
+        chartHandler.updateField(chartHandler.chartData.columnRegion, chartHandler.chartData.idSelectedRegion)
+    <?php endif; ?>
+    <?php if($st_country['Status'] == 1): ?>
+        updateUIValueFromCookie("country");
+        chartHandler.updateField(chartHandler.chartData.columnCountry, chartHandler.chartData.idSelectedCountry)
+    <?php endif; ?>
+    updateUIValueFromCookie("chartType");
+    //chartHandler.filter()
     viewHandler.generateChart(
         misc.mainChartNameId,
         viewHandler.chartData.selectedRegion,
