@@ -17,20 +17,24 @@ function updateType(imageFormatBox) {
 }
 
 function saveChart(chartId) {
-    const canvas = document.getElementById(chartId);
-    console.log(MIME_TYPE)
-    //const imageURL = canvas.toDataURL(MIME_TYPE);
-    const imageURL = 'data:' + MIME_TYPE + "," + encodeURIComponent(canvas.outerHTML);
-    console.log(imageURL)
-
+    let encodedUri
+    let termination = ""
     const dlLink = document.createElement('a');
-    dlLink.download = "graph";
-    dlLink.href = imageURL;
-    dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
-
+    if(MIME_TYPE === "text/csv") {
+        let csvContent = "data:text/csv;charset=utf-8,";
+        for(let i = 0; i < window.myChart.data.labels.length; i++) {
+            csvContent = csvContent + window.myChart.data.labels[i] + "," + window.myChart.data.datasets[0].data[i] + '\n'
+        }
+        encodedUri = encodeURI(csvContent);
+        termination = ".csv"
+    } else {
+        const canvas = document.getElementById(chartId);
+        encodedUri = canvas.toDataURL(MIME_TYPE);
+        dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+    }
+    dlLink.download = "data" + termination;
+    dlLink.href = encodedUri;
     document.body.appendChild(dlLink);
     dlLink.click();
     document.body.removeChild(dlLink);
-
-    window.myChart.exports
 }

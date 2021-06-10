@@ -37,7 +37,9 @@ export default class ChartHandler {
         let fieldsToGet = [this.chartData.columnCountry, this.chartData.columnYear, this.chartData.columnSex]
         let concatenatedValue = ""
         fieldsToGet.forEach(field => {
-            concatenatedValue = concatenatedValue + cols[field] + " "
+            if(concatenatedValue !== "")
+                concatenatedValue += ", "
+            concatenatedValue = concatenatedValue + cols[field]
         })
         return concatenatedValue
     }
