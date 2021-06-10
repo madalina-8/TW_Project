@@ -16,7 +16,37 @@ $years = "'$year'";
 $sexes = "'$sex'";
 $regions = "'$region'";
 
-$search_c = $mysqli->query("SELECT * FROM data WHERE Country IN ($countries) AND Year IN ($years) AND Sex IN ($sexes) AND Location IN ($regions)") or die($mysqli->error);
+$customQuery = "SELECT * FROM data WHERE ";
+$needsAnd = false;
+if(strlen($country) > 0) {
+    $customQuery = $customQuery."Country IN ($countries)";
+    $needsAnd = true;
+}
+if(strlen($year) > 0) {
+    if($needsAnd) {
+        $customQuery = $customQuery." AND ";
+    }
+    $customQuery = $customQuery."Year IN ($years)";
+    $needsAnd = true;
+}
+
+if(strlen($sex) > 0) {
+    if($needsAnd) {
+        $customQuery = $customQuery." AND ";
+    }
+    $customQuery = $customQuery."Sex IN ($sexes)";
+    $needsAnd = true;
+}
+
+if(strlen($region) > 0) {
+    if($needsAnd) {
+        $customQuery = $customQuery." AND ";
+    }
+    $customQuery = $customQuery."Location IN ($regions)";
+}
+
+$search_c = $mysqli->query($customQuery) or die($mysqli->error);
+
 while($row = $search_c->fetch_array()):
     $data = $row['Location'].','.$row['Country'].','.$row['Year'].','.$row['Sex'].','.$row['Value'];
     echo json_encode($data);

@@ -20,6 +20,7 @@ export default class ChartHandler {
             method: 'GET',
         });
         const data = await response.text()
+        //console.log(data)
         const entries = data.split('|')
         entries.splice(entries.length-1)
         const entryName = [];
