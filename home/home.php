@@ -17,6 +17,7 @@
     <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> --><script src="https://kit.fontawesome.com/bad7801a4d.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"></script>
     <script type="module" src="homeChart.js"></script>
+    <script src="../view/SaveHandler.js"></script>
     <script src="../view/UpdateHandler.js"></script>
     <script type="module" src="../cookies/cookieUtils.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
@@ -58,7 +59,7 @@
                                 viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
                             </script>
                         </select>
-                        <input type="text" id="year" name="year" class="form-control" disabled="disabled">
+                        <input type="text" id="year" name="year" class="form-control" >
                     </div>
                 </div>
                 <div>
@@ -71,7 +72,7 @@
                             <option value="Female">Female</option>
                             <option value="Both sexes">Both sexes</option>
                         </select>
-                        <input type="text" id="sex" name="sex" class="form-control" disabled="disabled">
+                        <input type="text" id="sex" name="sex" class="form-control" >
                     </div>
                 </div>
                 <div>
@@ -83,7 +84,7 @@
                                 viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
                             </script>
                         </select>
-                        <input type="text" id="country" name="country" class="form-control" disabled="disabled">
+                        <input type="text" id="country" name="country" class="form-control">
                     </div>
                 </div>
                 <div>
@@ -95,7 +96,7 @@
                                 viewHandler.addOptionsForParameter(chartData.columnRegion, 'region1')
                             </script>
                         </select>
-                        <input type="text" id="region" name="region" class="form-control" disabled="disabled">
+                        <input type="text" id="region" name="region" class="form-control">
                     </div>
                 </div>
                 <button id="filterButton" onclick="chartHandler.filter()">Filter</button>
@@ -110,7 +111,7 @@
                 <option value="CSV">CSV</option>
                 <option value="SVG">SVG</option>
             </select>
-            <button id="saveButton" onclick="chartHandler.saveChart()">Save chart image</button>
+            <button id="saveButton" onclick="saveChart('mainChart')">Save chart image</button>
         </div>
     </div>
 </div>

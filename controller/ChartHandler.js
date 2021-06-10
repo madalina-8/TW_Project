@@ -3,44 +3,12 @@ export default class ChartHandler {
         this.chartData = chartData
     }
 
-    updateType(imageFormatBox) {
-        alert(imageFormatBox.value)
-        switch(imageFormatBox.value) {
-            case "CSV":
-                misc.MIME_TYPE = "text/csv"
-                break;
-            case "PNG":
-                misc.MIME_TYPE = "image/png"
-                break;
-            case "SCV":
-                misc.MIME_TYPE = "image/scv"
-                break;
-            default:
-            // code block
-        }
-        alert(misc.MIME_TYPE)
-    }
-
-    saveChart(chartId) {
-        const canvas = document.getElementById(chartId);
-        const imageURL = canvas.toDataURL(misc.MIME_TYPE);
-
-        const dlLink = document.createElement('a');
-        dlLink.download = "graph";
-        dlLink.href = imageURL;
-        dlLink.dataset.downloadurl = [misc.MIME_TYPE, dlLink.download, dlLink.href].join(':');
-
-        document.body.appendChild(dlLink);
-        dlLink.click();
-        document.body.removeChild(dlLink);
-    }
-
     async getData(sRegion,
                   sCountry,
                   sYear,
                   sSex
     ) {
-        /*let url = new URL('http://localhost/chartapi/ChartServer.php')
+        let url = new URL('http://localhost/chartapi/ChartServer.php')
         let params = {
             sRegion: sRegion,
             sCountry: sCountry,
@@ -51,7 +19,7 @@ export default class ChartHandler {
         let response2 = await fetch(url, {
             method: 'GET',
         });
-        console.log(response2.text().valueOf())*/
+        console.log(response2.text().valueOf())
         const response = await fetch("data.csv");
         const data = await response.text();
         const rows = data.split('\n').slice(1);
@@ -73,13 +41,6 @@ export default class ChartHandler {
                      sYear,
                      sSex
     ) {
-       /* console.log(cols + '\n' + sRegion + '\n' + sCountry + '\n' + sYear + sYear[0]+sYear[1] + '\n' + sSex+sSex[0]+sSex[1] + '\n')
-        console.log(sRegion.includes(cols[this.chartData.columnRegion]))
-        console.log(sCountry.includes(cols[this.chartData.columnCountry]))
-        console.log(sYear.includes(cols[this.chartData.columnYear]))
-        console.log(sSex.includes(cols[this.chartData.columnSex]))
-
-        console.log('\n')*/
         return (sRegion.includes(cols[this.chartData.columnRegion]) || this.isArrayEmpty(sRegion)) &&
             (sCountry.includes(cols[this.chartData.columnCountry]) || this.isArrayEmpty(sCountry)) &&
             (sYear.includes(cols[this.chartData.columnYear]) || this.isArrayEmpty(sYear)) &&

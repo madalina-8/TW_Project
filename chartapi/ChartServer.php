@@ -1,63 +1,25 @@
 <?php
-class ChartServer
-{
-    private $columnRegion = 0;
-    private $columnCountry = 1;
-    private $columnYear = 2;
-    private $columnSex = 3;
-    private $columnValue = 4;
+$region = $_GET['sRegion'];
+$country = $_GET['sCountry'];
+$year = $_GET['sYear'];
+$sex = $_GET['sSex'];
 
-    public function __construct() {
-        $region = $_GET['sRegion'];
-        $country = $_GET['sCountry'];
-        $year = $_GET['sYear'];
-        $sex = $_GET['sSex'];
-        echo "$region$country$year$sex"
-            . $this->getFields(["Ooga", "Booga", "Chunga", "Wonga"])
-            . $this->getData($region,$country, $year, $sex);
-    }
+$region = str_replace(", ", "','", $region);
+$country = str_replace(", ", "','", $country);
+$year = str_replace(", ", "','", $year);
+$sex = str_replace(", ", "','", $sex);
 
-    public function isSelectableData(
-        $cols,
-        $sRegion,
-        $Country,
-        $sYear,
-        $sSex
-    ): bool
-    {
-        return (in_array($cols[$this->columnRegion], $sRegion) || count($sRegion) == 0) &&
-            (in_array($cols[$this->columnCountry], $Country) || count($Country) == 0) &&
-            (in_array($cols[$this->columnYear], $sYear) || count($sYear) == 0) &&
-            (in_array($cols[$this->columnSex], $sSex) || count($sSex) == 0);
-    }
+$mysqli = new mysqli("localhost","root","","project") or die(mysqli_error($mysqli));
 
-    public function getFields($cols): string {
-        $fieldsToGet = [$this->columnCountry, $this->columnYear, $this->columnSex];
-        $concatenatedValue = "";
-        foreach ($fieldsToGet as $field) {
-            $concatenatedValue = $concatenatedValue . $cols[$field];
-        }
-        return $concatenatedValue;
-    }
+$countries = "'$country'";
+$years = "'$year'";
+$sexes = "'$sex'";
+$regions = "'$region'";
 
-    public function getData(
-        $sRegion,
-        $sCountry,
-        $sYear,
-        $sSex
-    ): string {
-        $someString = "";
-        if (($handle = fopen('data.csv', 'r')) !== FALSE) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+$search_c = $mysqli->query("SELECT * FROM data WHERE Country IN ($countries) AND Year IN ($years) AND Sex IN ($sexes) AND Location IN ($regions)") or die($mysqli->error);
+while($row = $search_c->fetch_array()):
+    $data = array($row['Location'], $row['Country'], $row['Year'], $row['Sex'], $row['Value']);
 
-                for ($i = 0; $i < count($data); $i++) {
-                    $someString = $someString . $data[$i];
-                }
-            }
-            fclose($handle);
-        }
-        return $someString;
-    }
-}
-$chartServer = new ChartServer();
+    echo json_encode($data);;
+endwhile;
 ?>
