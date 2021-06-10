@@ -29,6 +29,7 @@
             <li><a href="../home/home.php">Home</a></li>
             <li><a href="../compare/compare.php">Compare</a></li>
             <li><a href="about.php">About</a></li>
+            <li><a href="../admin/admin.php">Admin</a></li>
         </ul>
     </div>
 </nav>
