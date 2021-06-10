@@ -7,7 +7,7 @@ include_once "../cookies/CookiesHelper.php";
 
 //when changing 'formNames' change its value in script.js too
 
-$formNames = array("year", "region", "country", "sex");
+$formNames = array("year", "region", "country", "sex", "chartType");
 
 function getShareLink() {
     global $formNames;
@@ -43,6 +43,9 @@ function filterFromPost($name): ?Filter {
         case RegionFilter::getCookieName():
             return new RegionFilter($array);
 
+        case ChartFilter::getCookieName():
+            return new ChartFilter($array);
+
         default:
             return null;
     }
@@ -50,11 +53,11 @@ function filterFromPost($name): ?Filter {
 
 function submitForm() {
     global $formNames;
-    //var_dump($_POST);
+    var_dump($_POST);
     foreach ($formNames as $name) {
         if (isset($_POST[$name])) {
             $filter = filterFromPost($name);
-            var_dump($filter);
+            //var_dump($filter);
             if ($filter != null) {
                 echo("Filter to put in cookie:" . $filter->getEncoded() . "<br/>");
                 CookiesHelper::setCookieFilter($filter);

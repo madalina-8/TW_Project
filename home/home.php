@@ -99,6 +99,17 @@
                         <input type="text" id="region" name="region" class="form-control">
                     </div>
                 </div>
+                <div>
+                    <label for="chartType">Select chart type</label>
+                    <div class="form-group">
+                        <select name="chartType" id="chartType" class="form-control">
+                            <option value="bar">bar</option>
+                            <option value="line">line</option>
+                            <option value="pie">pie</option>
+                            <option value="radar">radar</option>
+                        </select>
+                    </div>
+                </div>
                 <button id="filterButton" onclick="chartHandler.filter()">Filter</button>
             </form>
         </div>
@@ -164,6 +175,7 @@
     updateUIValueFromCookie("sex");
     updateUIValueFromCookie("region");
     updateUIValueFromCookie("country");
+    updateUIValueFromCookie("chartType");
     import { chartHandler, viewHandler, misc } from "./homeChart.js";
     chartHandler.filter()
     viewHandler.generateChart(
@@ -171,7 +183,8 @@
         viewHandler.chartData.selectedRegion,
         viewHandler.chartData.selectedCountry,
         viewHandler.chartData.selectedYear,
-        viewHandler.chartData.selectedSex
+        viewHandler.chartData.selectedSex,
+        document.getElementById('chartType').valueOf().value
     )
 </script>
 </body>

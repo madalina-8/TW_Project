@@ -6,7 +6,7 @@ foreach (glob("../filters/php/*.php") as $filename)
 include_once "../cookies/CookiesHelper.php";
 
 //when changing 'formNames' change its value in scriptCompare.js too
-$formNames = array("year", "region", "country", "sex");
+$formNames = array("year", "region", "country", "sex", "chartType");
 $yearFilter = null;
 $regionFilter = null;
 $countryFilter = null;

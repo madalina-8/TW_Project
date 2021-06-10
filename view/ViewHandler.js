@@ -12,7 +12,8 @@ export default class ViewHandler {
         selectedRegions,
         selectedCountries,
         selectedYears,
-        selectedSexes
+        selectedSexes,
+        chartType
     ) {
         const ctx = document.getElementById(chartID).getContext('2d');
         const data = await this.chartHandler.getData(
@@ -22,7 +23,7 @@ export default class ViewHandler {
             selectedSexes
         );
         window.myChart = new Chart(ctx, {
-            type: 'bar',
+            type: chartType,
             data: {
                 labels: data.enName,
                 datasets: [
