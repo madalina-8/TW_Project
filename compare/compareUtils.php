@@ -24,11 +24,13 @@ function getShareLink() {
     $data = array();
     foreach ($cookies as $name) {
         if (isset($_COOKIE[$name])) {
-            $value = urldecode($_COOKIE[$name]);
+            $value = $name . "=" . urldecode($_COOKIE[$name]);
             $data[$name] = $value;
         }
     }
-    return urldecode(http_build_query($data));
+
+//    return urldecode(http_build_query($data, "", "&", PHP_QUERY_RFC3986));
+    return str_replace("&reg", "&amp;reg", join('&', $data));
 }
 
 function addCookie($name, $value) {
