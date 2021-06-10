@@ -28,10 +28,10 @@
     </a>
     <div class="navbar-links">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Compare</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Admin</a></li>
+           <li><a href="../home/home.php">Home</a></li>
+            <li><a href="../compare/compare.php">Compare</a></li>
+            <li><a href="../about/about.php">About</a></li>
+            <li><a href="admin.php">Admin</a></li>
         </ul>
     </div>
 </nav>
