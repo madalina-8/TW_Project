@@ -6,7 +6,7 @@ foreach (glob("../filters/php/*.php") as $filename)
 include_once "../cookies/CookiesHelper.php";
 
 //when changing 'formNames' change its value in scriptCompare.js too
-$formNames = array("year", "region", "country", "sex", "chartType");
+$formNames = array("year", "region", "country", "sex");
 $yearFilter = null;
 $regionFilter = null;
 $countryFilter = null;
@@ -24,11 +24,11 @@ function getShareLink() {
     $data = array();
     foreach ($cookies as $name) {
         if (isset($_COOKIE[$name])) {
-            $value = $_COOKIE[$name];
+            $value = urldecode($_COOKIE[$name]);
             $data[$name] = $value;
         }
     }
-    return urlencode(http_build_query($data));
+    return urldecode(http_build_query($data));
 }
 
 function addCookie($name, $value) {
@@ -90,7 +90,7 @@ function filterFromData($name, $values, $compare) {
 
 function checkGETAndRedirect(): bool{
     global $cookies;
-//    var_dump($cookies);
+    var_dump($cookies);
 
     $shouldExit = false;
 
@@ -126,7 +126,7 @@ function generateCompareTable() {
     $compareFilters = getCompareFilters();
     $normalFilters = getFiltersWithout($compareFilters);
     if (count($compareFilters) > 0) {
-        echo "<table class=\"table\">";
+        echo "<table class=\"table\" style=\"table-layout: auto; width: 100%;\">";
 
         echo "<tr>";
 
