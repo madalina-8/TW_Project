@@ -1,78 +1,112 @@
 <!DOCTYPE html>
 <html >
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-        <title>Obesity Prevalence Visualizer raport</title>
-    </head>
-    <body prefix="schema: https://schema.org">
-        <header>
-            <h1>Obesity Prevalence Visualizer</h1>
-        </header>
-        <div class="autori">
-            <dl>
-                <dt>Autori</dt>
-                <dd>Dulhac Lavinia-Mădălina</dd>
-                <dd>Lorin Budaca</dd>
-                <dd>Crăciun Tudor</dd>
-            </dl>
-        </div>
-        <div class="Pagina">
-            <p>Cuprins</p>
-            <ol class="Cuprins">
-                <li><a class="titlu-cuprins" href="#Introducere">Introducere</a>
-                    <ul class="Cuprins">
-                        <li><a class="titlu-cuprins" href="#Scop">Scop</a></li>
-                        <li><a class="titlu-cuprins" href="#Utilizatori">Utilizatori</a></li>
-                    </ul>
-                </li>
-                <li><a class="titlu-cuprins" href="#Structura">Structura Site-ului</a>
-                    <ul>
-                        <li><a class="titlu-cuprins" href="#Tehnologii">Tehnologii utilizate</a></li>
-                    </ul>
-                </li>
-                <li><a class="titlu-cuprins" href="#Utilizare">Utilizarea site-ului</a></li>
-                <li><a class="titlu-cuprins" href="#Concluzie">Concluzie</a></li>
-            </ol><br></br>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Obesity Prevalence Visualizer raport</title>
+</head>
+<body prefix="schema: https://schema.org">
+<header>
+    <h1>Obesity Prevalence Visualizer</h1>
+</header>
+<div class="autori">
+    <dl>
+        <dt>Autori</dt>
+        <dd>Dulhac Lavinia-Mădălina</dd>
+        <dd>Lorin Budaca</dd>
+        <dd>Crăciun Tudor</dd>
+    </dl>
+</div>
+<div class="Pagina">
+    <p>Cuprins</p>
+    <ol class="Cuprins">
+        <li><a class="titlu-cuprins" href="#Introducere">Introducere</a>
+            <ul class="Cuprins">
+                <li><a class="titlu-cuprins" href="#Scop">Scop</a></li>
+                <li><a class="titlu-cuprins" href="#Utilizatori">Utilizatori</a></li>
+            </ul>
+        </li>
+        <li><a class="titlu-cuprins" href="#Structura">Structura Site-ului</a>
+            <ul>
+                <li><a class="titlu-cuprins" href="#Tehnologii">Tehnologii utilizate</a></li>
+            </ul>
+        </li>
+        <li><a class="titlu-cuprins" href="#Utilizare">Utilizarea site-ului</a></li>
+        <li><a class="titlu-cuprins" href="#Concluzie">Concluzie</a></li>
+    </ol><br></br>
 
-            <section id="Introducere">
-                <h1>1. Introducere</h1>
-                <p> Am creat un site pentru vizualizarea nivelului de obezitate în anumite țări în funcție de diverse variabile. </p>
-            </section>
-            <section id="Scop">
-                <h1>1.1 Scop</h1>
-                <p> Scopul site-ului este vizualizarea/compararea unor grafice legate de nivelul de obezitate din diferite țări. Vizualizarea se poate face pe baza mai multor filtre.</p>
-            </section>
-            <section id="Utilizatori">
-                <h1>1.2 Utilizatori</h1>
-                <p> Utilizatorii acestui site sunt persoane interesate de vizualizarea acestor tipuri de informații. Aceștia pot cuprinde studenți și jurnaliști. </p>
+    <section id="Introducere">
+        <h1>1. Introducere</h1>
+        <p> În cadrul proiectului "Obesity Visualizer", ne-am propus să dezvoltăm un site care să faciliteze vizualizarea nivelului
+            de obezitate în diferite țări și regiuni ale lumii, vizualizare bazată pe aplicarea unor filtre specifice asupra unor grafice populate cu date. </p>
+    </section>
+    <section id="Scop">
+        <h1>1.1 Scop</h1>
+        <p> Scopul site-ului este reprezentat atât de vizualizarea, cât și de compararea unor grafice legate de nivelul de obezitate din diferite țări.
+            Vizualizarea se poate face pe baza mai multor filtre sau a unor combinații de filtre. Filtrarea datelor este divizată în 4 categorii: în funcție de ani,
+            în funcție de sex, în funcție de țară și în funcție de regiune. </p>
+    </section>
+    <section id="Utilizatori">
+        <h1>1.2 Utilizatori</h1>
+        <p> Utilizatorii acestui site sunt persoane interesate de vizualizarea acestor tipuri de informații. Aceștia pot cuprinde studenți, jurnaliști, nutriționiști,
+            medici, persoane care doresc să facă un studiu în domeniul sănătății și necesită o dispunere vizuală și intuitivă a datelor, etc. </p>
 
-            </section>
-            <section id="Structura">
-                <h1>2. Structura site-ului</h1>
-                <p> Site-ul este compus din 3 pagini:<br></br>
-                1. Home (pagina principala, vizualizarea unui grafic pe baza unor filtre);<br></br>
-                2. Compare (pagina în care se pot compara două grafice) <br></br>
-                3. About (pagină despre creatorii site-ului, care include și un formular de feedback) <br></br>
-                </p>
-            </section>
-            <section id="Tehnologii">
-                <h1>2.1 Tehnologii utilizate</h1>
-                <p>Am utilizat HTML și CSS pentru structurarea și stilizarea site-ului iar Javascript (librăria Chart.js) pentru generarea graficelor.
-                    Javascript am folosit si pentru a aplica preferintele salvate in cookie-uri, PHP fiind folosit pentru a le crea. </p>
-            </section>
-            <section id="Utilizare">
-                <h1>3. Utilizarea site-ului</h1>
-                <p>Pentru utilizarea site-ului, utilizatorul își alege întâi tipul de date pe care dorește să îl vizualizeze. Dacă acesta dorește să observe situația într-o anumită țară pe baza unor filtre,
-                acesta va selecta filtrele dorite în cadrul paginii Home și va vizualiza informațiile. Dacă acesta dorește să compare situația în două țări diferite, acesta va vizualiza diferențele în cadrul
-                paginii Compare. Utilizatorii pot de asemenea să salveze graficul într-un format dorit (deși, momentan, suportam doar PNG). Preferințele utilizatorului (filtrele curente) sunt retinute pentru accesari ulterioare.
-                Utilizatorului i se ofera și posibilitatea de a împărtăși filtrele folosite, pentru a prezenta și altora informațiile descoperite prin pagina noastră.</p>
-            </section>
-            <section id="Concluzie">
-                <h1>4. Concluzie</h1>
-                <p> In urma structurării paginilor principale, considerăm că am creat un 'flow' de utilizare destul de intuitiv pentru utilizator, precum și o interfața atractivă. Urmează să adăugăm funcționalitățile
-                propriu zise pentru a finaliza nivelul de practicalitate al site-ului.</p>
-            </section>
-        </div>
-    </body>
+    </section>
+    <section id="Structura">
+        <h1>2. Structura site-ului</h1>
+        <p> Site-ul este compusă din 3 pagini (pagini cu care utilizatorul va interacționa în mod direct) și un modul de administrare (specific doar administratorilor site-ului):<br></br>
+            1. Home - pagina principală, în care utilizatorul poate consulta un grafic unic și aplica diferite filtre sau combinații de filtre
+            pentru a vizualiza nivelul de obezitate;<br></br>
+            2. Compare - pagina în care se pot compara două grafice. Scopul acestei pagini este de a vizualiza grafice distince și de a compara
+            în mod paralel date din diferite țări, regiuni, în funcție de diferite criterii; <br></br>
+            3. About - pagină cu detalii despre creatorii site-ului, despre scopul proiectului și care include și un formular de feedback; <br></br>
+            4. Admin - modulul de administrare. Această pagină este destinată persoanelor ce se ocupă cu menținerea site-ului. Prezintă un sistem de logare
+            care în spate folosește o bază de date (în care se află numele adminilor și parolele lor). În cadrul modulului de administrare, un admin are control
+            asupra funcționării unui filtru. Fiecare filtru poate avea una din următoarele stări: "enabled" sau "disabled". Fundamentul îl reprezintă o bază de date
+            în care am stocate numele fiecărui filtru și un state (by default 1). Când admin-ul accesează "disable", starea filtrului în baza de date devine 0, iar în paginile Home și Compare,
+            acel filtru nu mai intră în procesul de filtrare a graficelor.
+        </p>
+    </section>
+    <section id="Tehnologii">
+        <h1>2.1 Tehnologii utilizate</h1>
+        <p>Am utilizat HTML și CSS pentru structurarea și stilizarea site-ului, dar și JavaScript pentru a oferi dinamism paginii de About și pentru
+            a face funcțional burger button-ul. Mai mult, am uzitat de JavaScript (librăria Chart.js) pentru generarea graficelor și pentru  aplicarea preferințelor
+            salvate în cookie-uri. PHP a fost folosit pentru a crea cookie-urile, pentru a crea funcționalitatea sistemul de login, dar și a formularului de contact(feedback),
+            pentru a asigura conexiunea cu baza de date și pentru a face legătura între modulul de administrare și paginile corespunzătoare.
+        </p>
+    </section>
+    <section id="Utilizare">
+        <h1>3. Utilizarea site-ului</h1>
+        <p>Pentru utilizarea site-ului, utilizatorul își alege întâi tipul de date pe care dorește să îl vizualizeze. Dacă acesta dorește să observe situația într-o anumită țară pe baza unor filtre,
+            acesta va selecta filtrele dorite în cadrul paginii Home și va vizualiza informațiile. Dacă acesta dorește să compare situația în două țări diferite, acesta va vizualiza diferențele în cadrul
+            paginii Compare. Utilizatorii pot de asemenea să salveze graficul într-un format dorit. Preferințele utilizatorului (filtrele curente) sunt reținute pentru accesări ulterioare.
+            Utilizatorului i se oferă și posibilitatea de a împărtăși filtrele folosite, pentru a prezenta și altora informațiile descoperite prin pagina noastră.
+            În pagina de About, utilizatorul poate lua contact cu dezvoltatorii site-ului printr-un formular de feedback în care acesta trebuie să-și introducă datele.
+            La nivelul fiecărei pagini, în cadrul footer-ului, utilizatorul poate găsi link-uri către diverse platforme sociale în care poate observa activitatea dezvoltatorilor,
+            dar și trimiteri către site-uri asociate cu website-ul curent, site-uri care oferă detalii similare, în maniere diferite.
+            Administratorii se loghează pe platforma corespunzătoare lor și au posibilitatea de a da enable sau disable la un anumit filtru. La nivelul header-ului, au un buton de logout care îi deloghează
+            și îi trimite pe pagina "Admin". </p>
+    </section>
+    <section id="Strategii de implementare">
+        <h1>4. Strategii de implementare</h1>
+        <h3> 4.1. Home </h3>
+        <p> În cadrul paginii Home, am ales să utilizăm o bază de date în care am stocat toate intrările corespunzătoare țărilor, regiunilor, anilor și sexelor.
+            Utilizatorul alege filtrele, iar în spate, căutăm în baza de date și afișăm pe grafic datele corespunzătoare interogării trimise către serverul SQL. Mai mult, utilizatorul
+            poate alege tipul de afișare și formatul în care dorește ca imaginea să fie salvată.
+        <h3> 4.2. Compare </h3>
+        <h3> 4.3. About </h3>
+        <p> Implementarea paginii About la nivel de back-end nu este foarte sofisticată. S-au implementat funcționalitățile ce țin de formularul de contact,
+            prin care user-ul poate să trimită un mesaj concret către o adresă de mail prestabilită. </p>
+        <h3> 4.4. Admin </h3>
+        <p> La nivelul paginii de administrare, adminii trebuie să se logheze pentru a putea accesa funcționalitățile din pagina de administrare. Login-ul se face pe baza unei baze de date în care sunt stocați
+            toți adminii. După logare, un admin are posibilitatea de a activa sau dezactiva un filtru. Starea fiecărui filtru este stocată în baza de date. Disable modifică starea curentă în 0, iar enable în 1. În urma
+            modificărilor survenite în baza de date, la un refresh în cadrul paginilor Home și Compare, utilizatorul va putea/nu va mai putea accesa unul sau mai multe filtre. </p>
+    </section>
+    <section id="Concluzie">
+        <h1>5. Concluzie</h1>
+        <p> În urma structurării paginilor principale, considerăm că am creat un 'flow' de utilizare destul de intuitiv pentru utilizator, precum și o interfața atractivă. Urmează să adăugăm funcționalitățile
+            propriu zise pentru a finaliza nivelul de practicalitate al site-ului.</p>
+    </section>
+</div>
+</body>
 </html> 
