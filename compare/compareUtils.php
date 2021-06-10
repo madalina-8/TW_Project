@@ -257,7 +257,7 @@ function printCanvasForFilters($filters) {
         echo ", " . $filter->getCookieName() . "Filter.values";
     };
 
-    echo ")\n";
+    echo ",\"bar\")\n";
 
     echo "</script>";
 
