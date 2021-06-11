@@ -4,10 +4,14 @@ $country = $_GET['sCountry'];
 $year = $_GET['sYear'];
 $sex = $_GET['sSex'];
 
-$region = str_replace(", ", "','", $region);
-$country = str_replace(", ", "','", $country);
-$year = str_replace(", ", "','", $year);
-$sex = str_replace(", ", "','", $sex);
+$region = str_replace(",", "','", $region);
+$region = str_replace("',' ", "','", $region);
+$country = str_replace(",", "','", $country);
+$country = str_replace("',' ", "','", $country);
+$year = str_replace(",", "','", $year);
+$year = str_replace("',' ", "','", $year);
+$sex = str_replace(",", "','", $sex);
+$sex = str_replace("',' ", "','", $sex);
 
 $mysqli = new mysqli("localhost","root","","project") or die(mysqli_error($mysqli));
 

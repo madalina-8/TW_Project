@@ -8,11 +8,52 @@ export default class ChartHandler {
                   sYear,
                   sSex
     ) {
+        /*
         const response = await fetch("data.csv");
         const data = await response.text();
         const rows = data.split('\n').slice(1);
         const entryName = [];
         const entryValue = [];
+        rows.forEach(row => {
+            const cols = row.split(',');
+            if(this.isSelectableData(cols, sRegion, sCountry, sYear, sSex)) {
+                entryName.push(this.getFields(cols));
+                entryValue.push(parseFloat(cols[4]));
+            }
+        });
+        const isGrouped = document.getElementById("grouped")?.checked
+
+        if (isGrouped === true) {
+            return {enName: ["Average"], enValue: [this.getAverage(entryValue)]}
+        } else {
+            return {enName: entryName, enValue: entryValue};
+        }
+        */
+        let url = new URL('http://localhost:63342/TW_Project/chartapi/ChartServer.php')
+        let params = {
+            sRegion: sRegion,
+            sCountry: sCountry,
+            sYear: sYear,
+            sSex: sSex
+        }
+        console.log(params)
+        url.search = new URLSearchParams(params).toString()
+        console.log(url)
+        let response = await fetch(url, {
+            method: 'GET',
+        });
+        const data = await response.text()
+        console.log(data)
+        const entries = data.split('|')
+        entries.splice(entries.length-1)
+        const entryName = [];
+        const entryValue = [];
+        entries.forEach(entry => {
+            const en = entry.replaceAll("\"", "").split(',')
+            entryName.push(this.getFields(en));
+            entryValue.push(parseFloat(en[4]));
+        })
+
         const isGrouped = document.getElementById("grouped")?.checked
 
         if (isGrouped === true) {

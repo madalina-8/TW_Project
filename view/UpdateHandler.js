@@ -19,7 +19,7 @@ function updateSelection(choiceBoxId, selectionsTextBoxId) {
     choiceBox.valueOf().value = '-'*/
 
     if(selectionTextBox.valueOf().value !== "")
-        selectionTextBox.valueOf().value = selectionTextBox.valueOf().value + ", " +  choiceBox.valueOf().value
+        selectionTextBox.valueOf().value = selectionTextBox.valueOf().value + "," +  choiceBox.valueOf().value
     else
         selectionTextBox.valueOf().value = choiceBox.valueOf().value
 }
