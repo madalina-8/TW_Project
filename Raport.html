@@ -32,6 +32,8 @@
             </ul>
         </li>
         <li><a class="titlu-cuprins" href="#Utilizare">Utilizarea site-ului</a></li>
+        <li><a class="titlu-cuprins" href="#Implementare">Strategii de implementare</a></li>
+        <li><a class="titlu-cuprins" href="#Diagrame">Diagrame</a></li>
         <li><a class="titlu-cuprins" href="#Concluzie">Concluzie</a></li>
     </ol><br></br>
 
@@ -94,6 +96,11 @@
             Utilizatorul alege filtrele, iar în spate, căutăm în baza de date și afișăm pe grafic datele corespunzătoare interogării trimise către serverul SQL. Mai mult, utilizatorul
             poate alege tipul de afișare și formatul în care dorește ca imaginea să fie salvată.
         <h3> 4.2. Compare </h3>
+        <p> Pagina compare furnizeaza utilizatorului o interfata ce permite o comparare mai buna a datelor despre obezitate. Utilizatorul poate selecta ca un filtru sa fie comparat (pot fi selectate maxim 2 astfel de filtre) și
+            astfel se va forma o tabela ce va avea pe linie sau pe coloana acel filtru, iar in celule grafice cu fiecare valoare a acelui filtru. Astfel daca utilizatorul va selecta doua filtre, se va forma un tabel bidimensional ce
+            va contine grafice cu datele filtrelor separate unul catre unul.
+            O alta functionalizate a paginei compare este gruparea datelor. Daca un grafic contine mai mult de o linie, utilizatorul poate opta ca o medie aritmetica a tuturor datelor graficului sa fie afisata.
+            Functionalizatea de "Share with others" ofera posibilitatea impartasirii configuratiei curente cu altii, creanduse un URL custom cu aceasta. </p>
         <h3> 4.3. About </h3>
         <p> Implementarea paginii About la nivel de back-end nu este foarte sofisticată. S-au implementat funcționalitățile ce țin de formularul de contact,
             prin care user-ul poate să trimită un mesaj concret către o adresă de mail prestabilită. </p>
@@ -102,8 +109,14 @@
             toți adminii. După logare, un admin are posibilitatea de a activa sau dezactiva un filtru. Starea fiecărui filtru este stocată în baza de date. Disable modifică starea curentă în 0, iar enable în 1. În urma
             modificărilor survenite în baza de date, la un refresh în cadrul paginilor Home și Compare, utilizatorul va putea/nu va mai putea accesa unul sau mai multe filtre. </p>
     </section>
+    <section id="Diagrame">
+        <h1>6. Diagrame</h1>
+        <h3> Diagrama USE-case </h3>
+        <img src="uml.png" alt="uml" width="500">
+    </section>
+    </section>
     <section id="Concluzie">
-        <h1>5. Concluzie</h1>
+        <h1>6. Concluzie</h1>
         <p> În urma structurării paginilor principale, considerăm că am creat un 'flow' de utilizare destul de intuitiv pentru utilizator, precum și o interfața atractivă. Urmează să adăugăm funcționalitățile
             propriu zise pentru a finaliza nivelul de practicalitate al site-ului.</p>
     </section>
