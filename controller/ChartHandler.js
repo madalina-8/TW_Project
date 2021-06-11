@@ -8,18 +8,28 @@ export default class ChartHandler {
                   sYear,
                   sSex
     ) {
-        const response = await fetch("data.csv");
-        const data = await response.text();
-        const rows = data.split('\n').slice(1);
+        let url = new URL('http://localhost/chartapi/ChartServer.php')
+        let params = {
+            sRegion: sRegion,
+            sCountry: sCountry,
+            sYear: sYear,
+            sSex: sSex
+        }
+        url.search = new URLSearchParams(params).toString()
+        let response = await fetch(url, {
+            method: 'GET',
+        });
+        const data = await response.text()
+        //console.log(data)
+        const entries = data.split('|')
+        entries.splice(entries.length-1)
         const entryName = [];
         const entryValue = [];
-        rows.forEach(row => {
-            const cols = row.split(',');
-            if(this.isSelectableData(cols, sRegion, sCountry, sYear, sSex)) {
-                entryName.push(this.getFields(cols));
-                entryValue.push(parseFloat(cols[4]));
-            }
-        });
+        entries.forEach(entry => {
+            const en = entry.replaceAll("\"", "").split(',')
+            entryName.push(this.getFields(en));
+            entryValue.push(parseFloat(en[4]));
+        })
         return { enName: entryName, enValue: entryValue };
     }
 

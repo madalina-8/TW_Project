@@ -45,6 +45,9 @@ if(strlen($region) > 0) {
     $customQuery = $customQuery."Location IN ($regions)";
 }
 
+if($customQuery == "SELECT * FROM data WHERE ")
+    $customQuery = "SELECT * FROM data";
+
 $search_c = $mysqli->query($customQuery) or die($mysqli->error);
 
 while($row = $search_c->fetch_array()):

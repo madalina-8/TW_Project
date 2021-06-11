@@ -92,7 +92,7 @@ function filterFromData($name, $values, $compare) {
 
 function checkGETAndRedirect(): bool{
     global $cookies;
-    var_dump($cookies);
+//    var_dump($cookies);
 
     $shouldExit = false;
 

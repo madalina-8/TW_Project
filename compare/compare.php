@@ -44,60 +44,93 @@ if (checkGETAndRedirect()) {
     </div>
 </nav>
 
+<?php include '../admin/process.php';
+
+$mysqli = new mysqli("localhost","root","","project") or die(mysqli_error($mysqli));
+$result = $mysqli->query("SELECT * FROM modify_status1") or die($mysqli->error);
+
+
+$status_year = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Year'") or die($mysqli->error);
+$status_sex = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Sex'") or die($mysqli->error);
+$status_country = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Country'") or die($mysqli->error);
+$status_region = $mysqli->query("SELECT Status FROM modify_status1 WHERE Field='Region'") or die($mysqli->error);
+
+$st_year = $status_year->fetch_assoc();
+$st_sex = $status_sex->fetch_assoc();
+$st_country = $status_country->fetch_assoc();
+$st_region = $status_region->fetch_assoc();
+
+?>
+
 <div class="container">
     <div class="row">
         <div class="body-column">
             <form method="post" action="submitFormCompare.php">
                 <div class="filterContainer">
                     <label for="year1" class="filterTitle">Select year:</label>
-                    <br/>
-                    <select id="year1" class="choiceBox" onchange="updateSelection('year1', 'year')">
-                        <script type="module">
-                            import { viewHandler, chartData } from './compareChart.js'
-                            viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
-                        </script>
-                    </select>
-                    <br/>
-                    <input type="text" id="year" name="year" class="textInput">
-                    <br/>
-                    <label for="yearCompare">Should compare year:</label>
-                    <input type="checkbox" name="yearCompare" id="yearCompare">
+                    <?php if($st_year['Status'] == 0): ?>
+                        <select class=choiceBox disabled></select>
+                    <?php else: ?>
+                        <br/>
+                        <select id="year1" class="choiceBox" onchange="updateSelection('year1', 'year')">
+                            <script type="module">
+                                import { viewHandler, chartData } from './compareChart.js'
+                                viewHandler.addOptionsForParameter(chartData.columnYear, 'year1')
+                            </script>
+                        </select>
+                        <br/>
+                        <input type="text" id="year" name="year" class="textInput">
+                        <br/>
+                        <label for="yearCompare">Should compare year:</label>
+                        <input type="checkbox" name="yearCompare" id="yearCompare">
+                    <?php endif; ?>
                 </div>
                 <div class="filterContainer">
                     <label for="sex1" class="filterTitle">Select sex:</label>
-                    <br/>
-                    <div class="form-group">
-                        <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
-                            <!--https://github.com/harvesthq/chosen for better choicebox-->
-                            <option value="-">-</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Both sexes">Both sexes</option>
-                        </select>
-                        <input type="text" id="sex" name="sex" class="textInput" >
+                    <?php if($st_sex['Status'] == 0): ?>
+                        <select disabled></select>
+                    <?php else: ?>
                         <br/>
-                        <label for="sexCompare">Should compare sex:</label>
-                        <input type="checkbox" name="sexCompare" id="sexCompare">
-                    </div>
+                        <div class="form-group">
+                            <select id="sex1" class="choiceBox" onchange="updateSelection('sex1', 'sex')">
+                                <!--https://github.com/harvesthq/chosen for better choicebox-->
+                                <option value="-">-</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Both sexes">Both sexes</option>
+                            </select>
+                            <input type="text" id="sex" name="sex" class="textInput" >
+                            <br/>
+                            <label for="sexCompare">Should compare sex:</label>
+                            <input type="checkbox" name="sexCompare" id="sexCompare">
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="filterContainer">
                     <label for="country1" class="filterTitle">Select country</label>
-                    <br/>
-                    <div class="form-group">
-                        <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
-                            <script type="module">
-                                import { viewHandler, chartData} from './compareChart.js'
-                                viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
-                            </script>
-                        </select>
-                        <input type="text" id="country" name="country" class="textInput">
+                    <?php if($st_country['Status'] == 0): ?>
+                        <select disabled></select>
+                    <?php else: ?>
                         <br/>
-                        <label for="countryCompare">Should compare country:</label>
-                        <input type="checkbox" name="countryCompare" id="countryCompare">
-                    </div>
+                        <div class="form-group">
+                            <select id="country1" class="choiceBox" onchange="updateSelection('country1', 'country')">
+                                <script type="module">
+                                    import { viewHandler, chartData} from './compareChart.js'
+                                    viewHandler.addOptionsForParameter(chartData.columnCountry, 'country1')
+                                </script>
+                            </select>
+                            <input type="text" id="country" name="country" class="textInput">
+                            <br/>
+                            <label for="countryCompare">Should compare country:</label>
+                            <input type="checkbox" name="countryCompare" id="countryCompare">
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="filterContainer">
                     <label for="region1" class="filterTitle">Select region</label>
+                    <?php if($st_region['Status'] == 0): ?>
+                        <select disabled></select>
+                    <?php else: ?>
                     <br/>
                     <div class="form-group">
                         <select id="region1" class="choiceBox" onchange="updateSelection('region1', 'region')">
@@ -111,6 +144,7 @@ if (checkGETAndRedirect()) {
                         <label for="regionCompare">Should compare region:</label>
                         <input type="checkbox" name="regionCompare" id="regionCompare">
                     </div>
+                    <?php endif; ?>
                 </div>
                 <div class="filterContainer">
                     <label for="grouped" class="filterTitle">Group data: </label>
@@ -186,10 +220,18 @@ if (checkGETAndRedirect()) {
 
 <script type="module">
     import {updateUIValueFromCookie, updateUICheckBoxFromCookie} from '../cookies/cookieUtils.js';
-    updateUIValueFromCookie("year");
-    updateUIValueFromCookie("sex");
-    updateUIValueFromCookie("region");
-    updateUIValueFromCookie("country");
+    <?php if($st_year['Status'] == 1): ?>
+        updateUIValueFromCookie("year");
+    <?php endif; ?>
+    <?php if($st_sex['Status'] == 1): ?>
+        updateUIValueFromCookie("sex");
+    <?php endif; ?>
+    <?php if($st_region['Status'] == 1): ?>
+        updateUIValueFromCookie("region");
+    <?php endif; ?>
+    <?php if($st_country['Status'] == 1): ?>
+        updateUIValueFromCookie("country");
+    <?php endif; ?>
     updateUICheckBoxFromCookie("grouped");
 </script>
 </body>
