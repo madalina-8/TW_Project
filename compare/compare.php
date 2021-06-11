@@ -69,7 +69,7 @@ $st_region = $status_region->fetch_assoc();
                 <div class="filterContainer">
                     <label for="year1" class="filterTitle">Select year:</label>
                     <?php if($st_year['Status'] == 0): ?>
-                        <select class=choiceBox disabled></select>
+                        <select class="choiceBox" disabled="disabled" id="year1"></select>
                     <?php else: ?>
                         <br/>
                         <select id="year1" class="choiceBox" onchange="updateSelection('year1', 'year')">
@@ -88,7 +88,7 @@ $st_region = $status_region->fetch_assoc();
                 <div class="filterContainer">
                     <label for="sex1" class="filterTitle">Select sex:</label>
                     <?php if($st_sex['Status'] == 0): ?>
-                        <select disabled></select>
+                        <select class="choiceBox" disabled="disabled" id="sex1"></select>
                     <?php else: ?>
                         <br/>
                         <div class="form-group">
@@ -109,7 +109,7 @@ $st_region = $status_region->fetch_assoc();
                 <div class="filterContainer">
                     <label for="country1" class="filterTitle">Select country</label>
                     <?php if($st_country['Status'] == 0): ?>
-                        <select disabled></select>
+                        <select class="choiceBox" disabled="disabled" id="country1"></select>
                     <?php else: ?>
                         <br/>
                         <div class="form-group">
@@ -129,7 +129,7 @@ $st_region = $status_region->fetch_assoc();
                 <div class="filterContainer">
                     <label for="region1" class="filterTitle">Select region</label>
                     <?php if($st_region['Status'] == 0): ?>
-                        <select disabled></select>
+                        <select class="choiceBox" disabled="disabled" id="region1"></select>
                     <?php else: ?>
                     <br/>
                     <div class="form-group">
