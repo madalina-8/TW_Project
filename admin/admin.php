@@ -58,6 +58,7 @@
 </div>
 
 <?php 
+        $con=mysqli_connect("localhost","root","","project");
         if(isset($_POST['SignIn'])) {
             $query="SELECT * FROM `admin_login` WHERE `Admin_Name`='$_POST[AdminName]' AND `Admin_Password`='$_POST[AdminPassword]'";
             $result=mysqli_query($con,$query);
