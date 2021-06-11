@@ -25,12 +25,25 @@ export default class ChartHandler {
         entries.splice(entries.length-1)
         const entryName = [];
         const entryValue = [];
-        entries.forEach(entry => {
-            const en = entry.replaceAll("\"", "").split(',')
-            entryName.push(this.getFields(en));
-            entryValue.push(parseFloat(en[4]));
-        })
-        return { enName: entryName, enValue: entryValue };
+        rows.forEach(row => {
+            const cols = row.split(',');
+            if(this.isSelectableData(cols, sRegion, sCountry, sYear, sSex)) {
+                entryName.push(this.getFields(cols));
+                entryValue.push(parseFloat(cols[4]));
+            }
+        });
+        const isGrouped = document.getElementById("grouped").checked
+
+        if (isGrouped) {
+            return {enName: ["Average"], enValue: [this.getAverage(entryValue)]}
+        } else {
+            return {enName: entryName, enValue: entryValue};
+        }
+    }
+
+    getAverage(array) {
+        const sum = array.reduce((a, b) => a + b, 0);
+        return (sum / array.length) || 0;
     }
 
     getFields(cols) {
