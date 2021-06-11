@@ -116,7 +116,7 @@ function importFiltersFromCookies() {
 }
 
 function shouldCompare($filter): bool {
-    return $filter->shouldCompare();
+    return $filter != null && $filter->shouldCompare();
 }
 
 function shouldNotCompare($filter): bool
@@ -212,16 +212,23 @@ function getFiltersWithout($without): array
 function orderFilters($filters): array {
     $result = [];
     foreach($filters as $filter) {
-        switch ($filter->getCookieName()) {
-            case "region": $result[0] = $filter;
-                break;
-            case "country": $result[1] = $filter;
-                break;
-            case "year": $result[2] = $filter;
-                break;
-            case "sex": $result[3] = $filter;
-                break;
-            default: echo "Unknown filter: " . $filter->getCookieName();
+        if ($filter != null) {
+            switch ($filter->getCookieName()) {
+                case "region":
+                    $result[0] = $filter;
+                    break;
+                case "country":
+                    $result[1] = $filter;
+                    break;
+                case "year":
+                    $result[2] = $filter;
+                    break;
+                case "sex":
+                    $result[3] = $filter;
+                    break;
+                default:
+                    echo "Unknown filter: " . $filter->getCookieName();
+            }
         }
     }
     ksort($result);
