@@ -25,7 +25,7 @@ export function updateUIValueFromCookie(optionsID) {
     } else {
         options.value = ""
     }
-    if(shouldCompare !== undefined) {
+    if(shouldCompare !== null) {
         shouldCompare.valueOf().checked = (getCompareFromCookie(optionsID) === true)
     }
 }

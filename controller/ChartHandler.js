@@ -13,14 +13,9 @@ export default class ChartHandler {
         const rows = data.split('\n').slice(1);
         const entryName = [];
         const entryValue = [];
-        entries.forEach(entry => {
-            const en = entry.replaceAll("\"", "").split(',')
-            entryName.push(this.getFields(en));
-            entryValue.push(parseFloat(en[4]));
-        })
-        const isGrouped = document.getElementById("grouped").checked
+        const isGrouped = document.getElementById("grouped")?.checked
 
-        if (isGrouped) {
+        if (isGrouped === true) {
             return {enName: ["Average"], enValue: [this.getAverage(entryValue)]}
         } else {
             return {enName: entryName, enValue: entryValue};
